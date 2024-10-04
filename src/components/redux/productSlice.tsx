@@ -19,8 +19,7 @@ export const fetchImagesData = createAsyncThunk<Product[]>(
   "product/fetchImages", () => {
     return axios
         .get("https://api.unsplash.com/photos/?client_id=G_jsyuMxxg2ge-zm4r3hlGnZRnT8pvt3sLUCX8CUe4g")
-        .then((response) => response.data)
-
+        .then((response) => response.data) 
   }
 );
 
@@ -40,7 +39,7 @@ const productSlice = createSlice({
         state.isLoading = false
         const productsWithPrice = action.payload.map((product) => ({
           ...product,
-          price: 1 // Math.random() * 100
+          price: Math.random() * 100
         }))
         state.products = productsWithPrice
       })
