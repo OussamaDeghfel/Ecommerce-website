@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect} from "react";
 import Axios from "axios";
-import { FaHeart } from "react-icons/fa6";
-import { FaShoppingBag } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { Product, addToCart, cartItem, incrementProduct } from "../redux/cartSlice";
-import { RootState, appDispatch } from "../redux/store";
-import { useSelector } from "react-redux";
-import {  fetchImagesData } from "../redux/productSlice";
+
+
 
 const Store = () => {
-  const [images, setImages] = useState([]);
-  const dispatch = useDispatch<appDispatch>();
-  const imageData = useSelector((state: RootState) => state.product.products)
-  
+  // const [images, setImages] = useState([]);
+  // const dispatch = useDispatch<appDispatch>();
+  // const imageData = useSelector((state: RootState) => state.product.products)
 
   // useEffect(() => {
   //   const fetchImages = async () => {
@@ -26,12 +20,16 @@ const Store = () => {
   //   fetchImages();
   // }, []);
 
+  const fetchProducts = async () => {
+    const response = await Axios.get(
+      "https://api.escuelajs.co/api/v1/products"
+    );
+    const productData = response.data;
+    console.log(productData);
+  };
   useEffect(() => {
-    dispatch(fetchImagesData())
-    console.log(imageData);
-    
-  }, [dispatch])
-
+    fetchProducts();
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-start h-screen">
@@ -48,7 +46,7 @@ const Store = () => {
         </button>
       </div>
       <div className="p-5 m-5 grid grid-cols-5 gap-4">
-        {imageData.map((image, idx) => (
+        {/* {imageData.map((image, idx) => (
           <>
             <div
               key={idx}
@@ -61,20 +59,22 @@ const Store = () => {
               />
               <div className="px-2">
                 <h1 className="font-bold my-2">{image.user.name}</h1>
-                <h1 className="font-bold my-2">{image.price.toFixed(2)} {" "}$</h1>
+                <h1 className="font-bold my-2">{image.price.toFixed(2)} $</h1>
                 <button
                   className="flex items-center text-[#fc142c] font-bold border-2 border-red-600 rounded-md  px-2 my-1"
-                  onClick={() => {dispatch(addToCart({
-                    product: {  
-                      id: image.id,
-                      name: image.user.name,
-                      url: image.urls.small,
-                      price: image.price
-                    } as Product,
-                    quantity: 1,
-                    quantityPrice: image.price,
-                
-                  }))
+                  onClick={() => {
+                    dispatch(
+                      addToCart({
+                        product: {
+                          id: image.id,
+                          name: image.user.name,
+                          url: image.urls.small,
+                          price: image.price,
+                        } as Product,
+                        quantity: 1,
+                        quantityPrice: image.price,
+                      })
+                    );
                   }}
                 >
                   <FaShoppingBag className="mr-2" /> Add To Cart
@@ -82,7 +82,7 @@ const Store = () => {
               </div>
             </div>
           </>
-        ))}
+        ))} */}
       </div>
     </div>
   );
