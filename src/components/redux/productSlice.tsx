@@ -1,24 +1,40 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
-import React from 'react'
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-interface productValue {
-    id: string
-    category: {
-        id: string
-        name: string
+interface productState {
+  product: [
+    {
+      id: string;
+      category: {
+        id: string;
+        name: string;
+      };
+      title: string;
+      description: string;
+      price: number;
     }
-    title: string
-    descritpion: string
-    price: number
+  ];
+  loading: boolean
+  error: string | null
 }
- const initialState = {
-    products: [],
-    loading: false,
-    error: null
- }
- export const fetchProducts = createAsyncThunk("products/fetchProducts", () => {
-   return axios
-   .get("https://api.escuelajs.co/api/v1/products")
-   .then(response => response.data)
- })
+
+const initialState: productState = {
+  product: [{
+      id: "",
+      category: {
+          id: "",
+          name: ""
+      },
+      title: "",
+      description: "",
+      price: 0
+  }],
+  loading: false,
+  error: null,
+};
+export const fetchProducts = createAsyncThunk("product/fetchProducts", () => {
+  return axios
+    .get("https://api.escuelajs.co/api/v1/products")
+    .then((response) => response.data);
+});
+
