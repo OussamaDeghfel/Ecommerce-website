@@ -1,19 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
-interface Product {
-    id: string;
-    category: {
-      id: string;
-      name: string;
-    };
-    title: string;
-    description: string; // Corrected spelling
-    price: number;
-  }
+import { ProductData } from "./types";
+import { RootState } from "./store";
 
   interface ProductState {
-    product: Product[];
+    product: ProductData[];
     loading: boolean;
     error: string | null;
   }
@@ -39,18 +30,17 @@ export const fetchProducts = createAsyncThunk(
 const productSlice = createSlice({
   name: "product",
   initialState,
-  reducers: {},
+  reducers: {
+  },
   extraReducers(builder) {
     builder.addCase(fetchProducts.pending, (state) => {
       state.loading = true;
     });
-
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.product = action.payload;
       state.loading = false;
       state.error = "";
     });
-
     builder.addCase(fetchProducts.rejected, (state, action) => {
       state.product = [];
       state.error = action.error.message ?? null;
@@ -60,3 +50,7 @@ const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
+// export const {getProducts} = productSlice.actions
+
+export const selectProduct = (state:RootState) => state.product.product;
+
