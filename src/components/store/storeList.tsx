@@ -1,17 +1,22 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { appDispatch, RootState } from "../redux/store";
+import { fetchProducts } from "../redux/productSlice";
+import { useEffect } from "react";
+import { FaShoppingBag } from "react-icons/fa";
 
 
 
 const StoreList = () => {
+
+  // const [productList , setProductList] = useState([]);
   
   const dispatch = useDispatch<appDispatch>();
   const products = useSelector((state:RootState) => state.product.product)
 
-  // useEffect(() => {
-  //   dispatch(fetchProducts)
-  // },[])
+  useEffect(() => {
+  dispatch(fetchProducts)
+  },[dispatch])
 
   console.log("products", products)
 
@@ -31,43 +36,43 @@ const StoreList = () => {
         </button>
       </div>
       <div className="p-5 m-5 grid grid-cols-5 gap-4">
-        {/* {imageData.map((image, idx) => (
+        {products.map((product) => (
           <>
             <div
-              key={idx}
+              key={product.id}
               className="w-full h-full bg-gray-300 pb-2 rounded-md"
             >
               <img
                 className="w-[200px] h-[200px] rounded-t-md"
-                src={image.urls.thumb}
+                src={product.images[0]}
                 alt="just image"
               />
               <div className="px-2">
-                <h1 className="font-bold my-2">{image.user.name}</h1>
-                <h1 className="font-bold my-2">{image.price.toFixed(2)} $</h1>
+                <h1 className="font-bold my-2">{product.title}</h1>
+                <h1 className="font-bold my-2">{product.price} $</h1>
                 <button
                   className="flex items-center text-[#fc142c] font-bold border-2 border-red-600 rounded-md  px-2 my-1"
-                  onClick={() => {
-                    dispatch(
-                      addToCart({
-                        product: {
-                          id: image.id,
-                          name: image.user.name,
-                          url: image.urls.small,
-                          price: image.price,
-                        } as Product,
-                        quantity: 1,
-                        quantityPrice: image.price,
-                      })
-                    );
-                  }}
+                  // onClick={() => {
+                  //   dispatch(
+                  //     addToCart({
+                  //       product: {
+                  //         id: image.id,
+                  //         name: image.user.name,
+                  //         url: image.urls.small,
+                  //         price: image.price,
+                  //       } as Product,
+                  //       quantity: 1,
+                  //       quantityPrice: image.price,
+                  //     })
+                  //   );
+                  // }}
                 >
                   <FaShoppingBag className="mr-2" /> Add To Cart
                 </button>
               </div>
             </div>
           </>
-        ))} */}
+        ))}
       </div>
     </div>
   );
