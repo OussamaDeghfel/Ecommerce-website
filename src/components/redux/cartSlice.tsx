@@ -1,15 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ProductData } from "./types";
 // import { Product } from "./types";
 
-export interface Product {
-  id: string;
-  name: string;
-  url: string;
-  price: number
-}
 
 interface cartItem {
-  product: Product;
+  product: ProductData;
   quantity: number;
   quantityPrice: number;
 
