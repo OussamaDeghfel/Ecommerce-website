@@ -104,5 +104,4 @@ export const {
   removeFromCart,
   incrementQuantity,
   decrementQuantity,
-  TotalCartPrice,
 } = cartSlice.actions;
