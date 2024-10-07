@@ -5,10 +5,13 @@ import NavBar from "./components/navbar";
 import { Routes, Route } from "react-router-dom";
 import Contact from "./components/Contact";
 import StoreList from "./components/store/storeList";
+import { Provider } from "react-redux";
+import { store } from "./components/redux/store";
 
 function App() {
   return (
     <>
+    <Provider store={store}>
       <NavBar />
       <div>
           <Routes>
@@ -18,6 +21,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
       </div>
+      </Provider>
     </>
   );
 }
