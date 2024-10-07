@@ -12,13 +12,13 @@ const StoreList = () => {
   // const [productList , setProductList] = useState([]);
   
   const dispatch = useDispatch<appDispatch>();
-  const products = useSelector((state:RootState) => state.product.product)
+  const { product } = useSelector((state:RootState) => state.product)
 
   useEffect(() => {
-  dispatch(fetchProducts)
+  dispatch(fetchProducts())
   },[dispatch])
 
-  console.log("products", products)
+  console.log("products", product)
 
 
   return (
@@ -36,20 +36,20 @@ const StoreList = () => {
         </button>
       </div>
       <div className="p-5 m-5 grid grid-cols-5 gap-4">
-        {products.map((product) => (
+        {product.map((prod) => (
           <>
             <div
-              key={product.id}
+              key={prod.id}
               className="w-full h-full bg-gray-300 pb-2 rounded-md"
             >
               <img
                 className="w-[200px] h-[200px] rounded-t-md"
-                src={product.images[0]}
+                src={prod.images[0]}
                 alt="just image"
               />
               <div className="px-2">
-                <h1 className="font-bold my-2">{product.title}</h1>
-                <h1 className="font-bold my-2">{product.price} $</h1>
+                <h1 className="font-bold my-2">{prod.title}</h1>
+                <h1 className="font-bold my-2">{prod.price} $</h1>
                 <button
                   className="flex items-center text-[#fc142c] font-bold border-2 border-red-600 rounded-md  px-2 my-1"
                   // onClick={() => {
