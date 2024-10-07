@@ -4,6 +4,7 @@ import { appDispatch, RootState } from "../redux/store";
 import { fetchProducts } from "../redux/productSlice";
 import { useEffect } from "react";
 import { FaShoppingBag } from "react-icons/fa";
+import { addToCart } from "../redux/cartSlice";
 
 
 
@@ -52,20 +53,20 @@ const StoreList = () => {
                 <h1 className="font-bold my-2">{prod.price} $</h1>
                 <button
                   className="flex items-center text-[#fc142c] font-bold border-2 border-red-600 rounded-md  px-2 my-1"
-                  // onClick={() => {
-                  //   dispatch(
-                  //     addToCart({
-                  //       product: {
-                  //         id: image.id,
-                  //         name: image.user.name,
-                  //         url: image.urls.small,
-                  //         price: image.price,
-                  //       } as Product,
-                  //       quantity: 1,
-                  //       quantityPrice: image.price,
-                  //     })
-                  //   );
-                  // }}
+                  onClick={() => {
+                    dispatch(
+                      addToCart({
+                        product: {
+                          id: prod.id,
+                          title: prod.title,
+                          image: prod.images[0],
+                          price: prod.price,
+                        },
+                        quantity: 1,
+                        quantityPrice: prod.price,
+                      })
+                    );
+                  }}
                 >
                   <FaShoppingBag className="mr-2" /> Add To Cart
                 </button>
