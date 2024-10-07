@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import {
   decrementQuantity,
-  getTotalPrice,
   incrementQuantity,
   removeFromCart,
 } from "../redux/cartSlice";

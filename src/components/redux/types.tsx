@@ -10,9 +10,10 @@ export interface ProductData {
     category: {
       id: string;
       name: string;
+      image: string;
     };
     title: string;
     description: string; 
     price: number;
-    images: string[];
+    images: string;
   }
