@@ -7,6 +7,7 @@ import Contact from "./components/Contact";
 import StoreList from "./components/store/storeList";
 import { Provider } from "react-redux";
 import { store } from "./components/redux/store";
+import AccountDetails from "./components/accountDetails/accountDetails";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/store" element={<StoreList />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/accountDetails" element={<AccountDetails />} />
           </Routes>
       </div>
       </Provider>
