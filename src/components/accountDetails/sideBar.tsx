@@ -1,23 +1,23 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
   return (
     <div>
-      <ul className="flex flex-col bg-gray-50 h-fit w-[30vh] space-y-5">
+      <ul className="flex flex-col h-fit w-[35vh] space-y-5">
         <li className="text-xl p-4 shadow-sm rounded-md cursor-pointer hover:scale-105 duration-300">
-          Account Details
+          <Link to="/accountInfo">Account Details</Link>
         </li>
         <li className="text-xl  p-4 shadow-sm rounded-md cursor-pointer hover:scale-105 duration-300">
-          Security
+          <Link to="/security">Security</Link>
         </li>
         <li className="text-xl  p-4 shadow-sm rounded-md cursor-pointer hover:scale-105 duration-300">
-          Billing & Payment
+          <Link to="/payment">Billing & Payment</Link>
         </li>
         <li className="text-xl  p-4 shadow-sm rounded-md cursor-pointer hover:scale-105 duration-300">
-          Order History
+          <Link to="/orderHistory">Order History</Link>
         </li>
         <li className="text-xl  p-4 shadow-sm rounded-md cursor-pointer hover:scale-105 duration-300">
-          Wishlist/Favorites
+          <Link to="/favorList">Wishlist/Favorites</Link>
         </li>
       </ul>
     </div>
