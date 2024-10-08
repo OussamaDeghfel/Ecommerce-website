@@ -9,7 +9,7 @@ import { RootState } from "../redux/store";
 import Items from "./items";
 const NavBar = () => {
   const [showSearch, setShowSearch] = useState(false);
-  const {cart, quantity} = useSelector((state: RootState) => state.cart);
+  const { cart, quantity } = useSelector((state: RootState) => state.cart);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -54,7 +54,9 @@ const NavBar = () => {
             )}
           </div>
           <button className="m-4">
-            <FaUser />
+            <Link to="/accountDetails">
+              <FaUser />
+            </Link>
           </button>
           <button onClick={() => setIsOpen(!isOpen)}>
             <FaCartShopping />
@@ -64,9 +66,7 @@ const NavBar = () => {
           </button>
         </div>
       </div>
-      <div className="absolute right-6">
-      {isOpen && <Items />}{" "}
-      </div>
+      <div className="absolute right-6">{isOpen && <Items />} </div>
     </>
   );
 };
