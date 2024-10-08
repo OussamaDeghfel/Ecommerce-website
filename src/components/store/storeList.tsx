@@ -2,12 +2,15 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { appDispatch, RootState } from "../redux/store";
 import { fetchProducts } from "../redux/productSlice";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FaShoppingBag } from "react-icons/fa";
 import { addToCart } from "../redux/cartSlice";
+import { FcClearFilters } from "react-icons/fc";
 
 const StoreList = () => {
   // const [productList , setProductList] = useState([]);
+
+  const [searchByCategory, setSearchByCategory] = useState("");
 
   const dispatch = useDispatch<appDispatch>();
   const { product } = useSelector((state: RootState) => state.product);
@@ -17,25 +20,45 @@ const StoreList = () => {
   }, [dispatch]);
 
   //filter the category for only one name cause of duplicate
-  const uniqueFilter = [...new Map(product.map(item => [item['category']['name'], item])).values()];
+  const uniqueFilter = [
+    ...new Map(
+      product.map((item) => [item["category"]["name"], item])
+    ).values(),
+  ];
+console.log("search by cat : ", searchByCategory)
 
-  console.log("Unique filter ",uniqueFilter)
-
+  const filteredProduct = useMemo(() => {
+    if (searchByCategory) {
+      return product.filter((item) => item.category.name === searchByCategory);
+    } else {
+      return product;
+    }
+  }, [searchByCategory, product]);
 
   return (
     <div className="flex flex-col items-center justify-start h-screen">
       <h1 className="font-bold text-black text-2xl pb-4">FIND YOUR PRODUCT</h1>
-      <div className="flex-col">
+      <div className="flex justify-center items-center">
+        <div className="p-5 m-5 grid grid-cols-5 gap-4 w-full">
         {uniqueFilter.map((prod) => (
           <>
-            <button className="px-4 py-2 bg-yellow-950 text-white font-medium mx-2 rounded-md" key={prod.category.id}>
+            <button
+              value={prod.category.name}
+              onClick={() => setSearchByCategory(prod.category.name)}
+              className="px-4 py-2 bg-orange-500 text-white font-medium mx-2 rounded-md"
+              key={prod.category.id}
+            >
               {prod.category.name}
             </button>
           </>
         ))}
+        </div>
+        <span>
+          <FcClearFilters size={30} onClick={() => setSearchByCategory("")} className="cursor-pointer" />
+        </span>
       </div>
       <div className="p-5 m-5 grid grid-cols-5 gap-4">
-        {product.map((prod) => (
+        {filteredProduct.map((prod) => (
           <>
             <div
               key={prod.id}
