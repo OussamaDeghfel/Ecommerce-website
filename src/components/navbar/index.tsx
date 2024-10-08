@@ -3,13 +3,12 @@ import logo from "../../assets/Ecomlogo.png";
 import { FaCartShopping, FaMagnifyingGlass } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import Items from "./items";
 const NavBar = () => {
   const [showSearch, setShowSearch] = useState(false);
-  const { cart, quantity } = useSelector((state: RootState) => state.cart);
+  const { cart } = useSelector((state: RootState) => state.cart);
 
   const [isOpen, setIsOpen] = useState(false);
 
