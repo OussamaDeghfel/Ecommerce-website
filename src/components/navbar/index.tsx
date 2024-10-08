@@ -29,9 +29,6 @@ const NavBar = () => {
               <Link to="/store">Store</Link>
             </li>
             <li className="p-2 text-black font-medium mx-4 cursor-pointer">
-              <Link to="/contact">Contact</Link>
-            </li>
-            <li className="p-2 text-black font-medium mx-4 cursor-pointer">
               <Link to="/about">About</Link>
             </li>
           </ul>
