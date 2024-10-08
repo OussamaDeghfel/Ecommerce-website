@@ -50,7 +50,7 @@ const NavBar = () => {
             )}
           </div>
           <button className="m-4">
-            <Link to="/accountDetails">
+            <Link to="/accountDetails/accountInfo">
               <FaUser />
             </Link>
           </button>
