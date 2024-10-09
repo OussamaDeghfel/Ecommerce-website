@@ -1,9 +1,10 @@
-import { Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   return (
-    <div>
-      <div>
+    <div className="flex w-full h-screen justify-center items-center">
+      <div className="m-auto border-2 border-orange-100 rounded-md p-5 w-[400px] h-fit shadow-lg ">
         <Form layout="vertical">
           <Form.Item
             label="FirstName"
@@ -35,7 +36,21 @@ const SignUp = () => {
           >
             <Input />
           </Form.Item>
+          <Form.Item>
+            <Button type="primary" size="large">
+              Sign Up
+            </Button>
+          </Form.Item>
         </Form>
+        <div>
+          <h1>
+            Already have an account?{" "}
+            <Link to="/">
+              {" "}
+              <span className="font-bold text-orange-500">SignIn</span>{" "}
+            </Link>
+          </h1>
+        </div>
       </div>
     </div>
   );
