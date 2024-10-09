@@ -1,11 +1,29 @@
 import { Button, Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
+
+type userSignUP = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+}
 
 const SignUp = () => {
+
+  const saveCredential = (values:userSignUP) => {
+    localStorage.setItem("firstname", values.firstname);
+    localStorage.setItem("lastname", values.lastname);
+    localStorage.setItem("email", values.email);
+    localStorage.setItem("password", values.password);
+
+    console.log("signup values: ", values)
+
+    redirect("/")
+  }
   return (
     <div className="flex w-full h-screen justify-center items-center">
       <div className="m-auto border-2 border-orange-100 rounded-md p-5 w-[400px] h-fit shadow-lg ">
-        <Form layout="vertical">
+        <Form layout="vertical" onFinish={saveCredential}>
           <Form.Item
             label="FirstName"
             name="firstname"
@@ -34,10 +52,10 @@ const SignUp = () => {
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
-            <Input />
+            <Input.Password />
           </Form.Item>
           <Form.Item>
-            <Button type="primary" size="large">
+            <Button type="primary" size="large" htmlType="submit">
               Sign Up
             </Button>
           </Form.Item>
