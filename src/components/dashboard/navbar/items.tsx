@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { RootState } from "../../redux/store";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import {
   decrementQuantity,
   incrementQuantity,
   removeFromCart,
-} from "../redux/cartSlice";
+} from "../../redux/cartSlice";
 import { FaMinus } from "react-icons/fa6";
 
 const Items = () => {

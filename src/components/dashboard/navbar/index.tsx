@@ -4,7 +4,7 @@ import { FaCartShopping, FaMagnifyingGlass } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { RootState } from "../../redux/store";
 import Items from "./items";
 const NavBar = () => {
   const [showSearch, setShowSearch] = useState(false);
