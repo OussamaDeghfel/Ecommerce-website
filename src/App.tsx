@@ -1,29 +1,23 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Auth from "./components/authorization/auth";
-import About from "./components/about";
-import Home from "./components/dashboard/home";
-import NavBar from "./components/dashboard/navbar";
-import { Routes, Route } from "react-router-dom";
-import StoreList from "./components/store/storeList";
-import { Provider } from "react-redux";
-import { store } from "./components/redux/store";
-import AccountDetails from "./components/accountDetails/accountDetails";
+import Dashboard from "./components/dashboard";
+import ProtectedRoutes from "./utils/ProtectedRoutes";
 
 function App() {
   return (
     <>
-    <Auth />
-    {/* <Provider store={store}>
-      <NavBar />
+      <Auth />
+
       <div>
-          <Routes>
-            <Route path="/*" element={<Home />} />
-            <Route path="/store" element={<StoreList />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/accountDetails/*" element={<AccountDetails />} />
-          </Routes>
+        <Routes>
+          <Route path="/login" element={<Auth />} />
+
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/dashboard/" element={<Dashboard />} />
+          </Route>
+        </Routes>
       </div>
-      </Provider> */}
     </>
   );
 }
