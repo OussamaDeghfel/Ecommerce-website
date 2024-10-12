@@ -15,6 +15,7 @@ const SignUp = () => {
     localStorage.setItem("lastname", values.lastname);
     localStorage.setItem("email", values.email);
     localStorage.setItem("password", values.password);
+    localStorage.setItem("isLogin", "true");
   }
   return (
     <div className="flex w-full h-screen justify-center items-center">
@@ -52,14 +53,16 @@ const SignUp = () => {
           </Form.Item>
           <Form.Item>
             <Button type="primary" size="large" htmlType="submit">
+              <Link to='/'>
               Sign Up
+              </Link>
             </Button>
           </Form.Item>
         </Form>
         <div>
           <h1>
             Already have an account?{" "}
-            <Link to="/signin">
+            <Link to="/">
               {" "}
               <span className="font-bold text-orange-500">SignIn</span>{" "}
             </Link>

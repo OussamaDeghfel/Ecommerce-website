@@ -1,6 +1,6 @@
 import { Button, Checkbox, Form, Input } from "antd";
 import { useState } from "react";
-import { Link, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 type user = {
   email: string;
@@ -9,13 +9,14 @@ type user = {
 
 const SignIn = () => {
   const [credentialWarn, setCredentialWarn] = useState(false);
+  const navigate = useNavigate()
 
 
   const verfiyCredential = (values : user) => {
     if(values.email === localStorage.getItem("email") && values.password === localStorage.getItem("password")){
-      alert("Login Success")
+      localStorage.setItem("isLogin", "true");
       setCredentialWarn(false)
-      redirect('/home')
+      navigate("/dashboard")
     } else {
       setCredentialWarn(true)
     }
