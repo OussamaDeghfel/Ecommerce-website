@@ -1,5 +1,5 @@
 import { Button, Form, Input } from "antd";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type userSignUP = {
   firstname: string;
@@ -15,10 +15,6 @@ const SignUp = () => {
     localStorage.setItem("lastname", values.lastname);
     localStorage.setItem("email", values.email);
     localStorage.setItem("password", values.password);
-
-    console.log("signup values: ", values)
-
-    redirect("/")
   }
   return (
     <div className="flex w-full h-screen justify-center items-center">
@@ -63,7 +59,7 @@ const SignUp = () => {
         <div>
           <h1>
             Already have an account?{" "}
-            <Link to="/">
+            <Link to="/signin">
               {" "}
               <span className="font-bold text-orange-500">SignIn</span>{" "}
             </Link>
