@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../assets/Ecomlogo.png";
+import logo from "../../../assets/Ecomlogo.png";
 import { FaCartShopping, FaMagnifyingGlass } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
