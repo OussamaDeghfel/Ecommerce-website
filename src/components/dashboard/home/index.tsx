@@ -1,8 +1,8 @@
 import { useState } from "react";
-import salondesk1 from "../../assets/desk1.jpg";
-import salondesk2 from "../../assets/desk2.jpeg";
-import salondesk3 from "../../assets/desk3.png";
-import salondesk4 from "../../assets/desk4.jpeg";
+import salondesk1 from "../../../assets/desk1.jpg";
+import salondesk2 from "../../../assets/desk2.jpeg";
+import salondesk3 from "../../../assets/desk3.png";
+import salondesk4 from "../../../assets/desk4.jpeg";
 import { Link } from "react-router-dom";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
