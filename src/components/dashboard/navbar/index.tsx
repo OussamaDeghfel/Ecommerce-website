@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import logo from "../../../assets/Ecomlogo.png";
+import { useState } from "react";
+import logo from "../../../assets/quickbuy_logo.png";
 import { FaCartShopping, FaMagnifyingGlass } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -18,7 +18,7 @@ const NavBar = () => {
   return (
     <>
       <div className="flex justify-between pt-4">
-        <img className="w-[90px] h-[30px] " src={logo} alt="" />
+        <img className="w-fit h-[30px] " src={logo} alt="store logo" />
         <div>
           <ul className="flex">
             <li className="p-2 text-black font-medium mx-4 cursor-pointer">
