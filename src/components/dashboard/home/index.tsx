@@ -10,22 +10,18 @@ const Home = () => {
               </h1>{" "}
               <p className="font-outline-2"> Discover exclusive deals today!</p>
             </div>
-            <div className="grid grid-cols-4 gap-5 mt-8">
-              <div className="w-40 h-50 bg-white rounded-md border-2 border-black p-5 text-center shadow-lg">
-                <h2>98%</h2>
-                <h1>Customer Satisfaction</h1>
+            <div className="grid grid-cols-3 gap-5 mt-8 justify-center items-center">
+              <div className="w-40 h-50 bg-white rounded-md border-2 border-orange-500 p-5 text-center shadow-lg">
+                <h2 className="text-2xl font-bold text-orange-500">98%</h2>
+                <h1 className="font-medium text-xl">Customer Satisfaction</h1>
               </div>
-              <div className="w-40 h-50 bg-white rounded-md border-2 border-black p-5 text-center">
-                <h2>Shipping to 30+ </h2>
-                <h1>countries worldwide.</h1>
+              <div className="w-40 h-50 bg-white rounded-md border-2 border-orange-500 p-5 text-center">
+                <h2 className="text-2xl font-bold text-orange-500">+30</h2>
+                <h1 className="font-medium text-xl"> Shipping to countries worldwide</h1>
               </div>
-              <div className="w-40 h-50 bg-white rounded-md border-2 border-black p-5 text-center">
-                <h2>450</h2>
-                <h1>Shipping</h1>
-              </div>
-              <div className="w-40 h-50 bg-white rounded-md border-2 border-black p-5 text-center">
-                <h2>+500</h2>
-                <h1>items sold this month!</h1>
+              <div className="w-40 h-50 bg-white rounded-md border-2 border-orange-500 p-5 text-center">
+                <h2 className="text-2xl font-bold text-orange-500">+500</h2>
+                <h1 className="font-medium text-xl">items sold this month!</h1>
               </div>
             </div>
           </div>
