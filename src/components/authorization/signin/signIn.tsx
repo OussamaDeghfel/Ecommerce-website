@@ -16,7 +16,7 @@ const SignIn = () => {
     if(values.email === localStorage.getItem("email") && values.password === localStorage.getItem("password")){
       localStorage.setItem("isLogin", "true");
       setCredentialWarn(false)
-      navigate("/dashboard")
+      navigate("/home")
     } else {
       setCredentialWarn(true)
     }
