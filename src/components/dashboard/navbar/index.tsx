@@ -36,17 +36,17 @@ const NavBar = () => {
         </div>
         <div className="flex">
           <button className="search-button">
-            <BiHeart size={25} />
+            <BiHeart size={25} color="orange" />
           </button>
 
           <button className="m-4">
             <Link to="/accountDetails/accountInfo">
-              <FaUser size={20} />
+              <FaUser size={20} color="orange" />
             </Link>
           </button>
           <button onClick={() => setIsOpen(!isOpen)}>
-            <FaCartShopping size={25} />
-            <span className="absolute top-10 right-5 bg-black text-white px-1 rounded-lg w-[20px] h-[25px]">
+            <FaCartShopping size={25} color="orange" />
+            <span className="absolute top-10 right-5 bg-orange-300 text-white px-1 rounded-lg w-[20px] h-[25px]">
               {cart.length}
             </span>
           </button>
