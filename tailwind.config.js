@@ -5,7 +5,17 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "Banner": "url('/src/assets/storeProducts.jpg')",
+      },
+      backgroundSize: {
+        "Banner": "cover",
+      },
+      brightness: {
+        50: ".5",
+      },
+    },
   },
   plugins: [],
 }
