@@ -1,20 +1,21 @@
 import { useState } from "react";
 import logo from "../../../assets/quickbuy_logo.png";
-import { FaCartShopping, FaMagnifyingGlass } from "react-icons/fa6";
+import { FaCartShopping } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import Items from "./items";
+import { BiHeart } from "react-icons/bi";
 const NavBar = () => {
-  const [showSearch, setShowSearch] = useState(false);
+  // const [showSearch, setShowSearch] = useState(false);
   const { cart } = useSelector((state: RootState) => state.cart);
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleSearch = () => {
-    setShowSearch(!showSearch);
-  };
+  // const toggleSearch = () => {
+  //   setShowSearch(!showSearch);
+  // };
   return (
     <>
       <div className="flex justify-between pt-4">
@@ -34,28 +35,17 @@ const NavBar = () => {
           </ul>
         </div>
         <div className="flex">
-          <div className="flex justify-center items-center ">
-            <button className="search-button" onClick={toggleSearch}>
-              <FaMagnifyingGlass className="cursor-pointer" />
-            </button>
+          <button className="search-button">
+            <BiHeart size={25} />
+          </button>
 
-            {showSearch && (
-              <button className="close-button">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="ml-2 outline-none"
-                />
-              </button>
-            )}
-          </div>
           <button className="m-4">
             <Link to="/accountDetails/accountInfo">
-              <FaUser />
+              <FaUser size={20} />
             </Link>
           </button>
           <button onClick={() => setIsOpen(!isOpen)}>
-            <FaCartShopping />
+            <FaCartShopping size={25} />
             <span className="absolute top-10 right-5 bg-black text-white px-1 rounded-lg w-[20px] h-[25px]">
               {cart.length}
             </span>
