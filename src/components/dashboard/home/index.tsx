@@ -1,3 +1,5 @@
+import CountUp from "react-countup";
+
 const Home = () => {
   return (
     <>
@@ -12,15 +14,24 @@ const Home = () => {
             </div>
             <div className="grid grid-cols-3 gap-5 mt-8 justify-center items-center">
               <div className="w-40 h-50 bg-white rounded-md border-2 border-orange-500 p-5 text-center shadow-lg">
-                <h2 className="text-2xl font-bold text-orange-500">98%</h2>
+                <h2 className="text-2xl font-bold text-orange-500">
+                   <CountUp start={0} end={98} duration={6} />%
+                </h2>
                 <h1 className="font-medium text-xl">Customer Satisfaction</h1>
               </div>
               <div className="w-40 h-50 bg-white rounded-md border-2 border-orange-500 p-5 text-center">
-                <h2 className="text-2xl font-bold text-orange-500">+30</h2>
-                <h1 className="font-medium text-xl"> Shipping to countries worldwide</h1>
+                <h2 className="text-2xl font-bold text-orange-500">
+                  + <CountUp start={0} end={30} duration={8} />
+                </h2>
+                <h1 className="font-medium text-xl">
+                  {" "}
+                  Shipping to countries worldwide
+                </h1>
               </div>
               <div className="w-40 h-50 bg-white rounded-md border-2 border-orange-500 p-5 text-center">
-                <h2 className="text-2xl font-bold text-orange-500">+500</h2>
+                <h2 className="text-2xl font-bold text-orange-500">+
+                <CountUp start={0} end={500} duration={4} />
+                </h2>
                 <h1 className="font-medium text-xl">items sold this month!</h1>
               </div>
             </div>
