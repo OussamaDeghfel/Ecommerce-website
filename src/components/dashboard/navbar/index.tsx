@@ -7,11 +7,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import Items from "./items";
 import { BiHeart } from "react-icons/bi";
+import FavProducts from "./favProducts";
 const NavBar = () => {
   // const [showSearch, setShowSearch] = useState(false);
   const { cart } = useSelector((state: RootState) => state.cart);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [showFavorite, setShowFavorite] = useState(false);
 
   // const toggleSearch = () => {
   //   setShowSearch(!showSearch);
@@ -35,8 +37,9 @@ const NavBar = () => {
           </ul>
         </div>
         <div className="flex">
-          <button className="search-button">
+          <button className="search-button" onClick={() => setShowFavorite(!showFavorite)}>
             <BiHeart size={25} color="orange" />
+            
           </button>
 
           <button className="m-4">
@@ -52,7 +55,10 @@ const NavBar = () => {
           </button>
         </div>
       </div>
-      <div className="absolute right-6">{isOpen && <Items />} </div>
+      <div className="absolute right-6 z-10">{isOpen && <Items />} </div>
+      <div className="absolute right-14 z-10">
+        {showFavorite && <FavProducts />}
+      </div>
     </>
   );
 };
