@@ -10,10 +10,11 @@ const FavProducts = () => {
 
   const dispatch = useDispatch();
 
+
   return (
     <div className="w-full h-full justify-center items-center border-2 border-gray-200 bg-white p-10 rounded-lg shadow-lg">
       <div className="grid grid-cols-3 gap-5">
-        {favoriteProduct.map((prod) => (
+        {favoriteProduct.length > 0 && favoriteProduct.map((prod) => (
           <div
             key={prod.id}
             className="w-60 h-fit bg-orange-50 pb-2 rounded-md shadow-md"
