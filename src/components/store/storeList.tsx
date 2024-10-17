@@ -4,7 +4,7 @@ import { appDispatch, RootState } from "../redux/store";
 import { fetchProducts } from "../redux/productSlice";
 import { useEffect, useState } from "react";
 import { FaHeart, FaRegHeart, FaShoppingBag } from "react-icons/fa";
-import { addToCart } from "../redux/cartSlice";
+import { addToCart, chooseFavorite } from "../redux/cartSlice";
 // import { FcClearFilters } from "react-icons/fc";
 // import { BiHeart } from "react-icons/bi";
 
@@ -84,7 +84,18 @@ const StoreList = () => {
                 />
                 <div className=" absolute top-0 right-0 p-2 cursor-pointer hover:scale-125" onClick={FavToggle}>
                   {isLiked ? (
-                    <FaHeart className="text-red-500" size={25} />
+                    <FaHeart className="text-red-500" size={25} onClick={() => {
+                      dispatch(
+                        chooseFavorite(
+                          {
+                            id: prod.id,
+                            title: prod.title,
+                            images: prod.images[0],
+                            price: prod.price,    
+                          }
+                        )
+                      )
+                    }} />
                   ) : (
                     <FaRegHeart className="text-gray-500" size={25} color="white" />
                   )}
