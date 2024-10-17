@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { appDispatch, RootState } from "../redux/store";
 import { fetchProducts } from "../redux/productSlice";
 import { useEffect, useState } from "react";
-import { FaHeart, FaRegHeart, FaShoppingBag } from "react-icons/fa";
+import { FaRegHeart, FaShoppingBag } from "react-icons/fa";
 import { addToCart, chooseFavorite } from "../redux/cartSlice";
 // import { FcClearFilters } from "react-icons/fc";
 // import { BiHeart } from "react-icons/bi";
@@ -14,7 +14,7 @@ const StoreList = () => {
 
   const FavToggle = () => {
     setIsLiked(!isLiked);
-  }
+  };
 
   // const [searchByCategory, setSearchByCategory] = useState("");
 
@@ -82,24 +82,25 @@ const StoreList = () => {
                   src={prod.images[0]}
                   alt="just image"
                 />
-                <div className=" absolute top-0 right-0 p-2 cursor-pointer hover:scale-125" onClick={FavToggle}>
-                  {isLiked ? (
-                    <FaHeart className="text-red-500" size={25} onClick={() => {
+                <div
+                  className=" absolute top-0 right-0 p-2 cursor-pointer hover:scale-125"
+                  onClick={FavToggle}
+                >
+                  <FaRegHeart
+                    // className="text-red-500"
+                    color="white"
+                    size={25}
+                    onClick={() => {
                       dispatch(
-                        chooseFavorite(
-                          {
-                            id: prod.id,
-                            title: prod.title,
-                            images: prod.images[0],
-                            price: prod.price,    
-                          }
-                        )
-                      )
-                    }} />
-                  ) : (
-                    <FaRegHeart className="text-gray-500" size={25} color="white" />
-                  )}
-                
+                        chooseFavorite({
+                          id: prod.id,
+                          title: prod.title,
+                          images: prod.images[0],
+                          price: prod.price,
+                        })
+                      );
+                    }}
+                  />
                 </div>
               </div>
               <div className="flex flex-col p-2 justify-between h-[25.5vh]">
