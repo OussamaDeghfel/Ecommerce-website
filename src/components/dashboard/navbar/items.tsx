@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { FaPlus, FaTrash } from "react-icons/fa";
@@ -15,9 +14,7 @@ const Items = () => {
     (state: RootState) => state.cart
   );
   const dispatch = useDispatch();
-  useEffect(() => {
-    console.log(cart);
-  }, []);
+
   return (
     <>
       <div className="overflow-scroll w-[80vh] h-[350px] border-2 border-gray-200 rounded-md bg-white shadow-lg">
@@ -34,7 +31,9 @@ const Items = () => {
                 />
 
                 <div className="m-2 w-full">
-                  <h1 className="font-medium px-3 text-xl">{pic.product.title}</h1>
+                  <h1 className="font-medium px-3 text-xl">
+                    {pic.product.title}
+                  </h1>
                   <div className="flex px-3 py-5 justify-start items-center">
                     <FaMinus
                       size={12}
