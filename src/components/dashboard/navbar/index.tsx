@@ -10,7 +10,7 @@ import { BiHeart } from "react-icons/bi";
 import FavProducts from "./favProducts";
 const NavBar = () => {
   // const [showSearch, setShowSearch] = useState(false);
-  const { cart } = useSelector((state: RootState) => state.cart);
+  const { cart, favCart } = useSelector((state: RootState) => state.cart);
 
   const [isOpen, setIsOpen] = useState(false);
   const [showFavorite, setShowFavorite] = useState(false);
@@ -36,23 +36,32 @@ const NavBar = () => {
             </li>
           </ul>
         </div>
-        <div className="flex">
-          <button onClick={() => setShowFavorite(!showFavorite)} >
-            <BiHeart size={25} color="orange" />
-            
-          </button>
-
-          <button className="m-4">
-            <Link to="/accountDetails/accountInfo">
-              <FaUser size={20} color="orange" />
-            </Link>
-          </button>
-          <button onClick={() => setIsOpen(!isOpen)}>
-            <FaCartShopping size={25} color="orange" />
-            <span className="absolute top-10 right-5 bg-orange-300 text-white px-1 rounded-lg w-[20px] h-[25px]">
-              {cart.length}
+        <div className="flex justify-between items-center">
+          <div className="relative mx-3">
+            <button onClick={() => setShowFavorite(!showFavorite)}>
+              <BiHeart size={25} color="orange" />
+              <span className="absolute left-5 top-3 bg-orange-300 text-white px-1 rounded-lg text-sm w-fit h-fit">
+              {favCart.length}
             </span>
-          </button>
+            </button>
+          </div>
+
+          <div className="relative mx-2">
+            <button onClick={() => setIsOpen(!isOpen)}>
+              <FaCartShopping size={25} color="orange" />
+              <span className="absolute  left-5 top-3 bg-orange-300 text-white px-1 rounded-lg text-sm w-fit h-fit">
+                {cart.length}
+              </span>
+            </button>
+          </div>
+
+          <div>
+            <button className="m-4">
+              <Link to="/accountDetails/accountInfo">
+                <FaUser size={20} color="orange" />
+              </Link>
+            </button>
+          </div>
         </div>
       </div>
       <div className="absolute right-6 z-10">{isOpen && <Items />} </div>
