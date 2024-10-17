@@ -12,11 +12,13 @@ interface cartItem {
 
 interface cartState {
   cart: cartItem[];
+  favCart: ProductData[]
   totalQuantityPrice: number 
 }
 
 const initialState: cartState = {
   cart: [],
+  favCart: [],
   totalQuantityPrice: 0
 };
 
@@ -81,13 +83,11 @@ const cartSlice = createSlice({
 
     },
 
-
-
-
     addToCart: (state, action) => {
       state.cart.push(action.payload);
       state.totalQuantityPrice = state.totalQuantityPrice + action.payload.product.price
     },
+    
     removeFromCart: (state, action) => {
       return {
         ...state,
@@ -95,6 +95,10 @@ const cartSlice = createSlice({
         totalQuantityPrice: state.totalQuantityPrice - action.payload.price 
       };
     },
+
+    chooseFavorite: (state, action) => {
+      state.favCart.push(action.payload);
+    }
   },
 });
 
@@ -104,4 +108,5 @@ export const {
   removeFromCart,
   incrementQuantity,
   decrementQuantity,
+  chooseFavorite
 } = cartSlice.actions;
