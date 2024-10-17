@@ -37,7 +37,7 @@ const NavBar = () => {
           </ul>
         </div>
         <div className="flex">
-          <button className="search-button" onClick={() => setShowFavorite(!showFavorite)}>
+          <button onClick={() => setShowFavorite(!showFavorite)} >
             <BiHeart size={25} color="orange" />
             
           </button>

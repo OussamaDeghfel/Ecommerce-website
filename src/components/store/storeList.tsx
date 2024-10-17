@@ -82,7 +82,7 @@ const StoreList = () => {
                   src={prod.images[0]}
                   alt="just image"
                 />
-                <div className=" absolute top-0 right-0 p-2 cursor-pointer" onClick={FavToggle}>
+                <div className=" absolute top-0 right-0 p-2 cursor-pointer hover:scale-125" onClick={FavToggle}>
                   {isLiked ? (
                     <FaHeart className="text-red-500" size={25} />
                   ) : (
