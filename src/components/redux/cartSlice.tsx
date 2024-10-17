@@ -87,7 +87,7 @@ const cartSlice = createSlice({
       state.cart.push(action.payload);
       state.totalQuantityPrice = state.totalQuantityPrice + action.payload.product.price
     },
-    
+
     removeFromCart: (state, action) => {
       return {
         ...state,
@@ -98,6 +98,13 @@ const cartSlice = createSlice({
 
     chooseFavorite: (state, action) => {
       state.favCart.push(action.payload);
+    },
+
+    removeFavorite: (state, action) => {
+      return {
+        ...state,
+        favCart: state.favCart.filter((prod) => prod.id !== action.payload.productID),
+      }
     }
   },
 });
@@ -108,5 +115,6 @@ export const {
   removeFromCart,
   incrementQuantity,
   decrementQuantity,
-  chooseFavorite
+  chooseFavorite,
+  removeFavorite
 } = cartSlice.actions;
