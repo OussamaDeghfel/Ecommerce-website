@@ -1,9 +1,14 @@
 import { FaShoppingBag } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { BsTrash2 } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { removeFavorite } from "../../redux/cartSlice";
 
 const FavProducts = () => {
   const favoriteProduct = useSelector((state: RootState) => state.cart.favCart);
+
+  const dispatch = useDispatch();
 
   return (
     <div className="w-full h-full justify-center items-center border-2 border-gray-200 bg-white p-10 rounded-lg shadow-lg">
@@ -19,6 +24,18 @@ const FavProducts = () => {
                 src={prod.images}
                 alt="just image"
               />
+              <div
+                className=" absolute top-0 right-0 p-2 cursor-pointer hover:scale-125"
+                onClick={() => {
+                  dispatch(removeFavorite({ productID: prod.id }));
+                }}
+              >
+                <BsTrash2
+                  // className="text-red-500"
+                  color="white"
+                  size={25}
+                />
+              </div>
             </div>
             <div className="flex flex-col p-2 justify-between h-[25.5vh]">
               <div className="px-2">
