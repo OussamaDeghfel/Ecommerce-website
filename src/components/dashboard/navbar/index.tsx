@@ -8,6 +8,7 @@ import { RootState } from "../../redux/store";
 import Items from "./items";
 import { BiHeart } from "react-icons/bi";
 import FavProducts from "./favProducts";
+import { Popover } from "antd";
 const NavBar = () => {
   // const [showSearch, setShowSearch] = useState(false);
   const { cart, favCart } = useSelector((state: RootState) => state.cart);
@@ -18,6 +19,7 @@ const NavBar = () => {
   // const toggleSearch = () => {
   //   setShowSearch(!showSearch);
   // };
+
   return (
     <>
       <div className="flex justify-between pt-4">
@@ -36,23 +38,44 @@ const NavBar = () => {
             </li>
           </ul>
         </div>
-        <div className="flex justify-between items-center">
-          <div className="relative mx-3">
-            <button onClick={() => setShowFavorite(!showFavorite)}>
-              <BiHeart size={25} color="orange" />
-              <span className="absolute left-5 top-3 bg-orange-300 text-white px-1 rounded-lg text-sm w-fit h-fit">
-              {favCart.length}
-            </span>
-            </button>
+        <div className="flex justify-between items-center ">
+          <div className="relative mx-3 cursor-pointer">
+            {favCart.length === 0 ? (
+              <Popover
+                placement="bottom"
+                title="No Favorite Products"
+                className="font-bold"
+              >
+                <BiHeart size={25} color="orange" />
+              </Popover>
+            ) : (
+              <button onClick={() => setShowFavorite(!showFavorite)}>
+                <BiHeart size={25} color="orange" />
+                <span className="absolute left-5 top-3 bg-orange-300 text-white px-1 rounded-lg text-sm w-fit h-fit">
+                  {favCart.length}
+                </span>
+              </button>
+            )}
           </div>
 
-          <div className="relative mx-2">
-            <button onClick={() => setIsOpen(!isOpen)}>
-              <FaCartShopping size={25} color="orange" />
-              <span className="absolute  left-5 top-3 bg-orange-300 text-white px-1 rounded-lg text-sm w-fit h-fit">
-                {cart.length}
-              </span>
-            </button>
+          <div className="relative mx-2 cursor-pointer">
+            {cart.length === 0 ? (
+              <Popover
+                placement="bottom"
+                title="No Products In Cart"
+                className="text-4xl"
+              >
+                {" "}
+                <FaCartShopping size={25} color="orange" />{" "}
+              </Popover>
+            ) : (
+              <button onClick={() => setIsOpen(!isOpen)}>
+                <FaCartShopping size={25} color="orange" />
+                <span className="absolute  left-5 top-3 bg-orange-300 text-white px-1 rounded-lg text-sm w-fit h-fit">
+                  {cart.length}
+                </span>
+              </button>
+            )}
           </div>
 
           <div>
