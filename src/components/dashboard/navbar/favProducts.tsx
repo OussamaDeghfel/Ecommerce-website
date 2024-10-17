@@ -1,27 +1,22 @@
 import { FaShoppingBag } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { useEffect } from "react";
 
 const FavProducts = () => {
   const favoriteProduct = useSelector((state: RootState) => state.cart.favCart);
 
-  useEffect(() => {
-    console.log(favoriteProduct);
-  }, []);
-
   return (
     <div className="w-full h-full justify-center items-center border-2 border-gray-200 bg-white p-10 rounded-lg shadow-lg">
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3 gap-5">
         {favoriteProduct.map((prod) => (
           <div
             key={prod.id}
-            className="w-full h-full bg-orange-50 pb-2 rounded-md shadow-md"
+            className="w-60 h-fit bg-orange-50 pb-2 rounded-md shadow-md"
           >
             <div className="relative">
               <img
-                className="w-full h-[200px] rounded-t-md"
-                src={prod.images[0]}
+                className="w-60 h-56 rounded-t-md"
+                src={prod.images}
                 alt="just image"
               />
             </div>
