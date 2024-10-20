@@ -9,9 +9,9 @@ import Security from "./detailsComponent/security"
 const AccountDetails = () => {
   return (
     <div>
-        <h1 className='w-full h-full flex text-4xl font-bold border-2 border-black p-4 space-x-4'>
+        <h1 className='w-full h-full flex text-4xl font-bold p-4 space-x-4'>
             <SideBar />
-            <div className="border-2 border-gray-100 rounded-md p-5 w-full h-[80vh] shadow-inner">
+            <div className="border-2 border-gray-100 rounded-md p-5 w-full h-full shadow-inner">
                 <Routes>
                     <Route path="/accountInfo" element={<AccountInfo />} />
                     <Route path="/favorList" element={<FavorList />} />
