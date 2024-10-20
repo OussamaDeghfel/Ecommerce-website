@@ -1,23 +1,30 @@
-import { Button, Form } from "antd";
+import { Button, Form, Input } from "antd";
 import profilePic from "../../../../assets/profilePic.png";
 import { useState } from "react";
+import { userSignUP } from "../../../authorization/signup/signUp";
 
 const AccountInfo = () => {
-  const [userInformation, setUserInformation] = useState({
-    firstName: localStorage.getItem("firstname"),
-    lastName: localStorage.getItem("lastname"),
+  const [userInformation, setUserInformation] = useState<userSignUP>({
+    firstname: localStorage.getItem("firstname"),
+    lastname: localStorage.getItem("lastname"),
     email: localStorage.getItem("email"),
-    phoneNumber: localStorage.getItem("phonenumber"),
   });
 
   const [editable, setEditable] = useState(false);
+
+  const handleChangeEditable = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserInformation({
+      ...userInformation,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <div className="flex flex-col w-full h-full space-y-2">
       <div className="flex border-2 border-gray-300 rounded-md p-4 justify-start items-center">
         <img src={profilePic} alt="" className="w-20 h-20" />
         <div className="flex flex-col p-4">
-          <h1 className="text-3xl font-bold">User Name</h1>
+          <h1 className="text-3xl font-bold">{userInformation.firstname} {userInformation.lastname}</h1>
           <p className="text-base font-mono text-gray-500">Seller && Buyer</p>
         </div>
       </div>
@@ -26,22 +33,41 @@ const AccountInfo = () => {
         <div className="flex justify-between px-10">
           <Form layout="vertical" className="grid grid-cols-1 p-4">
             <Form.Item label="First Name">
-              {" "}
-              <span className="text-gray-500">
-                {userInformation.firstName}
-              </span>{" "}
+              {editable ? (
+                <Input
+                  name="First Name"
+                  value={userInformation.firstname}
+                  onChange={handleChangeEditable}
+                />
+              ) : (
+                <span className="text-gray-500">
+                  {userInformation.firstname}
+                </span>
+              )}
             </Form.Item>
             <Form.Item label="Last Name">
-              {" "}
-              <span className="text-gray-500">
-                {userInformation.lastName}
-              </span>{" "}
+              {editable ? (
+                <Input
+                  name="Last Name"
+                  value={userInformation.lastname}
+                  onChange={handleChangeEditable}
+                />
+              ) : (
+                <span className="text-gray-500">
+                  {userInformation.lastname}
+                </span>
+              )}
             </Form.Item>
             <Form.Item label="Email">
-              {" "}
-              <span className="text-gray-500">
-                {userInformation.email}
-              </span>{" "}
+              {editable ? (
+                <Input
+                  name="Email"
+                  value={userInformation.email}
+                  onChange={handleChangeEditable}
+                />
+              ) : (
+                <span className="text-gray-500">{userInformation.email}</span>
+              )}
             </Form.Item>
           </Form>
 
