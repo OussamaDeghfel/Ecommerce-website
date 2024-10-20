@@ -49,7 +49,12 @@ const NavBar = () => {
                 <BiHeart size={25} color="orange" />
               </Popover>
             ) : (
-              <button onClick={() => setShowFavorite(!showFavorite)}>
+              <button
+                onClick={() => {
+                  setShowFavorite(!showFavorite);
+                  setIsOpen(false);
+                }}
+              >
                 <BiHeart size={25} color="orange" />
                 <span className="absolute left-5 top-3 bg-orange-300 text-white px-1 rounded-lg text-sm w-fit h-fit">
                   {favCart.length}
@@ -69,7 +74,12 @@ const NavBar = () => {
                 <FaCartShopping size={25} color="orange" />{" "}
               </Popover>
             ) : (
-              <button onClick={() => setIsOpen(!isOpen)}>
+              <button
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                  setShowFavorite(false);
+                }}
+              >
                 <FaCartShopping size={25} color="orange" />
                 <span className="absolute  left-5 top-3 bg-orange-300 text-white px-1 rounded-lg text-sm w-fit h-fit">
                   {cart.length}
