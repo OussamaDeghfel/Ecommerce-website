@@ -1,10 +1,10 @@
 import { Button, Form, Input } from "antd";
 import { Link } from "react-router-dom";
 
-type userSignUP = {
+export type userSignUP = {
   firstname: string;
   lastname: string;
-  email: string;
+  email: string ;
   password: string;
 }
 
