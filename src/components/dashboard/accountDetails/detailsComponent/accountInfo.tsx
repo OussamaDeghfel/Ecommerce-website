@@ -13,9 +13,17 @@ const AccountInfo = () => {
   const [editable, setEditable] = useState(false);
 
   const handleChangeEditable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserInformation({
-      ...userInformation,
-      [e.target.name]: e.target.value,
+    const { name, value } = e.target;
+
+    setUserInformation((prevState) => {
+      const updateUserInformation = {
+        ...prevState,
+        [name]: value,
+      };
+
+      localStorage.setItem(name, value);
+
+      return updateUserInformation;
     });
   };
 
@@ -24,18 +32,20 @@ const AccountInfo = () => {
       <div className="flex border-2 border-gray-300 rounded-md p-4 justify-start items-center">
         <img src={profilePic} alt="" className="w-20 h-20" />
         <div className="flex flex-col p-4">
-          <h1 className="text-3xl font-bold">{userInformation.firstname} {userInformation.lastname}</h1>
+          <h1 className="text-3xl font-bold">
+            {userInformation.firstname} {userInformation.lastname}
+          </h1>
           <p className="text-base font-mono text-gray-500">Seller && Buyer</p>
         </div>
       </div>
       <div className="flex flex-col border-2 border-gray-300 rounded-md p-4">
         <h1 className="text-xl font-bold pb-8">Personal Inforamtion</h1>
         <div className="flex justify-between px-10">
-          <Form layout="vertical" className="grid grid-cols-1 p-4">
+          <Form layout="vertical" className="grid grid-cols-2 gap-5">
             <Form.Item label="First Name">
               {editable ? (
                 <Input
-                  name="First Name"
+                  name="firstname"
                   value={userInformation.firstname}
                   onChange={handleChangeEditable}
                 />
@@ -48,7 +58,7 @@ const AccountInfo = () => {
             <Form.Item label="Last Name">
               {editable ? (
                 <Input
-                  name="Last Name"
+                  name="lastname"
                   value={userInformation.lastname}
                   onChange={handleChangeEditable}
                 />
@@ -61,7 +71,7 @@ const AccountInfo = () => {
             <Form.Item label="Email">
               {editable ? (
                 <Input
-                  name="Email"
+                  name="email"
                   value={userInformation.email}
                   onChange={handleChangeEditable}
                 />
@@ -71,12 +81,23 @@ const AccountInfo = () => {
             </Form.Item>
           </Form>
 
-          <Button
-            className="w-fit font-bold"
-            onClick={() => setEditable(!editable)}
-          >
-            Edit
-          </Button>
+          {editable ? (
+            <Button
+              className="w-fit font-bold"
+              onClick={() => setEditable(!editable)}
+              size="large"
+            >
+              Save
+            </Button>
+          ) : (
+            <Button
+              className="w-fit font-bold"
+              onClick={() => setEditable(!editable)}
+              size="large"
+            >
+              Edit
+            </Button>
+          )}
         </div>
       </div>
       <div>address</div>
