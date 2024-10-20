@@ -4,7 +4,9 @@ import { useState } from "react";
 const Security = () => {
   const [twoVerificationChecked, setTwoVerificationChecked] = useState(false);
 
-  const dataSource = [
+  const [disabledButton, setDisbaledButton] = useState(false);
+
+  const initialSessionsData = [
     {
       key: "1",
       username: "John Brown",
@@ -76,7 +78,9 @@ const Security = () => {
       mostrecent: "6 minutes ago",
     },
   ];
-
+  
+  const [dataSource, setDataSource] = useState(initialSessionsData);
+  
   const columns = [
     {
       title: "User Name",
@@ -99,6 +103,16 @@ const Security = () => {
       key: "mostrecent",
     },
   ];
+
+
+  const handleLogoutAllSessions = () => {
+    setDataSource([]);
+    setDisbaledButton(true);
+  };
+
+
+  
+
   return (
     <>
       <div className="flex flex-col justify-center items-center w-full h-full space-y-10">
@@ -109,7 +123,6 @@ const Security = () => {
               description="Your account is now more secure with two-step verification. Please keep your phone accessible for login confirmations."
               type="success"
               showIcon
-              closable
             />
           ) : (
             <Alert
@@ -117,7 +130,6 @@ const Security = () => {
               description="Your account is less secure without two-step verification. We recommend re-enabling it to protect your account."
               type="warning"
               showIcon
-              closable
             />
           )}
         </div>
@@ -131,9 +143,7 @@ const Security = () => {
               </span>
             </div>
             <Switch
-              onChange={() =>
-                setTwoVerificationChecked(!twoVerificationChecked)
-              }
+              onClick={() => setTwoVerificationChecked(!twoVerificationChecked)}
             />
           </div>
           <div className="flex border-2 border-gray-100 justify-between items-center p-5 rounded-b-lg w-full mx-auto">
@@ -143,7 +153,12 @@ const Security = () => {
                 This will log you out from all devices
               </span>
             </div>
-            <Button type="primary" className="font-medium">
+            <Button
+              type="primary"
+              className="font-medium"
+              onClick={handleLogoutAllSessions}
+              disabled={disabledButton}
+            >
               Logout everyone
             </Button>
           </div>
