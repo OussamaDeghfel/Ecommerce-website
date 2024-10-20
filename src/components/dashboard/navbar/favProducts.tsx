@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { BsTrash2 } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { removeFavorite } from "../../redux/cartSlice";
+import { addToCart, removeFavorite } from "../../redux/cartSlice";
 
 const FavProducts = () => {
   const favoriteProduct = useSelector((state: RootState) => state.cart.favCart);
@@ -48,20 +48,20 @@ const FavProducts = () => {
                 <h1 className="font-bold my-2 text-2xl">{prod.price} $</h1>
                 <button
                   className="flex items-center text-blue-800 font-bold p-2 border-2 border-blue-600 rounded-md  px-2 my-1 hover:bg-blue-500 hover:text-white duration-200"
-                  // onClick={() => {
-                  //   dispatch(
-                  //     addToCart({
-                  //       product: {
-                  //         id: prod.id,
-                  //         title: prod.title,
-                  //         images: prod.images[0],
-                  //         price: prod.price,
-                  //       },
-                  //       quantity: 1,
-                  //       quantityPrice: prod.price,
-                  //     })
-                  //   );
-                  // }}
+                  onClick={() => {
+                    dispatch(
+                      addToCart({
+                        product: {
+                          id: prod.id,
+                          title: prod.title,
+                          images: prod.images,
+                          price: prod.price,
+                        },
+                        quantity: 1,
+                        quantityPrice: prod.price,
+                      })
+                    );
+                  }}
                 >
                   <FaShoppingBag className="mr-2" /> Add To Cart
                 </button>
