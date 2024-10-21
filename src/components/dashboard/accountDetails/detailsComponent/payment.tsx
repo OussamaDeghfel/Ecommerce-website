@@ -2,8 +2,12 @@ import { Button, Checkbox, Input } from "antd";
 import visaCard from "../../../../assets/visaCard.png";
 import masterCard from "../../../../assets/masterCard.png";
 import { BiPlusCircle } from "react-icons/bi";
+import { useState } from "react";
 
 const Payment = () => {
+
+  const [chooseDefaultCard, setChooseDefaultCard] = useState(0);
+
   return (
     <div className="space-y-5">
       <div className="grid grid-cols-2 w-full h-full border-2 border-gray-300 rounded-md p-6">
@@ -34,7 +38,9 @@ const Payment = () => {
         </div>
 
         <div className="grid grid-cols-1 gap-5">
-          <div className="flex h-full w-full border-2 border-blue-200 rounded-md p-4">
+          <div className={`flex h-full w-full border-2 border-cyan-200 rounded-md p-4 
+          ${chooseDefaultCard === 1 ? "bg-cyan-50" : ""}`} 
+          >
             <div className="w-10">
               <img src={visaCard} alt="visa card image" />
             </div>
@@ -42,13 +48,15 @@ const Payment = () => {
               <h1 className="text-xl">Paysera Visa Card</h1>
               <p className="text-sm text-gray-400">Expire on 22/09</p>
               <div className="flex justify-start items-center space-x-5">
-                <Button className="text-base font-light">set as default</Button>
+                <Button className="text-base font-light" onClick={() => setChooseDefaultCard(1)}>set as default</Button>
                 <Button>Edit</Button>
               </div>
             </div>
           </div>
 
-          <div className="flex h-full w-full border-2 border-blue-200 rounded-md p-4">
+          <div className={`flex h-full w-full border-2 border-cyan-200 rounded-md p-4 
+          ${chooseDefaultCard === 2 ? "bg-cyan-50" : ""}`} 
+          >
             <div className="w-10">
               <img src={masterCard} alt="visa card image" />
             </div>
@@ -56,7 +64,7 @@ const Payment = () => {
               <h1 className="text-xl">Master Card</h1>
               <p className="text-sm text-gray-400">Expire on 03/12</p>
               <div className="flex justify-start items-center space-x-5">
-                <Button className="text-base font-light">set as default</Button>
+                <Button className="text-base font-light" onClick={() => setChooseDefaultCard(2)}>set as default</Button>
                 <Button>Edit</Button>
               </div>
             </div>
