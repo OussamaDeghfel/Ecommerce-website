@@ -25,6 +25,8 @@ const StoreList = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
+  console.log(product)
+
   //filter the category for only one name cause of duplicate
   // const uniqueFilter = [
   //   ...new Map(
@@ -79,7 +81,7 @@ const StoreList = () => {
               <div className="relative">
                 <img
                   className="w-full h-[200px] rounded-t-md"
-                  src={prod.images[0]}
+                  src={prod.image}
                   alt="just image"
                 />
                 <div
@@ -95,7 +97,7 @@ const StoreList = () => {
                         chooseFavorite({
                           id: prod.id,
                           title: prod.title,
-                          images: prod.images[0],
+                          images: prod.image,
                           price: prod.price,
                         })
                       );
@@ -106,7 +108,7 @@ const StoreList = () => {
               <div className="flex flex-col p-2 justify-between h-[25.5vh]">
                 <div className="px-2">
                   <h1 className="font-bold text-md my-2">{prod.title}</h1>
-                  {/* <h1 className="font-medium my-2">{prod.category.name}</h1> */}
+                  <h1 className="font-medium my-2">{prod.category}</h1>
                 </div>
 
                 <div className="flex justify-between items-end ">
@@ -119,7 +121,7 @@ const StoreList = () => {
                           product: {
                             id: prod.id,
                             title: prod.title,
-                            images: prod.images[0],
+                            images: prod.image,
                             price: prod.price,
                           },
                           quantity: 1,
