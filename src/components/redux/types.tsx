@@ -7,13 +7,13 @@ export interface Product {
 
 export interface ProductData {
     id: string;
-    category: {
-      id: string;
-      name: string;
-      image: string;
-    };
+    category: string;
     title: string;
     description: string; 
     price: number;
-    images: string;
+    image: string;
+    rating: {
+      rate: number;
+      count: number;
+    }
   }
