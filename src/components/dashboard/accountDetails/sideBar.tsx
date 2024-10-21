@@ -19,16 +19,6 @@ const SideBar = () => {
             Billing & Payment
           </li>
         </Link>
-        <Link to="orderHistory">
-          <li className="text-xl  p-4 shadow-sm rounded-md cursor-pointer hover:scale-105 duration-300">
-            Order History
-          </li>
-        </Link>
-        <Link to="favorList">
-          <li className="text-xl  p-4 shadow-sm rounded-md cursor-pointer hover:scale-105 duration-300">
-            Wishlist/Favorites
-          </li>
-        </Link>
       </ul>
     </div>
   );

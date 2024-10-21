@@ -1,8 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import SideBar from "./sideBar"
 import AccountInfo from "./detailsComponent/accountInfo"
-import FavorList from "./detailsComponent/favorList"
-import OrderHistory from "./detailsComponent/orderHistory"
 import Payment from "./detailsComponent/payment"
 import Security from "./detailsComponent/security"
 
@@ -14,8 +12,6 @@ const AccountDetails = () => {
             <div className="border-2 border-gray-100 rounded-md p-5 w-full h-full shadow-inner">
                 <Routes>
                     <Route path="/accountInfo" element={<AccountInfo />} />
-                    <Route path="/favorList" element={<FavorList />} />
-                    <Route path="/orderHistory" element={<OrderHistory />} />
                     <Route path="/payment" element={<Payment />} />
                     <Route path="/security" element={<Security />} />
                 </Routes>
