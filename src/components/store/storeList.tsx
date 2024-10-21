@@ -3,8 +3,9 @@ import { useDispatch } from "react-redux";
 import { appDispatch, RootState } from "../redux/store";
 import { fetchProducts } from "../redux/productSlice";
 import { useEffect, useState } from "react";
-import { FaRegHeart, FaShoppingBag } from "react-icons/fa";
+import { FaRegHeart, FaShoppingBag, FaStarHalfAlt } from "react-icons/fa";
 import { addToCart, chooseFavorite } from "../redux/cartSlice";
+import { FaStar, FaStarHalf } from "react-icons/fa6";
 // import { FcClearFilters } from "react-icons/fc";
 // import { BiHeart } from "react-icons/bi";
 
@@ -25,7 +26,7 @@ const StoreList = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  console.log(product)
+  console.log(product);
 
   //filter the category for only one name cause of duplicate
   // const uniqueFilter = [
@@ -71,26 +72,25 @@ const StoreList = () => {
         </span>
         </div>
       </div> */}
-      <div className="p-5 m-5 grid grid-cols-4 gap-6">
+      <div className="w-full h-full p-5 m-5 grid grid-cols-4 gap-6">
         {product.map((prod) => (
           <>
             <div
               key={prod.id}
-              className="w-full h-full bg-orange-50 pb-2 rounded-md shadow-md"
+              className="w-full h-full bg-white pb-2 rounded-md shadow-md"
             >
               <div className="relative">
                 <img
-                  className="w-full h-[200px] rounded-t-md"
+                  className="w-full h-64 rounded-t-md"
                   src={prod.image}
-                  alt="just image"
+                  alt="product image"
                 />
                 <div
                   className=" absolute top-0 right-0 p-2 cursor-pointer hover:scale-125"
                   onClick={FavToggle}
                 >
                   <FaRegHeart
-                    // className="text-red-500"
-                    color="white"
+                    color="red"
                     size={25}
                     onClick={() => {
                       dispatch(
@@ -105,16 +105,39 @@ const StoreList = () => {
                   />
                 </div>
               </div>
+
               <div className="flex flex-col p-2 justify-between h-[25.5vh]">
                 <div className="px-2">
                   <h1 className="font-bold text-md my-2">{prod.title}</h1>
                   <h1 className="font-medium my-2">{prod.category}</h1>
                 </div>
 
+                <div className="flex ">
+                  {prod.rating.rate >= 4 && (
+                    <div className="flex justify-center items-center space-x-4">
+                      <FaStar size={20} className="mr-2" color="orange" />
+                      {prod.rating.rate}
+                    </div>
+                  )}
+                  {prod.rating.rate >= 3 && prod.rating.rate < 4 && (
+                    <>
+                      <FaStarHalfAlt size={20} className="mr-2" color="orange" />
+                      {prod.rating.rate}
+                    </>
+                  )}
+
+                  {prod.rating.rate < 3 && (
+                    <>
+                      <FaStarHalf size={20} className="mr-1" color="orange" />
+                      {prod.rating.rate}
+                    </>
+                  )}
+                </div>
+
                 <div className="flex justify-between items-end ">
-                  <h1 className="font-bold my-2 text-2xl">{prod.price}$</h1>
+                  <h1 className="font-bold my-2 text-xl">{prod.price} $</h1>
                   <button
-                    className="flex items-center text-blue-800 font-bold p-2 border-2 border-blue-600 rounded-md  px-2 my-1 hover:bg-blue-500 hover:text-white duration-200"
+                    className="flex items-center text-orange-600 font-bold p-2 border-2 border-orange-600 rounded-md  px-2 my-1 hover:bg-blue-500 hover:text-white duration-200"
                     onClick={() => {
                       dispatch(
                         addToCart({
