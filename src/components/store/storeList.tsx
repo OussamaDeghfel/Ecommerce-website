@@ -6,8 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { FaRegHeart, FaShoppingBag, FaStarHalfAlt } from "react-icons/fa";
 import { addToCart, chooseFavorite } from "../redux/cartSlice";
 import { FaStar, FaStarHalf } from "react-icons/fa6";
-import { FcClearFilters } from "react-icons/fc";
-import { Select } from "antd";
+import { Input, Select } from "antd";
 // import { FcClearFilters } from "react-icons/fc";
 // import { BiHeart } from "react-icons/bi";
 
@@ -29,13 +28,11 @@ const StoreList = () => {
   }, [dispatch]);
 
   // console.log(product.map((item) => item.category));
-  console.log(product)
+  console.log(product);
 
   //filter the category for only one name cause of duplicate
   const uniqueFilter = [
-    ...new Map(
-      product.map((item) => [item["category"], item])
-    ).values(),
+    ...new Map(product.map((item) => [item["category"], item])).values(),
   ];
   // console.log("search by cat : ", searchByCategory);
 
@@ -49,16 +46,63 @@ const StoreList = () => {
 
   return (
     <div className="flex flex-col items-center justify-start h-full bg-gray-100 p-4">
-      <h1 className="uppercase font-bold text-black text-2xl p-2 border-2 border-orange-600 rounded-lg ">
+      <h1 className="uppercase font-medium text-black text-3xl italic p-2 px-4 border-2 border-orange-600 rounded-lg ">
         Everything Comes in Your Mind
       </h1>
-      <div className="flex justify-center items-center border-2 border-black">
-        <div className="p-5 m-5 grid grid-cols-6 gap-4 w-full">
-          <Select className="w-full" placeholder="Filter By Category"
-          options={uniqueFilter.map((item) => ({value: item.category, label: item.category}))} onChange={(value) => setSearchByCategory(value)} allowClear  />
+      <div className="flex justify-center items-center">
+        <div className="p-5 m-5 grid grid-cols-3 gap-8 w-full">
+          <div className="flex flex-col  pr-5 h-fit">
+            <label htmlFor="category" className="font-bold pb-2">
+              Category
+            </label>
+            <Select
+              className="w-full"
+              placeholder="Filter By Category"
+              options={uniqueFilter.map((item) => ({
+                value: item.category,
+                label: item.category,
+              }))}
+              onChange={(value) => setSearchByCategory(value)}
+              allowClear
+            />
+          </div>
+          <div className="flex flex-col  pr-5 h-fit">
+            <label htmlFor="category" className="font-bold pb-2">
+              Price
+            </label>
+            <div className="space-x-2 flex justify-center w-full items-center">
+              <Input placeholder="min" />
+              <Input placeholder="max" />
+            </div>
+          </div>
+          <div className="flex flex-col pr-5 h-fit">
+            <label htmlFor="category" className="font-bold pb-2">
+              Rating
+            </label>
+            <Select
+              className="w-full"
+              placeholder="Filter By Rate"
+              options={[
+                {
+                  value: "1",
+                  label: "ALL",
+                },
+                {
+                  value: "2",
+                  label: "Above 4.0",
+                },
+                {
+                  value: "3",
+                  label: "Above 4.5",
+                },
+              ]}
+              // onChange={(value) => setSearchByCategory(value)}
+              allowClear
+            />
+          </div>
         </div>
       </div>
-      <div className="w-full h-full p-5 m-5 grid grid-cols-4 gap-6">
+      <div className="w-full h-full p-10 m-5 grid grid-cols-4 gap-8 border-t-2 border-gray-300">
         {filteredProduct.map((prod) => (
           <>
             <div
@@ -76,7 +120,7 @@ const StoreList = () => {
                   onClick={FavToggle}
                 >
                   <FaRegHeart
-                  color="white"
+                    color="white"
                     size={25}
                     onClick={() => {
                       dispatch(
@@ -107,17 +151,21 @@ const StoreList = () => {
                   )}
                   {prod.rating.rate >= 3 && prod.rating.rate < 4 && (
                     <>
-                      <FaStarHalfAlt size={20} className="mr-2" color="orange" />
+                      <FaStarHalfAlt
+                        size={20}
+                        className="mr-2"
+                        color="orange"
+                      />
                       {prod.rating.rate}
                     </>
                   )}
-
                   {prod.rating.rate < 3 && (
                     <>
                       <FaStarHalf size={20} className="mr-1" color="orange" />
                       {prod.rating.rate}
                     </>
                   )}
+                  <span className="font-thin ml-2">({prod.rating.count})</span>
                 </div>
 
                 <div className="flex justify-between items-end ">
