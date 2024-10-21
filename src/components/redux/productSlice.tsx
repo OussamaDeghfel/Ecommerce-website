@@ -21,7 +21,7 @@ export const fetchProducts = createAsyncThunk(
   "product/fetchProducts",
   async () => {
     const response = await axios.get(
-      "https://api.escuelajs.co/api/v1/products"
+      "https://fakestoreapi.com/products"
     );
     return response.data;
   }
