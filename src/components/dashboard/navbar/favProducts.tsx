@@ -22,7 +22,7 @@ const FavProducts = () => {
             <div className="relative">
               <img
                 className="w-60 h-56 rounded-t-md"
-                src={prod.images}
+                src={prod.image}
                 alt="just image"
               />
               <div
@@ -54,7 +54,7 @@ const FavProducts = () => {
                         product: {
                           id: prod.id,
                           title: prod.title,
-                          images: prod.images,
+                          images: prod.image,
                           price: prod.price,
                         },
                         quantity: 1,
@@ -63,7 +63,7 @@ const FavProducts = () => {
                     );
                   }}
                 >
-                  <FaShoppingBag className="mr-2" /> Add To Cart
+                  <FaShoppingBag className="mr-2 " /> Add To Cart
                 </button>
               </div>
             </div>
