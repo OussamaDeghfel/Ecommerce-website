@@ -5,14 +5,14 @@ import { RootState } from "./store";
 
   interface ProductState {
     product: ProductData[];
-    loading: boolean;
+    isLoading: boolean;
     error: string | null;
   }
 
 // Initial state
 const initialState:ProductState = {
   product: [],
-  loading: false,
+  isLoading: false,
   error: "",
 };
 
@@ -34,17 +34,17 @@ const productSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(fetchProducts.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
     });
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.product = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.error = "";
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
       state.product = [];
       state.error = action.error.message ?? null;
-      state.loading = false;
+      state.isLoading = false;
     });
   },
 });
