@@ -17,9 +17,10 @@ const StoreList = () => {
   const { product } = useSelector((state: RootState) => state.product);
 
   const [isLiked, setIsLiked] = useState(false);
-  // const [searchByCategory, setSearchByCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [selectedRate, setSelectedRate] = useState(null);
   const [filteredProduct, setFilteredProduct] = useState(product);
 
   // console.log("filtered inital ", filteredProduct)
@@ -37,23 +38,43 @@ const StoreList = () => {
     ...new Map(product.map((item) => [item["category"], item])).values(),
   ];
 
-  // const filteredProduct = useMemo(() => {
-  //   if (searchByCategory) {
-  //     return product.filter((item) => item.category === searchByCategory);
-  //   } else {
-  //     return product;
-  //   }
-  // }, [searchByCategory, product]);
 
-  const handleFilter = () => {
-    const min = parseFloat(minPrice);
-    const max = parseFloat(maxPrice);
+  const handleSearch = () => {
+    let filteredProduct = [...product];
 
-    if (!isNaN(min) && !isNaN(max)) {
-      const filteredProduct = product.filter((item) => item.price >= min && item.price <= max);
-      setFilteredProduct(filteredProduct);
+    if(selectedCategory){
+      filteredProduct = filteredProduct.filter((item) => item.category === selectedCategory);
     }
-  }
+
+    if(minPrice){
+      filteredProduct = filteredProduct.filter((item) => item.price >= Number(minPrice));
+    }
+    if(maxPrice){
+      filteredProduct = filteredProduct.filter((item) => item.price <= Number(maxPrice));
+    }
+
+    if (selectedRate) {
+      if (selectedRate === "2") {
+        filteredProduct = filteredProduct.filter(
+          (product) => product.rating.rate > 4.0
+        );
+      } else if (selectedRate === "3") {
+        filteredProduct = filteredProduct.filter(
+          (product) => product.rating.rate > 4.5
+        );
+      }
+    }
+
+    setFilteredProduct(filteredProduct);
+  };
+
+  const handleClear = () => {
+    setSelectedCategory(null);
+    setMinPrice("");
+    setMaxPrice("");
+    setSelectedRate(null);
+    setFilteredProduct(product);
+  };
 
   return (
     <div className="flex flex-col items-center justify-start h-full bg-gray-100 p-4">
@@ -66,9 +87,6 @@ const StoreList = () => {
             filter :
           </h1>
           <div className="flex flex-col  pr-5 h-fit">
-            {/* <label htmlFor="category" className="font-bold pb-2">
-              Category
-            </label> */}
             <Select
               className="w-full"
               placeholder="By Category"
@@ -76,14 +94,12 @@ const StoreList = () => {
                 value: item.category,
                 label: item.category,
               }))}
-              // onChange={(value) => setSearchByCategory(value)}
+              value={selectedCategory}
+              onChange={(value) => setSelectedCategory(value)}
               allowClear
             />
           </div>
           <div className="flex flex-col  pr-5 h-fit">
-            {/* <label htmlFor="category" className="font-bold pb-2">
-              Price
-            </label> */}
             <div className="space-x-2 flex justify-center w-full items-center">
               <Input
                 placeholder="Min PRICE"
@@ -98,9 +114,6 @@ const StoreList = () => {
             </div>
           </div>
           <div className="flex flex-col pr-5 h-fit">
-            {/* <label htmlFor="category" className="font-bold pb-2">
-              Rating
-            </label> */}
             <Select
               className="w-full"
               placeholder="By Rate"
@@ -118,17 +131,26 @@ const StoreList = () => {
                   label: "Above 4.5",
                 },
               ]}
-              // onChange={(value) => setSearchByCategory(value)}
+              value={selectedRate}
+              onChange={(value) => setSelectedRate(value)}
               allowClear
             />
           </div>
-          <div>
+          <div className="space-x-4">
             <Button
               className="w-fit justify-center items-end font-medium"
               danger
-              onClick={handleFilter}
+              onClick={handleSearch}
             >
               Search
+            </Button>
+            <Button
+              className="w-fit justify-center items-end font-medium"
+              color="default"
+              variant="outlined"
+              onClick={handleClear}
+            >
+              Clear
             </Button>
           </div>
         </div>
