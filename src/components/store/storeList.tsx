@@ -2,39 +2,40 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { appDispatch, RootState } from "../redux/store";
 import { fetchProducts } from "../redux/productSlice";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { FaRegHeart, FaShoppingBag, FaStarHalfAlt } from "react-icons/fa";
 import { addToCart, chooseFavorite } from "../redux/cartSlice";
 import { FaStar, FaStarHalf } from "react-icons/fa6";
-import { Input, Select } from "antd";
+import { Button, Input, Select } from "antd";
 // import { FcClearFilters } from "react-icons/fc";
 // import { BiHeart } from "react-icons/bi";
 
 const StoreList = () => {
   // const [productList , setProductList] = useState([]);
+  const dispatch = useDispatch<appDispatch>();
+  const { product } = useSelector((state: RootState) => state.product);
+
+
   const [isLiked, setIsLiked] = useState(false);
+  const [searchByCategory, setSearchByCategory] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+
 
   const FavToggle = () => {
     setIsLiked(!isLiked);
   };
 
-  const [searchByCategory, setSearchByCategory] = useState("");
-
-  const dispatch = useDispatch<appDispatch>();
-  const { product } = useSelector((state: RootState) => state.product);
-
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  // console.log(product.map((item) => item.category));
-  console.log(product);
 
   //filter the category for only one name cause of duplicate
   const uniqueFilter = [
     ...new Map(product.map((item) => [item["category"], item])).values(),
   ];
-  // console.log("search by cat : ", searchByCategory);
+  
 
   const filteredProduct = useMemo(() => {
     if (searchByCategory) {
@@ -44,20 +45,24 @@ const StoreList = () => {
     }
   }, [searchByCategory, product]);
 
+
+
+
   return (
     <div className="flex flex-col items-center justify-start h-full bg-gray-100 p-4">
       <h1 className="uppercase font-medium text-black text-3xl italic p-2 px-4 border-2 border-orange-600 rounded-lg ">
         Everything Comes in Your Mind
       </h1>
       <div className="flex justify-center items-center">
-        <div className="p-5 m-5 grid grid-cols-3 gap-8 w-full">
+        <div className="p-5 m-5 grid grid-cols-5 gap-8 w-full">
+          <h1 className="uppercase font-medium text-black text-xl italic w-fit">filter :</h1>
           <div className="flex flex-col  pr-5 h-fit">
-            <label htmlFor="category" className="font-bold pb-2">
+            {/* <label htmlFor="category" className="font-bold pb-2">
               Category
-            </label>
+            </label> */}
             <Select
               className="w-full"
-              placeholder="Filter By Category"
+              placeholder="By Category"
               options={uniqueFilter.map((item) => ({
                 value: item.category,
                 label: item.category,
@@ -67,21 +72,21 @@ const StoreList = () => {
             />
           </div>
           <div className="flex flex-col  pr-5 h-fit">
-            <label htmlFor="category" className="font-bold pb-2">
+            {/* <label htmlFor="category" className="font-bold pb-2">
               Price
-            </label>
+            </label> */}
             <div className="space-x-2 flex justify-center w-full items-center">
-              <Input placeholder="min" />
-              <Input placeholder="max" />
+              <Input placeholder="Min PRICE" value={minPrice} onChange={(e) => setMinPrice(e.target.value)} />
+              <Input placeholder="Max PRICE" value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)}/>
             </div>
           </div>
           <div className="flex flex-col pr-5 h-fit">
-            <label htmlFor="category" className="font-bold pb-2">
+            {/* <label htmlFor="category" className="font-bold pb-2">
               Rating
-            </label>
+            </label> */}
             <Select
               className="w-full"
-              placeholder="Filter By Rate"
+              placeholder="By Rate"
               options={[
                 {
                   value: "1",
@@ -99,6 +104,9 @@ const StoreList = () => {
               // onChange={(value) => setSearchByCategory(value)}
               allowClear
             />
+          </div>
+          <div>
+            <Button className="w-fit justify-center items-end font-medium" danger >Search</Button>
           </div>
         </div>
       </div>
