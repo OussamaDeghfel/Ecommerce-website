@@ -1,9 +1,10 @@
-import { FaShoppingBag } from "react-icons/fa";
+import { FaShoppingBag, FaStarHalfAlt } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { BsTrash2 } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { addToCart, removeFavorite } from "../../redux/cartSlice";
+import { FaStar, FaStarHalf } from "react-icons/fa6";
 
 const FavProducts = () => {
   const favoriteProduct = useSelector((state: RootState) => state.cart.favCart);
@@ -26,13 +27,12 @@ const FavProducts = () => {
                 alt="just image"
               />
               <div
-                className=" absolute top-0 right-0 p-2 cursor-pointer hover:scale-125"
+                className=" absolute top-0 right-0 cursor-pointer hover:scale-125 bg-gray-400 opacity-80 p-2 rounded-full"
                 onClick={() => {
                   dispatch(removeFavorite({ productID: prod.id }));
                 }}
               >
                 <BsTrash2
-                  // className="text-red-500"
                   color="white"
                   size={25}
                 />
@@ -41,8 +41,34 @@ const FavProducts = () => {
             <div className="flex flex-col p-2 justify-between h-[25.5vh]">
               <div className="px-2">
                 <h1 className="font-bold text-md my-2">{prod.title}</h1>
-                {/* <h1 className="font-medium my-2">{prod.category.name}</h1> */}
+                <h1 className="text-base my-2">{prod.category}</h1>
               </div>
+
+              <div className="flex font-bold">
+                  {prod.rating.rate >= 4 && (
+                    <div className="flex justify-center items-center space-x-4">
+                      <FaStar size={20} className="mr-2" color="orange" />
+                      {prod.rating.rate}
+                    </div>
+                  )}
+                  {prod.rating.rate >= 3 && prod.rating.rate < 4 && (
+                    <>
+                      <FaStarHalfAlt
+                        size={20}
+                        className="mr-2"
+                        color="orange"
+                      />
+                      {prod.rating.rate}
+                    </>
+                  )}
+                  {prod.rating.rate < 3 && (
+                    <>
+                      <FaStarHalf size={20} className="mr-1" color="orange" />
+                      {prod.rating.rate}
+                    </>
+                  )}
+                  <span className="font-thin ml-2">({prod.rating.count})</span>
+                </div>
 
               <div className="flex justify-between items-end ">
                 <h1 className="font-bold my-2 text-2xl">{prod.price} $</h1>
