@@ -14,19 +14,22 @@ import { Button, Input, Select } from "antd";
 const StoreList = () => {
   // const [productList , setProductList] = useState([]);
   const dispatch = useDispatch<appDispatch>();
-  const { product } = useSelector((state: RootState) => state.product);
+  const  {product }  = useSelector((state: RootState) => state.product);
 
   const [isLiked, setIsLiked] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [selectedRate, setSelectedRate] = useState(null);
-  const [filteredProduct, setFilteredProduct] = useState(product);
+  // const [filteredProduct, setFilteredProduct] = useState(product);
+  const [favlist, setFavlist] = useState<string[]>([]);
 
-  // console.log("filtered inital ", filteredProduct)
-
-  const FavToggle = () => {
-    setIsLiked(!isLiked);
+  const FavToggle = (id: string) => {
+    if (isLiked) {
+      setFavlist([...favlist, id]);
+    } else {
+      setFavlist(favlist.filter((item) => item !== id));
+    }
   };
 
   useEffect(() => {
@@ -38,19 +41,24 @@ const StoreList = () => {
     ...new Map(product.map((item) => [item["category"], item])).values(),
   ];
 
-
+  let filteredProduct = [...product];
   const handleSearch = () => {
-    let filteredProduct = [...product];
 
-    if(selectedCategory){
-      filteredProduct = filteredProduct.filter((item) => item.category === selectedCategory);
+    if (selectedCategory) {
+      filteredProduct = filteredProduct.filter(
+        (item) => item.category === selectedCategory
+      );
     }
 
-    if(minPrice){
-      filteredProduct = filteredProduct.filter((item) => item.price >= Number(minPrice));
+    if (minPrice) {
+      filteredProduct = filteredProduct.filter(
+        (item) => item.price >= Number(minPrice)
+      );
     }
-    if(maxPrice){
-      filteredProduct = filteredProduct.filter((item) => item.price <= Number(maxPrice));
+    if (maxPrice) {
+      filteredProduct = filteredProduct.filter(
+        (item) => item.price <= Number(maxPrice)
+      );
     }
 
     if (selectedRate) {
@@ -65,7 +73,7 @@ const StoreList = () => {
       }
     }
 
-    setFilteredProduct(filteredProduct);
+    return filteredProduct
   };
 
   const handleClear = () => {
@@ -73,7 +81,7 @@ const StoreList = () => {
     setMinPrice("");
     setMaxPrice("");
     setSelectedRate(null);
-    setFilteredProduct(product);
+    // setFilteredProduct(product);
   };
 
   return (
@@ -169,22 +177,26 @@ const StoreList = () => {
                   alt="product image"
                 />
                 <div
-                  className=" absolute top-0 right-0 p-2 cursor-pointer hover:scale-125 bg-gray-400 opacity-80 m-2 rounded-full"
-                  onClick={FavToggle}
+                  className={` absolute top-0 right-0 p-2 cursor-pointer hover:scale-125 bg-gray-400 opacity-80 m-2 rounded-full  ${
+                    favlist.includes(prod.id) && "bg-red-600"
+                  }  `}
+                  onClick={() => {FavToggle(prod.id)
+                    setIsLiked(!isLiked)
+                  }}
                 >
                   <FaRegHeart
                     color="white"
                     size={25}
-                    onClick={() => {
-                      dispatch(
-                        chooseFavorite({
-                          id: prod.id,
-                          title: prod.title,
-                          images: prod.image,
-                          price: prod.price,
-                        })
-                      );
-                    }}
+                    // onClick={() => {
+                    //   dispatch(
+                    //     chooseFavorite({
+                    //       id: prod.id,
+                    //       title: prod.title,
+                    //       image: prod.image,
+                    //       price: prod.price,
+                    //     })
+                    //   );
+                    // }}
                   />
                 </div>
               </div>
