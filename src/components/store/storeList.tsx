@@ -5,7 +5,7 @@ import { fetchProducts } from "../redux/productSlice";
 import { useEffect, useState } from "react";
 // import { useMemo } from "react";
 import { FaRegHeart, FaShoppingBag, FaStarHalfAlt } from "react-icons/fa";
-import { addToCart, chooseFavorite } from "../redux/cartSlice";
+import { addToCart, chooseFavorite, removeFavorite } from "../redux/cartSlice";
 import { FaStar, FaStarHalf } from "react-icons/fa6";
 import { Button, Input, Select } from "antd";
 // import { FcClearFilters } from "react-icons/fc";
@@ -29,6 +29,7 @@ const StoreList = () => {
       setFavlist([...favlist, id]);
     } else {
       setFavlist(favlist.filter((item) => item !== id));
+      dispatch(removeFavorite({ productID: id }));
     }
   };
 
@@ -187,16 +188,19 @@ const StoreList = () => {
                   <FaRegHeart
                     color="white"
                     size={25}
-                    // onClick={() => {
-                    //   dispatch(
-                    //     chooseFavorite({
-                    //       id: prod.id,
-                    //       title: prod.title,
-                    //       image: prod.image,
-                    //       price: prod.price,
-                    //     })
-                    //   );
-                    // }}
+                    onClick={() => {
+                      dispatch(
+                        chooseFavorite({
+                          id: prod.id,
+                          title: prod.title,
+                          category: prod.category,
+                          image: prod.image,
+                          price: prod.price,
+                          rating: prod.rating,
+                          // count: prod.rating.count,
+                        })
+                      );
+                    }}
                   />
                 </div>
               </div>
