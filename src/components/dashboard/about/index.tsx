@@ -2,6 +2,45 @@ import customerRevImg from "../../../assets/CustomerRevImg.jpg";
 import customerImage from "../../../assets/profilePic.png"
 
 const About = () => {
+
+  const costumerReviewsdata = [
+    {
+      name: "John Doe",
+      image: customerImage,
+      title: "Customer Title",
+      review: "I am beyond impressed with the quality of the products and the speedy delivery! Everything was just as described, and the customer service team was extremely helpful with my inquiries. I’ll definitely be shopping here again!",
+    },
+    {
+      name: "John Doe",
+      image: customerImage,
+      title: "Customer Title",
+      review: "This is my go-to store for finding exclusive deals. I’ve purchased several items, and every time, the process has been seamless. The products are fantastic, and the variety is great. Highly recommend!",
+    },
+    {
+      name: "John Doe",
+      image: customerImage,
+      title: "Customer Title",
+      review: "I am beyond impressed with the quality of the products and the speedy delivery! Everything was just as described, and the customer service team was extremely helpful with my inquiries. I’ll definitely be shopping here again!",
+    },
+    {
+      name: "John Doe",
+      image: customerImage,
+      title: "Customer Title",
+      review: "I am beyond impressed with the quality of the products and the speedy delivery! Everything was just as described, and the customer service team was extremely helpful with my inquiries. I’ll definitely be shopping here again!",
+    },
+    {
+      name: "John Doe",
+      image: customerImage,
+      title: "Customer Title",
+      review: "I was hesitant to order online, but this store exceeded my expectations! The items I bought arrived quickly, and they are exactly what I wanted. I’m very satisfied with my purchase and will be recommending this shop to my friends.",
+    },
+    {
+      name: "John Doe",
+      image: customerImage,
+      title: "Customer Title",
+      review: "I am beyond impressed with the quality of the products and the speedy delivery! Everything was just as described, and the customer service team was extremely helpful with my inquiries. I’ll definitely be shopping here again!",
+    },
+  ]
   return (
     <div className="w-full h-full grid grid-cols-2 gap-4">
       <div
@@ -15,45 +54,22 @@ const About = () => {
 
       </div>
 
-      <div className="flex flex-col w-full h-full border-2 border-gray-400 rounded-md space-y-3">
-        <div className="w-full h-fit flex flex-col p-5 rounded-lg space-y-4 bg-orange-50">
-        <div className="text-start">
-        "I am beyond impressed with the quality of the products and the speedy delivery! Everything was just as described, and the customer service team was extremely helpful with my inquiries. I’ll definitely be shopping here again!"
-        </div>
-        <div className="flex justify-start items-center space-x-4">
-          <img src={customerImage} alt="customer image" className="w-10 h-10" />
-          <div className="flex flex-col">
-            <h1>Emily R.</h1>
-            <h2>Customer Title</h2>
+      <div className="flex flex-col w-full h-[80vh] rounded-md space-y-3 overflow-y-scroll">
+        {costumerReviewsdata.map((item, index) => (
+          <div className="w-full h-fit flex flex-col p-5 rounded-lg space-y-4 bg-orange-50 border-2 border-orange-100" key={index}>
+          <div className="text-start">
+          "{item.review}"
           </div>
-        </div>
-        </div>
-
-        <div className="w-full h-fit flex flex-col p-5 rounded-lg space-y-4 bg-orange-50">
-        <div className="text-start">
-        "This is my go-to store for finding exclusive deals. I’ve purchased several items, and every time, the process has been seamless. The products are fantastic, and the variety is great. Highly recommend!"
-        </div>
-        <div className="flex justify-start items-center space-x-4">
-          <img src={customerImage} alt="customer image" className="w-10 h-10" />
-          <div className="flex flex-col">
-            <h1>James D.</h1>
-            <h2>Customer Title</h2>
+          <div className="flex justify-end items-center space-x-4">
+            <div className="flex flex-col items-end">
+              <h1>{item.name}</h1>
+              <h2>{item.title}</h2>
+            </div>
+            <img src={item.image} alt="customer image" className="w-10 h-10" />
           </div>
-        </div>
-        </div>
-
-        <div className="w-full h-fit flex flex-col p-5 rounded-lg space-y-4 bg-orange-50">
-        <div className="text-start">
-        "I was hesitant to order online, but this store exceeded my expectations! The items I bought arrived quickly, and they are exactly what I wanted. I’m very satisfied with my purchase and will be recommending this shop to my friends."
-        </div>
-        <div className="flex justify-start items-center space-x-4">
-          <img src={customerImage} alt="customer image" className="w-10 h-10" />
-          <div className="flex flex-col">
-            <h1>Sofia M.</h1>
-            <h2>Customer Title</h2>
           </div>
-        </div>
-        </div>
+        ))}
+        
       </div>
 
       <div  className="w-full col-span-2 h-fit border-2 border-gray-400">invitation for try the store</div>
