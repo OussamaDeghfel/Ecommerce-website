@@ -21,7 +21,7 @@ const StoreList = () => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [selectedRate, setSelectedRate] = useState(null);
-  // const [filteredProduct, setFilteredProduct] = useState(product);
+  const [filteredProduct, setFilteredProduct] = useState(product);
   const [favlist, setFavlist] = useState<string[]>([]);
 
   const FavToggle = (id: string) => {
@@ -42,8 +42,8 @@ const StoreList = () => {
     ...new Map(product.map((item) => [item["category"], item])).values(),
   ];
 
-  let filteredProduct = [...product];
   const handleSearch = () => {
+    let filteredProduct = [...product];
 
     if (selectedCategory) {
       filteredProduct = filteredProduct.filter(
@@ -74,7 +74,7 @@ const StoreList = () => {
       }
     }
 
-    return filteredProduct
+    setFilteredProduct(filteredProduct)
   };
 
   const handleClear = () => {
@@ -82,7 +82,7 @@ const StoreList = () => {
     setMinPrice("");
     setMaxPrice("");
     setSelectedRate(null);
-    // setFilteredProduct(product);
+    setFilteredProduct(product);
   };
 
   return (
