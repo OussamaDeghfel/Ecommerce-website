@@ -9,7 +9,7 @@ const SideBar = () => {
         <Link to="accountInfo">
           <li className={`text-xl p-4 shadow-sm rounded-md cursor-pointer hover:scale-105 duration-300 ${choosedDetail === 0 ? "bg-orange-100" : ""}`}
           onClick={() => setChoosedDetail(0)}>
-            Account Details
+            Account Information
           </li>
         </Link>
         <Link to="security">
