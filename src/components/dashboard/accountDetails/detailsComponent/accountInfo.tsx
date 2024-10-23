@@ -2,6 +2,7 @@ import { Button, Form, Input } from "antd";
 import profilePic from "../../../../assets/profilePic.png";
 import { useState } from "react";
 import { userSignUP } from "../../../authorization/signup/signUp";
+import { useNavigate } from "react-router-dom";
 
 const AccountInfo = () => {
   const [userInformation, setUserInformation] = useState<userSignUP>({
@@ -39,6 +40,12 @@ const AccountInfo = () => {
       [e.target.name]: e.target.value,
     })
   };
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    localStorage.setItem("isLogin", "false");
+    navigate("/")
+  }
 
   return (
     <div className="flex flex-col w-full h-full space-y-2">
@@ -190,6 +197,8 @@ const AccountInfo = () => {
           )}
         </div>
       </div>
+
+      <Button className="w-fit font-bold" type="primary" onClick={handleLogout} size="large"> Log Out</Button>
     </div>
   );
 };
