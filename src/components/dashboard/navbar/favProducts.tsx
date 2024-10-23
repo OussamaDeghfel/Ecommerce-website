@@ -13,9 +13,11 @@ const FavProducts = () => {
 
 
   return (
-    <div className="w-full h-full justify-center items-center border-2 border-gray-200 bg-white p-10 rounded-lg shadow-lg">
+    <>
+    {favoriteProduct && favoriteProduct.length > 0 && (
+      <div className="w-full h-full justify-center items-center border-2 border-gray-200 bg-white p-10 rounded-lg shadow-lg">
       <div className="grid grid-cols-3 gap-5">
-        {favoriteProduct.length > 0 && favoriteProduct.map((prod) => (
+        {favoriteProduct.map((prod) => (
           <div
             key={prod.id}
             className="w-60 h-fit bg-orange-50 pb-2 rounded-md shadow-md"
@@ -38,7 +40,7 @@ const FavProducts = () => {
                 />
               </div>
             </div>
-            <div className="flex flex-col p-2 justify-between h-[25.5vh]">
+            <div className="flex flex-col p-2 justify-between h-[30vh]">
               <div className="px-2">
                 <h1 className="font-bold text-md my-2">{prod.title}</h1>
                 <h1 className="text-base my-2">{prod.category}</h1>
@@ -97,6 +99,9 @@ const FavProducts = () => {
         ))}
       </div>
     </div>
+    )}
+    
+    </>
   );
 };
 
