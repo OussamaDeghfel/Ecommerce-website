@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import logo from "../../../assets/quickbuy_logo.png";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
@@ -13,8 +13,22 @@ const NavBar = () => {
   // const [showSearch, setShowSearch] = useState(false);
   const { cart, favCart } = useSelector((state: RootState) => state.cart);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [showProducts, setShowProducts] = useState(false);
   const [showFavorite, setShowFavorite] = useState(false);
+
+  const favRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (favRef.current && !favRef.current.contains(e.target as Node)) {
+        setShowFavorite(false); 
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  },[])
 
   // const toggleSearch = () => {
   //   setShowSearch(!showSearch);
@@ -52,7 +66,7 @@ const NavBar = () => {
               <button
                 onClick={() => {
                   setShowFavorite(!showFavorite);
-                  setIsOpen(false);
+                  setShowProducts(false);
                 }}
               >
                 <BiHeart size={25} color="orange" />
@@ -76,7 +90,7 @@ const NavBar = () => {
             ) : (
               <button
                 onClick={() => {
-                  setIsOpen(!isOpen);
+                  setShowProducts(!showProducts);
                   setShowFavorite(false);
                 }}
               >
@@ -97,8 +111,10 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-      <div className="absolute right-6 z-10">{isOpen && <Items />} </div>
-      <div className="absolute right-14 z-10">
+      <div className="absolute right-6 z-10">{showProducts && <Items />} </div>
+      <div className="absolute right-14 z-10" 
+      ref={favRef}
+        >
         {showFavorite && <FavProducts />}
       </div>
     </>
