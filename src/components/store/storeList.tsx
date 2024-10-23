@@ -87,9 +87,6 @@ const StoreList = () => {
 
   return (
     <div className="flex flex-col items-center justify-start h-full bg-gray-100 p-4">
-      <h1 className="uppercase font-medium text-black text-3xl italic p-2 px-4 border-2 border-orange-600 rounded-lg ">
-        Everything Comes in Your Mind
-      </h1>
       <div className="flex justify-center items-center">
         <div className="p-5 m-5 grid grid-cols-5 gap-8 w-full">
           <h1 className="uppercase font-medium text-black text-xl italic w-fit">
@@ -197,7 +194,7 @@ const StoreList = () => {
                           image: prod.image,
                           price: prod.price,
                           rating: prod.rating,
-                          // count: prod.rating.count,
+    
                         })
                       );
                     }}
@@ -205,7 +202,7 @@ const StoreList = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col p-2 justify-between h-[25.5vh]">
+              <div className="flex flex-col p-2 justify-between h-[30vh]">
                 <div className="px-2">
                   <h1 className="font-bold text-md my-2">{prod.title}</h1>
                   <h1 className="text-base my-2">{prod.category}</h1>
@@ -240,7 +237,7 @@ const StoreList = () => {
                 <div className="flex justify-between items-end ">
                   <h1 className="font-bold my-2 text-xl">{prod.price} $</h1>
                   <button
-                    className="flex items-center text-orange-600 font-bold p-2 border-2 border-orange-600 rounded-md  px-2 my-1 hover:bg-blue-500 hover:text-white duration-200"
+                    className="flex items-center text-orange-600 font-bold p-2 border-2 border-orange-600 rounded-md  px-2 my-1 hover:bg-orange-500 hover:text-white duration-200"
                     onClick={() => {
                       dispatch(
                         addToCart({
