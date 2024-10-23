@@ -1,6 +1,7 @@
 import { Button, Checkbox, Form, Input } from "antd";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import QBLogoSite from "../../../assets/QB-LogoSite.png"
 
 type user = {
   email: string;
@@ -23,7 +24,11 @@ const SignIn = () => {
   }
   return (
     <div className="flex w-full h-screen justify-center items-center">
-      <div className="m-auto border-2 border-orange-100 rounded-md p-5 w-[400px] h-fit shadow-lg ">
+      <div className="m-auto border-2 border-orange-100 rounded-md space-y-5 p-5 w-[400px] h-fit shadow-lg ">
+        <div className="flex flex-col space-y-2 justify-center items-center">
+          <img src={QBLogoSite} alt="Store logo" className="w-25 h-20 bg-black/70 rounded-lg p-2" />
+          <h1 className="text-2xl font-bold w-fit">Welcome to QuickBuy</h1>
+        </div>
         {credentialWarn && (
           <div className="w-full h-fit p-4 bg-orange-200  text-center rounded-md mb-5">
           <h1 className="font-bold text-red-600 ">Wrong Credentials</h1>
@@ -47,17 +52,17 @@ const SignIn = () => {
             <Input.Password />
           </Form.Item>
 
-          <Form.Item name="remember" valuePropName="checked">
+          <Form.Item name="remember" valuePropName="checked" className="justify-center items-center flex">
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" size="large" htmlType="submit">
+          <Form.Item className="justify-center items-center flex">
+            <Button type="primary" size="large" htmlType="submit" className="w-full bg-orange-500" >
               Sign In
             </Button>
           </Form.Item>
         </Form>
-        <div>
+        <div className="justify-center flex items-center">
           <h1>
             Don't have an account?{" "}
             <Link to="signup">
