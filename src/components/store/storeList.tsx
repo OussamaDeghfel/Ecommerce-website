@@ -35,6 +35,8 @@ const StoreList = () => {
 
   useEffect(() => {
     dispatch(fetchProducts());
+    setFilteredProduct(product);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   //filter the category for only one name cause of duplicate
