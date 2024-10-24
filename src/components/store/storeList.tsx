@@ -24,21 +24,18 @@ const StoreList = () => {
   const [filteredProduct, setFilteredProduct] = useState(product);
   // const [favlist, setFavlist] = useState<string[]>([]);
 
-  // const FavToggle = (id: string) => {
-  //   if (isLiked) {
-  //     setFavlist([...favlist, id]);
-  //   } else {
-  //     setFavlist(favlist.filter((item) => item !== id));
-  //     dispatch(removeFavorite({ productID: id }));
-  //   }
-  // };
+  
 
   useEffect(() => {
     dispatch(fetchProducts());
     setFilteredProduct(product);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
-  
+
+  useMemo(() => {
+    setFilteredProduct(product);
+  },[product])
+
 
   //filter the category for only one name cause of duplicate
   const uniqueFilter = [
@@ -192,7 +189,7 @@ const StoreList = () => {
                         rating: prod.rating,
                       })
                     ),
-                    dispatch(favorite(prod.id));
+                    dispatch(favorite(prod.id))
                   }}
                 >
                   <FaRegHeart color="white" size={25} />
