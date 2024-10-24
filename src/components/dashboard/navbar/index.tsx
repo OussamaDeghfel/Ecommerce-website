@@ -2,37 +2,71 @@ import { useEffect, useRef, useState } from "react";
 import logo from "../../../assets/quickbuy_logo.png";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import Items from "./items";
 import { BiHeart } from "react-icons/bi";
 import FavProducts from "./favProducts";
-import { Popover } from "antd";
+import { Dropdown, MenuProps, Popover } from "antd";
+import { FiLogOut } from "react-icons/fi";
+import { MdAccountBox } from "react-icons/md";
 const NavBar = () => {
   // const [showSearch, setShowSearch] = useState(false);
   const { cart, favCart } = useSelector((state: RootState) => state.cart);
 
   const [showProducts, setShowProducts] = useState(false);
   const [showFavorite, setShowFavorite] = useState(false);
+  const navigate = useNavigate();
 
-  const favRef = useRef<HTMLDivElement>(null)
+  const favRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (favRef.current && !favRef.current.contains(e.target as Node)) {
-        setShowFavorite(false); 
+        setShowFavorite(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  },[])
+  }, []);
 
   // const toggleSearch = () => {
   //   setShowSearch(!showSearch);
   // };
+  const handleLogOut = () => {
+    localStorage.setItem("isLogin", "false");
+    navigate("/");
+  };
+
+  const items: MenuProps["items"] = [
+    {
+      key: "1",
+      label: (
+        <Link
+          to="/accountDetails/accountInfo"
+          className="flex justify-center items-center space-x-2 font-bold"
+        >
+          <MdAccountBox size={20} />
+          <span>Account Info</span>
+        </Link>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <div
+          className="flex w-fit justify-between items-center space-x-2 font-bold"
+          onClick={handleLogOut}
+        >
+          <FiLogOut size={20} />
+          <p>LogOut</p>
+        </div>
+      ),
+    },
+  ];
 
   return (
     <>
@@ -104,17 +138,17 @@ const NavBar = () => {
 
           <div>
             <button className="m-4">
-              <Link to="/accountDetails/accountInfo">
-                <FaUser size={20} color="orange" />
-              </Link>
+              <Dropdown menu={{ items }}>
+                <a onClick={(e) => e.preventDefault()}>
+                  <FaUser size={20} color="orange" />
+                </a>
+              </Dropdown>
             </button>
           </div>
         </div>
       </div>
       <div className="absolute right-6 z-10">{showProducts && <Items />} </div>
-      <div className="absolute right-14 z-10" 
-      ref={favRef}
-        >
+      <div className="absolute right-14 z-10" ref={favRef}>
         {showFavorite && <FavProducts />}
       </div>
     </>
