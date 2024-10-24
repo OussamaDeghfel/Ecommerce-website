@@ -5,6 +5,7 @@ import { BsTrash2 } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { addToCart, removeFavorite } from "../../redux/cartSlice";
 import { FaStar, FaStarHalf } from "react-icons/fa6";
+import { favorite } from "../../redux/productSlice";
 
 const FavProducts = () => {
   const favoriteProduct = useSelector((state: RootState) => state.cart.favCart);
@@ -32,6 +33,7 @@ const FavProducts = () => {
                 className=" absolute top-0 right-0 cursor-pointer hover:scale-125 bg-gray-400 opacity-80 p-2 rounded-full"
                 onClick={() => {
                   dispatch(removeFavorite({ productID: prod.id }));
+                  dispatch(favorite(prod.id))
                 }}
               >
                 <BsTrash2
