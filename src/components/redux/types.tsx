@@ -16,4 +16,5 @@ export interface ProductData {
       rate: number;
       count: number;
     }
+    isLiked?: boolean
   }

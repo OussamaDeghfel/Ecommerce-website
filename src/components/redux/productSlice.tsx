@@ -31,6 +31,15 @@ const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
+    favorite: (state, action) => {
+      const prodId = action.payload
+      
+      const productIndex = state.product.findIndex((item) => item.id === prodId)
+
+      if(productIndex !== -1){
+        state.product[productIndex].isLiked = !state.product[productIndex].isLiked;
+      }
+    }
   },
   extraReducers(builder) {
     builder.addCase(fetchProducts.pending, (state) => {
@@ -40,6 +49,9 @@ const productSlice = createSlice({
       state.product = action.payload;
       state.isLoading = false;
       state.error = "";
+      state.product.map((item) => {
+        item.isLiked = false
+      })
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
       state.product = [];
@@ -50,7 +62,9 @@ const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
-// export const {getProducts} = productSlice.actions
+export const {
+  favorite
+} = productSlice.actions;
 
 export const selectProduct = (state:RootState) => state.product.product;
 

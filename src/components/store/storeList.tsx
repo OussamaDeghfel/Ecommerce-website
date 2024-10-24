@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { appDispatch, RootState } from "../redux/store";
-import { fetchProducts } from "../redux/productSlice";
-import { useEffect, useState } from "react";
+import { favorite, fetchProducts } from "../redux/productSlice";
+import { useEffect, useMemo, useState } from "react";
 // import { useMemo } from "react";
 import { FaRegHeart, FaShoppingBag, FaStarHalfAlt } from "react-icons/fa";
 import { addToCart, chooseFavorite, removeFavorite } from "../redux/cartSlice";
@@ -14,30 +14,31 @@ import { Button, Input, Select } from "antd";
 const StoreList = () => {
   // const [productList , setProductList] = useState([]);
   const dispatch = useDispatch<appDispatch>();
-  const  {product }  = useSelector((state: RootState) => state.product);
+  const { product } = useSelector((state: RootState) => state.product);
 
-  const [isLiked, setIsLiked] = useState(false);
+  // const [prodFavorite, setProdFavorite] = useState<boolean | undefined>(Boolean);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [selectedRate, setSelectedRate] = useState(null);
   const [filteredProduct, setFilteredProduct] = useState(product);
-  const [favlist, setFavlist] = useState<string[]>([]);
+  // const [favlist, setFavlist] = useState<string[]>([]);
 
-  const FavToggle = (id: string) => {
-    if (isLiked) {
-      setFavlist([...favlist, id]);
-    } else {
-      setFavlist(favlist.filter((item) => item !== id));
-      dispatch(removeFavorite({ productID: id }));
-    }
-  };
+  // const FavToggle = (id: string) => {
+  //   if (isLiked) {
+  //     setFavlist([...favlist, id]);
+  //   } else {
+  //     setFavlist(favlist.filter((item) => item !== id));
+  //     dispatch(removeFavorite({ productID: id }));
+  //   }
+  // };
 
   useEffect(() => {
     dispatch(fetchProducts());
     setFilteredProduct(product);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
+  
 
   //filter the category for only one name cause of duplicate
   const uniqueFilter = [
@@ -76,7 +77,7 @@ const StoreList = () => {
       }
     }
 
-    setFilteredProduct(filteredProduct)
+    setFilteredProduct(filteredProduct);
   };
 
   const handleClear = () => {
@@ -177,30 +178,24 @@ const StoreList = () => {
                   alt="product image"
                 />
                 <div
-                  className={` absolute top-0 right-0 p-2 cursor-pointer hover:scale-125 bg-gray-400 opacity-80 m-2 rounded-full  ${
-                    favlist.includes(prod.id) && "bg-red-600"
-                  }  `}
-                  onClick={() => {FavToggle(prod.id)
-                    setIsLiked(!isLiked)
+                  className={`absolute top-0 right-0 p-2 cursor-pointer hover:scale-125 m-2 rounded-full ${
+                    prod.isLiked ? "bg-red-600 opacity-100" : "bg-gray-400 opacity-80"
+                  } `}
+                  onClick={() => {
+                    dispatch(
+                      chooseFavorite({
+                        id: prod.id,
+                        title: prod.title,
+                        category: prod.category,
+                        image: prod.image,
+                        price: prod.price,
+                        rating: prod.rating,
+                      })
+                    ),
+                    dispatch(favorite(prod.id));
                   }}
                 >
-                  <FaRegHeart
-                    color="white"
-                    size={25}
-                    onClick={() => {
-                      dispatch(
-                        chooseFavorite({
-                          id: prod.id,
-                          title: prod.title,
-                          category: prod.category,
-                          image: prod.image,
-                          price: prod.price,
-                          rating: prod.rating,
-    
-                        })
-                      );
-                    }}
-                  />
+                  <FaRegHeart color="white" size={25} />
                 </div>
               </div>
 
