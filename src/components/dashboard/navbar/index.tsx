@@ -5,12 +5,12 @@ import { FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import Items from "./items";
 import { BiHeart } from "react-icons/bi";
 import FavProducts from "./favProducts";
 import { Dropdown, MenuProps, Popover } from "antd";
 import { FiLogOut } from "react-icons/fi";
 import { MdAccountBox } from "react-icons/md";
+import ShoppingCart from "./shoppingCart";
 const NavBar = () => {
   // const [showSearch, setShowSearch] = useState(false);
   const { cart, favCart } = useSelector((state: RootState) => state.cart);
@@ -147,7 +147,7 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-      <div className="absolute right-6 z-10">{showProducts && <Items />} </div>
+      <div className="absolute right-6 z-10">{showProducts && <ShoppingCart />} </div>
       <div className="absolute right-14 z-10" ref={favRef}>
         {showFavorite && <FavProducts />}
       </div>
