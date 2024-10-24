@@ -24,8 +24,6 @@ const StoreList = () => {
   const [filteredProduct, setFilteredProduct] = useState(product);
   // const [favlist, setFavlist] = useState<string[]>([]);
 
-  
-
   useEffect(() => {
     dispatch(fetchProducts());
     setFilteredProduct(product);
@@ -34,8 +32,7 @@ const StoreList = () => {
 
   useMemo(() => {
     setFilteredProduct(product);
-  },[product])
-
+  }, [product]);
 
   //filter the category for only one name cause of duplicate
   const uniqueFilter = [
@@ -176,20 +173,27 @@ const StoreList = () => {
                 />
                 <div
                   className={`absolute top-0 right-0 p-2 cursor-pointer hover:scale-125 m-2 rounded-full ${
-                    prod.isLiked ? "bg-red-600 opacity-100" : "bg-gray-400 opacity-80"
+                    prod.isLiked
+                      ? "bg-red-600 opacity-100"
+                      : "bg-gray-400 opacity-80"
                   } `}
                   onClick={() => {
-                    dispatch(
-                      chooseFavorite({
-                        id: prod.id,
-                        title: prod.title,
-                        category: prod.category,
-                        image: prod.image,
-                        price: prod.price,
-                        rating: prod.rating,
-                      })
-                    ),
-                    dispatch(favorite(prod.id))
+                    if (prod.isLiked == false) {
+                      dispatch(
+                        chooseFavorite({
+                          id: prod.id,
+                          title: prod.title,
+                          category: prod.category,
+                          image: prod.image,
+                          price: prod.price,
+                          rating: prod.rating,
+                        })
+                      ),
+                        dispatch(favorite(prod.id));
+                    } else if (prod.isLiked) {
+                      dispatch(removeFavorite({ productID: prod.id }));
+                      dispatch(favorite(prod.id));
+                    }
                   }}
                 >
                   <FaRegHeart color="white" size={25} />
