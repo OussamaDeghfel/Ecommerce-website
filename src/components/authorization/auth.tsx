@@ -5,7 +5,7 @@
 
 import { Button, Checkbox, Form, Input } from "antd";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import QBLogoSite from "../../assets/QB-LogoSite.png";
 import loginImage from "../../assets/loginImage.jpg";
 
@@ -14,7 +14,7 @@ type user = {
   password: string;
 };
 
-const SignIn = ({ togglePage }) => {
+const SignIn = ({ togglePage }: {togglePage : () => void}) => {
   const [credentialWarn, setCredentialWarn] = useState(false);
   const navigate = useNavigate();
 
@@ -108,7 +108,7 @@ export type userSignUP = {
   password: string;
 };
 
-const SignUp = ({ togglePage }) => {
+const SignUp = ({ togglePage }: {togglePage : () => void}) => {
   const saveCredential = (values: userSignUP) => {
     localStorage.setItem("firstname", values.firstname);
     localStorage.setItem("lastname", values.lastname);
