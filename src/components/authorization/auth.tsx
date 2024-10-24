@@ -91,9 +91,9 @@ const SignIn = ({ togglePage }) => {
               {" "}
               <span className="font-bold text-orange-500">Create Acccount</span>{" "}
             </Link> */}
-            <Button onClick={togglePage} className="font-bold text-orange-500">
+            <button onClick={togglePage} className="text-orange-500 font-medium pl-2" >
               Create Account
-            </Button>
+            </button>
           </h1>
         </div>
       </div>
@@ -118,7 +118,8 @@ const SignUp = ({ togglePage }) => {
   };
   return (
     <div className="flex w-full h-screen justify-center items-center">
-      <div className="m-auto border-2 border-orange-100 rounded-md p-5 w-[400px] h-fit shadow-lg ">
+      
+      <div className="m-auto border-y-2 border-r-2 -translate-x-2 border-gray-300 rounded-md p-5 w-[400px] h-fit shadow-lg ">
         <Form layout="vertical" onFinish={saveCredential}>
           <Form.Item
             label="FirstName"
@@ -150,22 +151,27 @@ const SignUp = ({ togglePage }) => {
           >
             <Input.Password />
           </Form.Item>
-          <Form.Item>
-            <Button type="primary" size="large" htmlType="submit">
-              <Link to="/">Sign Up</Link>
+          <Form.Item className="justify-center items-center flex">
+            <Button
+              type="primary"
+              size="large"
+              htmlType="submit"
+              className="w-full bg-orange-500"
+            >
+              Sign Up
             </Button>
           </Form.Item>
         </Form>
-        <div>
+        <div className="justify-center flex items-center">
           <h1>
-            Already have an account?{" "}
-            {/* <Link to="/">
+          Already have an account?{" "}
+            {/* <Link to="signup">
               {" "}
-              <span className="font-bold text-orange-500">SignIn</span>{" "}
+              <span className="font-bold text-orange-500">Create Acccount</span>{" "}
             </Link> */}
-            <Button onClick={togglePage} className="font-bold text-orange-500">
-              SignIn
-            </Button>
+            <button onClick={togglePage} className="text-orange-500 font-medium pl-2" >
+            SignIn
+            </button>
           </h1>
         </div>
       </div>
@@ -192,7 +198,7 @@ const Auth = () => {
           className="m-auto flex border-2 border-gray-300 rounded-md space-y-5 w-full h-[80vh] shadow-right bg-cover bg-center bg-no-repeat z-10"
           style={{ backgroundImage: `url(${loginImage})` }}
         >
-          <div className="w-full h-full flex flex-col p-5 bg-black/60 justify-end items-start space-y-3">
+          <div className="w-full h-full flex flex-col p-5 bg-black/60 justify-end items-start space-y-3 pb-14">
             <h1 className="text-white text-5xl font-bold font-mono">Get <br /> Everything <br/> You Want</h1>
             <p className="text-gray-300 ">"Find everything you're looking for in our store items you won't even find on Amazon."</p>
           </div>
