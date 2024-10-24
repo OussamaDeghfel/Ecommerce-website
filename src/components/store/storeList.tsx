@@ -242,7 +242,7 @@ const StoreList = () => {
                           product: {
                             id: prod.id,
                             title: prod.title,
-                            images: prod.image,
+                            image: prod.image,
                             price: prod.price,
                           },
                           quantity: 1,
