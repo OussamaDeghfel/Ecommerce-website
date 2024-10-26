@@ -20,11 +20,15 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   const favRef = useRef<HTMLDivElement>(null);
+  const cartRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (favRef.current && !favRef.current.contains(e.target as Node)) {
         setShowFavorite(false);
+      }
+      if (cartRef.current && !cartRef.current.contains(e.target as Node)) {
+        setShowProducts(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -147,7 +151,9 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-      <div className="absolute right-6 z-10">{showProducts && <ShoppingCart />} </div>
+      <div className="absolute right-6 z-10" ref={cartRef}>
+        {showProducts && <ShoppingCart />}{" "}
+      </div>
       <div className="absolute right-14 z-10" ref={favRef}>
         {showFavorite && <FavProducts />}
       </div>
