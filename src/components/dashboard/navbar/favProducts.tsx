@@ -77,14 +77,14 @@ const FavProducts = () => {
               <div className="flex justify-between items-end ">
                 <h1 className="font-bold my-2 text-2xl">{prod.price} $</h1>
                 <button
-                  className="flex items-center text-blue-800 font-bold p-2 border-2 border-blue-600 rounded-md  px-2 my-1 hover:bg-blue-500 hover:text-white duration-200"
+                  className="flex items-center text-orange-600 font-bold p-2 border-2 border-orange-600 rounded-md  px-2 my-1 hover:bg-orange-500 hover:text-white duration-200"
                   onClick={() => {
                     dispatch(
                       addToCart({
                         product: {
                           id: prod.id,
                           title: prod.title,
-                          images: prod.image,
+                          image: prod.image,
                           price: prod.price,
                         },
                         quantity: 1,
