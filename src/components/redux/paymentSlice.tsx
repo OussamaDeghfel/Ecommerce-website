@@ -9,11 +9,19 @@ interface PaymentCart {
 }
 
 interface paymentState {
-  paymentMethod: PaymentCart;
+  paymentMethods: PaymentCart[];
 } 
 
 const initialState: paymentState = {
-    paymentMethod: []
+    paymentMethods: [
+        {
+            cardName: "",
+            cardNumber: "",
+            expiryDate: "",
+            cvv: "",
+            cardImg: ""
+        }
+    ]
 }
 
 const paymentSlice = createSlice({
