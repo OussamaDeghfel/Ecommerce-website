@@ -1,9 +1,8 @@
-import { Button, Checkbox, Input, Table } from "antd";
+import { Button, Checkbox, Input, Modal, Table, Form, DatePicker } from "antd";
 import visaCard from "../../../../assets/visaCard.png";
 import masterCard from "../../../../assets/masterCard.png";
 import { BiPlusCircle } from "react-icons/bi";
 import { useState } from "react";
-import PaymentMethod from "./_component/paymentMethod";
 
 const Payment = () => {
 
@@ -101,7 +100,6 @@ const Payment = () => {
 
   return (
     <>
-    <div className={`${addNewCard ? "fixed inset-0 bg-black opacity-50 z-5" : ""}`}></div>
     <div className="space-y-5">
       <div className="grid grid-cols-2 w-full h-full border-2 border-gray-300 rounded-md p-6">
         <div className="flex flex-col">
@@ -176,11 +174,36 @@ const Payment = () => {
       <Table columns={columns} dataSource={data} />
       </div>
     </div>
-    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 shadow-lg">
-      <div className="bg-white rounded-md p-5">
-        {addNewCard && <PaymentMethod />}
-      </div>
-    </div>
+
+    <Modal 
+      title="Add Payment Method" 
+      closable={false}
+      open={addNewCard} 
+      onOk={() => setAddNewCard(false)}
+      footer={[
+        <Button key="back" onClick={() => setAddNewCard(false)}>Cancel</Button>,
+        <Button type="primary" onClick={() => setAddNewCard(false)}>Add</Button>,
+      ]}
+    >
+
+    <Form layout="vertical">
+        <Form.Item name="cardName" label="Card Name">
+          <Input />
+        </Form.Item>
+
+        <Form.Item name="cardNumber" label="Card Number">
+          <Input />
+        </Form.Item>
+        <div className="flex w-full h-full justify-between space-x-2 items-center ">
+          <Form.Item name="expDate" label="Expiration Date">
+            <DatePicker  className="flex w-[30vh]" />
+          </Form.Item>
+          <Form.Item name="cardVerification" label="CVC">
+            <Input type="number" className="flex w-56" />
+          </Form.Item>
+        </div>
+      </Form>
+      </Modal>
     </>
   );
 };
