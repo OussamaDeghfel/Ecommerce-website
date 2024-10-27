@@ -3,10 +3,13 @@ import visaCard from "../../../../assets/visaCard.png";
 import masterCard from "../../../../assets/masterCard.png";
 import { BiPlusCircle } from "react-icons/bi";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 
 const Payment = () => {
-  const [chooseDefaultCard, setChooseDefaultCard] = useState(0);
   const [addNewCard, setAddNewCard] = useState(false);
+
+  const {paymentMethods} = useSelector((state: RootState) => state.payment)
 
   const columns = [
     {
@@ -130,20 +133,22 @@ const Payment = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-5">
-            <div
-              className={`flex h-full w-full border-2 border-cyan-200 rounded-md p-4 
-          ${chooseDefaultCard === 1 ? "bg-cyan-50" : ""}`}
+
+            {paymentMethods.map((item) => (
+              <div
+              className="flex h-full w-full border-2 border-cyan-200 rounded-md p-4 
+         "
             >
               <div className="w-10">
                 <img src={visaCard} alt="visa card image" />
               </div>
               <div className="flex flex-col ml-5 space-y-1">
-                <h1 className="text-xl">Paysera Visa Card</h1>
-                <p className="text-sm text-gray-400">Expire on 22/09</p>
+                <h1 className="text-xl">{item.cardName}</h1>
+                <p className="text-sm text-gray-400">Expire on {item.expiryDate}</p>
                 <div className="flex justify-start items-center space-x-5">
                   <Button
                     className="text-base font-light"
-                    onClick={() => setChooseDefaultCard(1)}
+                    // onClick={() => setChooseDefaultCard(1)}
                   >
                     set as default
                   </Button>
@@ -151,28 +156,9 @@ const Payment = () => {
                 </div>
               </div>
             </div>
+            ))}
 
-            <div
-              className={`flex h-full w-full border-2 border-cyan-200 rounded-md p-4 
-          ${chooseDefaultCard === 2 ? "bg-cyan-50" : ""}`}
-            >
-              <div className="w-10">
-                <img src={masterCard} alt="visa card image" />
-              </div>
-              <div className="flex flex-col ml-5 space-y-1">
-                <h1 className="text-xl">Master Card</h1>
-                <p className="text-sm text-gray-400">Expire on 03/12</p>
-                <div className="flex justify-start items-center space-x-5">
-                  <Button
-                    className="text-base font-light"
-                    onClick={() => setChooseDefaultCard(2)}
-                  >
-                    set as default
-                  </Button>
-                  <Button>Edit</Button>
-                </div>
-              </div>
-            </div>
+            
 
             <div className="flex">
               <Button onClick={() => setAddNewCard(true)}>
