@@ -3,10 +3,12 @@ import visaCard from "../../../../assets/visaCard.png";
 import masterCard from "../../../../assets/masterCard.png";
 import { BiPlusCircle } from "react-icons/bi";
 import { useState } from "react";
+import PaymentMethod from "./_component/paymentMethod";
 
 const Payment = () => {
 
   const [chooseDefaultCard, setChooseDefaultCard] = useState(0);
+  const [addNewCard, setAddNewCard] = useState(false);
 
   const columns = [
     {
@@ -98,6 +100,8 @@ const Payment = () => {
   ];
 
   return (
+    <>
+    <div className={`${addNewCard ? "fixed inset-0 bg-black opacity-50 z-5" : ""}`}></div>
     <div className="space-y-5">
       <div className="grid grid-cols-2 w-full h-full border-2 border-gray-300 rounded-md p-6">
         <div className="flex flex-col">
@@ -160,7 +164,7 @@ const Payment = () => {
           </div>
 
           <div className="flex">
-            <Button>
+            <Button onClick={() => setAddNewCard(true)}>
               <BiPlusCircle /> Add new card
             </Button>
           </div>
@@ -172,6 +176,12 @@ const Payment = () => {
       <Table columns={columns} dataSource={data} />
       </div>
     </div>
+    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 shadow-lg">
+      <div className="bg-white rounded-md p-5">
+        {addNewCard && <PaymentMethod />}
+      </div>
+    </div>
+    </>
   );
 };
 
