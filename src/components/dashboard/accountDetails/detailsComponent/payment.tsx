@@ -1,4 +1,13 @@
-import { Button, Checkbox, Input, Modal, Table, Form, DatePicker, Select } from "antd";
+import {
+  Button,
+  Checkbox,
+  Input,
+  Modal,
+  Table,
+  Form,
+  DatePicker,
+  Select,
+} from "antd";
 import visaCard from "../../../../assets/visaCard.png";
 import masterCard from "../../../../assets/masterCard.png";
 import { BiPlusCircle } from "react-icons/bi";
@@ -9,7 +18,7 @@ import { RootState } from "../../../redux/store";
 const Payment = () => {
   const [addNewCard, setAddNewCard] = useState(false);
 
-  const {paymentMethods} = useSelector((state: RootState) => state.payment)
+  const { paymentMethods } = useSelector((state: RootState) => state.payment);
 
   const columns = [
     {
@@ -133,36 +142,36 @@ const Payment = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-5">
-
             {paymentMethods.map((item) => (
               <div
-              className="flex h-full w-full border-2 border-cyan-200 rounded-md p-4 
+                className="flex h-full w-full border-2 border-cyan-200 rounded-md p-4 
          "
-            >
-              <div className="w-10">
-                <img src={visaCard} alt="visa card image" />
-              </div>
-              <div className="flex flex-col ml-5 space-y-1">
-                <h1 className="text-xl">{item.cardName}</h1>
-                <p className="text-sm text-gray-400">Expire on {item.expiryDate}</p>
-                <div className="flex justify-start items-center space-x-5">
-                  <Button
-                    className="text-base font-light"
-                    // onClick={() => setChooseDefaultCard(1)}
-                  >
-                    set as default
-                  </Button>
-                  <Button>Edit</Button>
+                key={item.cardId}
+              >
+                <div className="w-10">
+                  <img src={visaCard} alt="visa card image" />
+                </div>
+                <div className="flex flex-col ml-5 space-y-1">
+                  <h1 className="text-xl">{item.cardName}</h1>
+                  <p className="text-sm text-gray-400">
+                    Expire on {item.expiryDate}
+                  </p>
+                  <div className="flex justify-start items-center space-x-5">
+                    <Button
+                      className="text-base font-light"
+                      // onClick={() => setChooseDefaultCard(1)}
+                    >
+                      set as default
+                    </Button>
+                    <Button>Edit</Button>
+                  </div>
                 </div>
               </div>
-            </div>
             ))}
 
-            
-
-            <div className="flex">
-              <Button onClick={() => setAddNewCard(true)}>
-                <BiPlusCircle /> Add new card
+            <div className="flex p-5">
+              <Button onClick={() => setAddNewCard(true)} className="font-bold">
+                <BiPlusCircle size={20} /> Add new card
               </Button>
             </div>
           </div>
@@ -197,15 +206,19 @@ const Payment = () => {
               <Input />
             </Form.Item>
             <Select
-            placeholder="Select Card Type"
-            
+              placeholder="Select Card Type"
               options={[
-                { value: "mastercard", label: <img src={masterCard} alt="master card image" /> },
-                { value: "visacard", label: <img src={visaCard} alt="master card image" /> },
+                {
+                  value: "mastercard",
+                  label: <img src={masterCard} alt="master card image" />,
+                },
+                {
+                  value: "visacard",
+                  label: <img src={visaCard} alt="master card image" />,
+                },
               ]}
               className="w-20 h-8 -bottom-0.5"
             />
-            
           </div>
           <div className="flex w-full h-full justify-between space-x-2 items-center ">
             <Form.Item name="expDate" label="Expiration Date">
