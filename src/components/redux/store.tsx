@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartSlice from "./cartSlice";
 import productSlice from "./productSlice";
+import paymentSlice from "./paymentSlice";
 
 export const store = configureStore({
     reducer: {
         cart: cartSlice,
-        product: productSlice
+        product: productSlice,
+        payment: paymentSlice
     }
 })
 
