@@ -14,11 +14,16 @@ import { BiPlusCircle } from "react-icons/bi";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
+import { useDispatch } from "react-redux";
+import { addNewPayment } from "../../../redux/paymentSlice";
+import dayjs from "dayjs";
 
 const Payment = () => {
   const [addNewCard, setAddNewCard] = useState(false);
 
   const { paymentMethods } = useSelector((state: RootState) => state.payment);
+  const dispatch = useDispatch();
+  const [form] = Form.useForm();
 
   const columns = [
     {
@@ -109,6 +114,15 @@ const Payment = () => {
     },
   ];
 
+  // const handleValue = () => {
+  //   console.log(form.getFieldValue("cardName"));
+  //   console.log("card id ", Math.floor(Math.random() * 20) + 1),
+  //     console.log("cardName: ", form.getFieldValue("cardName")),
+  //     console.log("expiryDate: ", dayjs(form.getFieldValue("expDate")).format("MM/YYYY")),
+  //     console.log("cardNumber: ", form.getFieldValue("cardNumber")),
+  //     console.log("cvv: ", form.getFieldValue("cardVerification"))
+  // };
+
   return (
     <>
       <div className="space-y-5">
@@ -192,12 +206,21 @@ const Payment = () => {
           <Button key="back" onClick={() => setAddNewCard(false)}>
             Cancel
           </Button>,
-          <Button type="primary" onClick={() => setAddNewCard(false)}>
+          <Button type="primary" onClick={() => dispatch(
+            addNewPayment({
+              cardId: Math.floor(Math.random() * 20) + 1,
+              cardName: form.getFieldValue("cardName"),
+              expiryDate: dayjs(form.getFieldValue("expDate")).format("MM/YYYY"),
+              cardNumber: form.getFieldValue("cardNumber"),
+              cvv: form.getFieldValue("cardVerification"),
+              // cardImg: form.getFieldValue(""),
+            })
+          )}>
             Add
           </Button>,
         ]}
       >
-        <Form layout="vertical">
+        <Form layout="vertical" form={form}>
           <Form.Item name="cardName" label="Card Name">
             <Input />
           </Form.Item>
