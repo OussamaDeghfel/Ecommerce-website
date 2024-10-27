@@ -1,11 +1,11 @@
-import { DatePicker, Form, Input } from "antd";
+import { Button, Card, DatePicker, Form, Input } from "antd";
 import React from "react";
 
 const PaymentMethod = () => {
   return (
-    <div className="w-full h-full justify-center items-center rounded-md shadow-lg">
+    // <div className="w-full h-full justify-center items-center">
+    <Card title="Add Payment Method" type="inner">
       <Form layout="vertical">
-        <h1>Add Payment Method</h1>
         <Form.Item name="cardName" label="Card Name">
           <Input />
         </Form.Item>
@@ -13,7 +13,7 @@ const PaymentMethod = () => {
         <Form.Item name="cardNumber" label="Card Number">
           <Input />
         </Form.Item>
-        <div className="flex w-full">
+        <div className="flex w-full h-full space-x-5">
           <Form.Item name="expDate" label="Expiration Date">
             <DatePicker />
           </Form.Item>
@@ -21,8 +21,13 @@ const PaymentMethod = () => {
             <Input type="number" />
           </Form.Item>
         </div>
+        <div className="flex w-full h-full space-x-5 justify-end">
+        <Button type="default">Cancel</Button>
+        <Button type="primary">Add</Button>
+        </div>
       </Form>
-    </div>
+    </Card>
+    // </div>
   );
 };
 
