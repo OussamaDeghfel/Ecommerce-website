@@ -11,18 +11,19 @@ import {
 import visaCard from "../../../../assets/visaCard.png";
 import masterCard from "../../../../assets/masterCard.png";
 import { BiPlusCircle } from "react-icons/bi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { useDispatch } from "react-redux";
-import { addNewPayment } from "../../../redux/paymentSlice";
+import { addNewPayment, choosedPaymentMethod } from "../../../redux/paymentSlice";
 import dayjs from "dayjs";
 
 const Payment = () => {
   const [addNewCard, setAddNewCard] = useState(false);
-  const [selectCardType, setSelectCardType] = useState("")
+  const [editPaymentMethod, setEditPaymentMethod] = useState(false);
+  const [selectCardType, setSelectCardType] = useState("");
 
-  const { paymentMethods } = useSelector((state: RootState) => state.payment);
+  const { paymentMethods, paymentCardId } = useSelector((state: RootState) => state.payment);
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
@@ -115,6 +116,19 @@ const Payment = () => {
     },
   ];
 
+  useEffect(() => {
+    const choosedCard = paymentMethods.find(card => card.cardId == paymentCardId)
+
+    if(choosedCard) {
+      form.setFieldsValue({
+        cardName: choosedCard.cardName,
+        cardNumber: choosedCard.cardNumber,
+        expDate: dayjs(choosedCard.expiryDate),
+        cardVerification: choosedCard.cvv
+      })
+    }
+  },[paymentMethods, paymentCardId])
+
   // const handleValue = () => {
   //   console.log(form.getFieldValue("cardName"));
   //   console.log("card id ", Math.floor(Math.random() * 20) + 1),
@@ -164,7 +178,10 @@ const Payment = () => {
                 key={item.cardId}
               >
                 <div className="w-10">
-                  <img src={item.cardImg === "visacard" ? visaCard : masterCard} alt="visa card image" />
+                  <img
+                    src={item.cardImg === "visacard" ? visaCard : masterCard}
+                    alt="visa card image"
+                  />
                 </div>
                 <div className="flex flex-col ml-5 space-y-1">
                   <h1 className="text-xl">{item.cardName}</h1>
@@ -178,7 +195,14 @@ const Payment = () => {
                     >
                       set as default
                     </Button>
-                    <Button>Edit</Button>
+                    <Button
+                      onClick={() => {
+                        setEditPaymentMethod(true);
+                        dispatch(choosedPaymentMethod(item.cardId));
+                      }}
+                    >
+                      Edit
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -207,16 +231,23 @@ const Payment = () => {
           <Button key="back" onClick={() => setAddNewCard(false)}>
             Cancel
           </Button>,
-          <Button type="primary" onClick={() => dispatch(
-            addNewPayment({
-              cardId: Math.floor(Math.random() * 20) + 1,
-              cardName: form.getFieldValue("cardName"),
-              expiryDate: dayjs(form.getFieldValue("expDate")).format("MM/YYYY"),
-              cardNumber: form.getFieldValue("cardNumber"),
-              cvv: form.getFieldValue("cardVerification"),
-              cardImg: selectCardType,
-            })
-          )}>
+          <Button
+            type="primary"
+            onClick={() =>
+              dispatch(
+                addNewPayment({
+                  cardId: Math.floor(Math.random() * 20) + 1,
+                  cardName: form.getFieldValue("cardName"),
+                  expiryDate: dayjs(form.getFieldValue("expDate")).format(
+                    "MM/YYYY"
+                  ),
+                  cardNumber: form.getFieldValue("cardNumber"),
+                  cvv: form.getFieldValue("cardVerification"),
+                  cardImg: selectCardType,
+                })
+              )
+            }
+          >
             Add
           </Button>,
         ]}
@@ -230,7 +261,55 @@ const Payment = () => {
               <Input />
             </Form.Item>
             <Select
-            onChange={(value) => setSelectCardType(value)}
+              onChange={(value) => setSelectCardType(value)}
+              placeholder="Select Card Type"
+              options={[
+                {
+                  value: "mastercard",
+                  label: <img src={masterCard} alt="master card image" />,
+                },
+                {
+                  value: "visacard",
+                  label: <img src={visaCard} alt="master card image" />,
+                },
+              ]}
+              className="w-20 h-8 -bottom-0.5"
+            />
+          </div>
+          <div className="flex w-full h-full justify-between space-x-2 items-center ">
+            <Form.Item name="expDate" label="Expiration Date">
+              <DatePicker className="flex w-[30vh]" />
+            </Form.Item>
+            <Form.Item name="cardVerification" label="CVC">
+              <Input type="number" className="flex w-56" />
+            </Form.Item>
+          </div>
+        </Form>
+      </Modal>
+
+         {/* For Edit the Payment Card   */}
+      <Modal
+        title="Edit Payment Card"
+        closable={false}
+        open={editPaymentMethod}
+        onOk={() => setEditPaymentMethod(false)}
+        footer={[
+          <Button key="back" onClick={() => setEditPaymentMethod(false)}>
+            Cancel
+          </Button>,
+          <Button type="primary">Edit</Button>,
+        ]}
+      >
+        <Form layout="vertical" form={form}>
+          <Form.Item name="cardName" label="Card Name">
+            <Input />
+          </Form.Item>
+          <div className="flex w-full h-full space-x-2 justify-center items-center">
+            <Form.Item name="cardNumber" label="Card Number" className="w-full">
+              <Input />
+            </Form.Item>
+            <Select
+              onChange={(value) => setSelectCardType(value)}
               placeholder="Select Card Type"
               options={[
                 {
