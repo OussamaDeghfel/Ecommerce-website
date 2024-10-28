@@ -15,7 +15,10 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { useDispatch } from "react-redux";
-import { addNewPayment, choosedPaymentMethod } from "../../../redux/paymentSlice";
+import {
+  addNewPayment,
+  choosedPaymentMethod,
+} from "../../../redux/paymentSlice";
 import dayjs from "dayjs";
 
 const Payment = () => {
@@ -23,7 +26,9 @@ const Payment = () => {
   const [editPaymentMethod, setEditPaymentMethod] = useState(false);
   const [selectCardType, setSelectCardType] = useState("");
 
-  const { paymentMethods, paymentCardId } = useSelector((state: RootState) => state.payment);
+  const { paymentMethods, paymentCardId } = useSelector(
+    (state: RootState) => state.payment
+  );
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
@@ -117,26 +122,20 @@ const Payment = () => {
   ];
 
   useEffect(() => {
-    const choosedCard = paymentMethods.find(card => card.cardId == paymentCardId)
+    const choosedCard = paymentMethods.find(
+      (card) => card.cardId == paymentCardId
+    );
 
-    if(choosedCard) {
+    if (choosedCard) {
       form.setFieldsValue({
         cardName: choosedCard.cardName,
         cardNumber: choosedCard.cardNumber,
-        expDate: dayjs(choosedCard.expiryDate),
-        cardVerification: choosedCard.cvv
-      })
+        expDate: choosedCard.expiryDate,
+        cardVerification: choosedCard.cvv,
+      });
     }
-  },[paymentMethods, paymentCardId, form])
+  }, [paymentMethods, paymentCardId, form]);
 
-  // const handleValue = () => {
-  //   console.log(form.getFieldValue("cardName"));
-  //   console.log("card id ", Math.floor(Math.random() * 20) + 1),
-  //     console.log("cardName: ", form.getFieldValue("cardName")),
-  //     console.log("expiryDate: ", dayjs(form.getFieldValue("expDate")).format("MM/YYYY")),
-  //     console.log("cardNumber: ", form.getFieldValue("cardNumber")),
-  //     console.log("cvv: ", form.getFieldValue("cardVerification"))
-  // };
 
   return (
     <>
@@ -186,7 +185,7 @@ const Payment = () => {
                 <div className="flex flex-col ml-5 space-y-1">
                   <h1 className="text-xl">{item.cardName}</h1>
                   <p className="text-sm text-gray-400">
-                    Expire on {item.expiryDate}
+                    Expire on {dayjs(item.expiryDate).format("MM/YYYY")}
                   </p>
                   <div className="flex justify-start items-center space-x-5">
                     <Button
@@ -238,9 +237,7 @@ const Payment = () => {
                 addNewPayment({
                   cardId: Math.floor(Math.random() * 20) + 1,
                   cardName: form.getFieldValue("cardName"),
-                  expiryDate: dayjs(form.getFieldValue("expDate")).format(
-                    "MM/YYYY"
-                  ),
+                  expiryDate: form.getFieldValue("expDate"),
                   cardNumber: form.getFieldValue("cardNumber"),
                   cvv: form.getFieldValue("cardVerification"),
                   cardImg: selectCardType,
@@ -287,7 +284,7 @@ const Payment = () => {
         </Form>
       </Modal>
 
-         {/* For Edit the Payment Card   */}
+      {/* For Edit the Payment Card   */}
       <Modal
         title="Edit Payment Card"
         closable={false}
