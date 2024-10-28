@@ -6,8 +6,7 @@ import {
   Table,
   Form,
   DatePicker,
-  Select,
-  Radio,
+  Select
 } from "antd";
 import visaCard from "../../../../assets/visaCard.png";
 import masterCard from "../../../../assets/masterCard.png";
@@ -20,9 +19,9 @@ import {
   addNewPayment,
   choosedAsDefaultCardPayment,
   editPaymentCard,
+  removePaymentMethod,
 } from "../../../redux/paymentSlice";
 import dayjs from "dayjs";
-import { PiCheckFatBold } from "react-icons/pi";
 import { FaCheckCircle } from "react-icons/fa";
 
 const Payment = () => {
@@ -207,6 +206,7 @@ const Payment = () => {
                       size="small"
                       variant="dashed"
                       color="danger"
+                      onClick={() => dispatch(removePaymentMethod(item.cardId))}
                     >
                       Remove
                     </Button>

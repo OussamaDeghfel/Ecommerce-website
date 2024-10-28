@@ -67,9 +67,20 @@ const paymentSlice = createSlice({
         });
       }
     },
+    removePaymentMethod: (state, action) => {
+      const findCard = state.paymentMethods.findIndex(
+        (item) => (item.cardId = action.payload)
+      );
+
+      state.paymentMethods.splice(findCard, 1);
+    },
   },
 });
 
 export default paymentSlice.reducer;
-export const { addNewPayment, editPaymentCard, choosedAsDefaultCardPayment } =
-  paymentSlice.actions;
+export const {
+  addNewPayment,
+  editPaymentCard,
+  choosedAsDefaultCardPayment,
+  removePaymentMethod,
+} = paymentSlice.actions;
