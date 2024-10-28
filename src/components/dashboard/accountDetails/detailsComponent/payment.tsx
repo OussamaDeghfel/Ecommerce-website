@@ -17,6 +17,7 @@ import { RootState } from "../../../redux/store";
 import { useDispatch } from "react-redux";
 import {
   addNewPayment,
+  choosedAsDefaultCardPayment,
   choosedPaymentMethod,
   editPaymentCard,
 } from "../../../redux/paymentSlice";
@@ -173,8 +174,7 @@ const Payment = () => {
           <div className="grid grid-cols-1 gap-5">
             {paymentMethods.map((item) => (
               <div
-                className="flex h-full w-full border-2 border-cyan-200 rounded-md p-4 
-         "
+                className={`flex h-full w-full border-2 border-cyan-200 rounded-md p-4 ${item.ChoosedAsDefault ? "bg-cyan-100" : ""}`}
                 key={item.cardId}
               >
                 <div className="w-10">
@@ -191,7 +191,7 @@ const Payment = () => {
                   <div className="flex justify-start items-center space-x-5">
                     <Button
                       className="text-base font-light"
-                      // onClick={() => setChooseDefaultCard(1)}
+                      onClick={() => dispatch(choosedAsDefaultCardPayment(item.cardId))}
                     >
                       set as default
                     </Button>

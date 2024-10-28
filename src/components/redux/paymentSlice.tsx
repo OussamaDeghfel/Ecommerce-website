@@ -7,6 +7,7 @@ interface PaymentCart {
   expiryDate: string;
   cvv: string;
   cardImg: string;
+  ChoosedAsDefault?: boolean;
 }
 
 interface paymentState {
@@ -30,13 +31,24 @@ const paymentSlice = createSlice({
       state.paymentCardId = action.payload;
     },
     editPaymentCard: (state, action) => {
-        const index = state.paymentMethods.findIndex((item) => item.cardId === action.payload.cardId);
-        if (index !== -1) {
-          state.paymentMethods[index] = action.payload;
-        }
-    }
+      const index = state.paymentMethods.findIndex(
+        (item) => item.cardId === action.payload.cardId
+      );
+      if (index !== -1) {
+        state.paymentMethods[index] = action.payload;
+      }
+    },
+    choosedAsDefaultCardPayment: (state, action) => {
+      const findCard = state.paymentMethods.findIndex(
+        (item) => item.cardId === action.payload
+      );
+      if (findCard !== -1) {
+        state.paymentMethods[findCard].ChoosedAsDefault = true;
+      }
+    },
   },
 });
 
 export default paymentSlice.reducer;
-export const { addNewPayment, choosedPaymentMethod, editPaymentCard } = paymentSlice.actions;
+export const { addNewPayment, choosedPaymentMethod, editPaymentCard, choosedAsDefaultCardPayment } =
+  paymentSlice.actions;
