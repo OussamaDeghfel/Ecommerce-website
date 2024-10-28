@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import {
   addNewPayment,
   choosedPaymentMethod,
+  editPaymentCard,
 } from "../../../redux/paymentSlice";
 import dayjs from "dayjs";
 
@@ -294,7 +295,18 @@ const Payment = () => {
           <Button key="back" onClick={() => setEditPaymentMethod(false)}>
             Cancel
           </Button>,
-          <Button type="primary">Edit</Button>,
+          <Button type="primary" onClick={() => {
+            dispatch(
+              editPaymentCard({
+                cardId: paymentCardId,
+                cardName: form.getFieldValue("cardName"),
+                expiryDate: form.getFieldValue("expDate"),
+                cardNumber: form.getFieldValue("cardNumber"),
+                cvv: form.getFieldValue("cardVerification"),
+                cardImg: selectCardType,
+              })
+            )
+          }}>Edit</Button>,
         ]}
       >
         <Form layout="vertical" form={form}>

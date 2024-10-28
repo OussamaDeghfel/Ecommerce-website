@@ -28,9 +28,15 @@ const paymentSlice = createSlice({
     },
     choosedPaymentMethod: (state, action) => {
       state.paymentCardId = action.payload;
+    },
+    editPaymentCard: (state, action) => {
+        const index = state.paymentMethods.findIndex((item) => item.cardId === action.payload.cardId);
+        if (index !== -1) {
+          state.paymentMethods[index] = action.payload;
+        }
     }
   },
 });
 
 export default paymentSlice.reducer;
-export const { addNewPayment, choosedPaymentMethod } = paymentSlice.actions;
+export const { addNewPayment, choosedPaymentMethod, editPaymentCard } = paymentSlice.actions;
