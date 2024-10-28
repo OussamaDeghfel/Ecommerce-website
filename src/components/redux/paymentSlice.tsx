@@ -11,18 +11,12 @@ interface PaymentCart {
 
 interface paymentState {
   paymentMethods: PaymentCart[];
+  paymentCardId: number;
 }
 
 const initialState: paymentState = {
-  paymentMethods: [
-    // {
-    //     cardName: "",
-    //     cardNumber: "",
-    //     expiryDate: "",
-    //     cvv: "",
-    //     cardImg: ""
-    // }
-  ],
+  paymentMethods: [],
+  paymentCardId: 0,
 };
 
 const paymentSlice = createSlice({
@@ -32,8 +26,11 @@ const paymentSlice = createSlice({
     addNewPayment: (state, action) => {
       state.paymentMethods.push(action.payload);
     },
+    choosedPaymentMethod: (state, action) => {
+      state.paymentCardId = action.payload;
+    }
   },
 });
 
 export default paymentSlice.reducer;
-export const { addNewPayment } = paymentSlice.actions;
+export const { addNewPayment, choosedPaymentMethod } = paymentSlice.actions;
