@@ -32,8 +32,8 @@ const SignIn = ({ togglePage }: {togglePage : () => void}) => {
   };
 
   return (
-    <div className="flex w-full m-auto h-screen justify-center items-center">
-      <div className="m-auto border-y-2 border-r-2 -translate-x-2 border-gray-300 rounded-md space-y-5 p-5 w-[400px] h-fit shadow-lg ">
+    // <div className="flex w-full h-full justify-center items-center">
+      <div className="m-auto border-y-2 border-r-2 border-white rounded-md space-y-5 p-5 w-[400px] h-fit shadow-lg ">
         <div className="flex flex-col space-y-2 justify-center items-center">
           <img
             src={QBLogoSite}
@@ -96,7 +96,7 @@ const SignIn = ({ togglePage }: {togglePage : () => void}) => {
             </button>
           </h1>
         </div>
-      </div>
+      {/* </div> */}
     </div>
   );
 };
@@ -117,9 +117,9 @@ const SignUp = ({ togglePage }: {togglePage : () => void}) => {
     localStorage.setItem("isLogin", "true");
   };
   return (
-    <div className="flex w-full h-screen justify-center items-center">
+    // <div className="flex w-full h-screen justify-center items-center">
       
-      <div className="m-auto border-y-2 border-r-2 -translate-x-2 border-gray-300 rounded-md p-5 w-[400px] h-fit shadow-lg ">
+      <div className="m-auto border-y-2 border-r-2 border-white rounded-md p-5 w-[400px] h-fit shadow-lg ">
         <Form layout="vertical" onFinish={saveCredential}>
           <Form.Item
             label="FirstName"
@@ -174,7 +174,7 @@ const SignUp = ({ togglePage }: {togglePage : () => void}) => {
             </button>
           </h1>
         </div>
-      </div>
+      {/* </div> */}
     </div>
   );
 };
@@ -193,23 +193,29 @@ const Auth = () => {
         <Route path="signup" element={<SignUp />} />
       </Routes> */}
 
-      <div className="flex justify-center items-center m-auto w-[60%]">
-        <div
-          className="m-auto flex border-2 border-gray-300 rounded-md space-y-5 w-full h-[80vh] shadow-right bg-cover bg-center bg-no-repeat z-10"
-          style={{ backgroundImage: `url(${loginImage})` }}
-        >
-          <div className="w-full h-full flex flex-col p-5 bg-black/60 justify-end items-start space-y-3 pb-14">
-            <h1 className="text-white text-5xl font-bold font-mono">Get <br /> Everything <br/> You Want</h1>
-            <p className="text-gray-300 ">"Find everything you're looking for in our store items you won't even find on Amazon."</p>
+      <div className="flex justify-center items-center w-full h-screen">
+        <div className="flex flex-col md:flex-row justify-center items-center">
+          <div
+            className="flex border-2 border-white rounded-md space-y-5 w-[90vh] h-[80vh] shadow-right bg-cover bg-center bg-no-repeat z-10"
+            style={{ backgroundImage: `url(${loginImage})` }}
+          >
+            <div className="w-full h-full flex flex-col p-5 bg-black/60 justify-end items-start space-y-3 pb-14">
+              <h1 className="text-white text-5xl font-bold font-mono">
+                Get <br /> Everything <br /> You Want
+              </h1>
+              <p className="text-gray-300">
+                "Find everything you're looking for in our store items you won't even find on Amazon."
+              </p>
+            </div>
           </div>
-        </div>
 
-        <div>
-          {isSignIn ? (
-            <SignIn togglePage={togglePage} />
-          ) : (
-            <SignUp togglePage={togglePage} />
-          )}
+          <div className="flex w-fit h-full justify-center items-center border-2 bg-white border-white rounded-md">
+            {isSignIn ? (
+              <SignIn togglePage={togglePage} />
+            ) : (
+              <SignUp togglePage={togglePage} />
+            )}
+          </div>
         </div>
       </div>
     </>
