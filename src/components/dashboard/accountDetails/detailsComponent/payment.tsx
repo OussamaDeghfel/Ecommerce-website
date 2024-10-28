@@ -127,7 +127,7 @@ const Payment = () => {
         cardVerification: choosedCard.cvv
       })
     }
-  },[paymentMethods, paymentCardId])
+  },[paymentMethods, paymentCardId, form])
 
   // const handleValue = () => {
   //   console.log(form.getFieldValue("cardName"));
