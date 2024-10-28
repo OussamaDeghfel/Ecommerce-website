@@ -222,6 +222,8 @@ const Payment = () => {
         </div>
       </div>
 
+      {/* ADD new payment method  */}
+
       <Modal
         title="Add Payment Method"
         closable={false}
@@ -233,7 +235,7 @@ const Payment = () => {
           </Button>,
           <Button
             type="primary"
-            onClick={() =>
+            onClick={() =>{
               dispatch(
                 addNewPayment({
                   cardId: Math.floor(Math.random() * 20) + 1,
@@ -244,6 +246,8 @@ const Payment = () => {
                   cardImg: selectCardType,
                 })
               )
+              setAddNewCard(false)
+            }
             }
           >
             Add
@@ -306,6 +310,7 @@ const Payment = () => {
                 cardImg: selectCardType,
               })
             )
+            setEditPaymentMethod(false)
           }}>Edit</Button>,
         ]}
       >
