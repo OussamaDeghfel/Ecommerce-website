@@ -26,11 +26,9 @@ const Payment = () => {
   const [addNewCard, setAddNewCard] = useState(false);
   const [editPaymentMethod, setEditPaymentMethod] = useState(false);
   const [selectCardType, setSelectCardType] = useState("");
-  const [selectedCardToModify, setSelectedCardToModify] = useState<number>()
+  const [selectedCardToModify, setSelectedCardToModify] = useState<number>();
 
-  const { paymentMethods } = useSelector(
-    (state: RootState) => state.payment
-  );
+  const { paymentMethods } = useSelector((state: RootState) => state.payment);
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
@@ -123,7 +121,7 @@ const Payment = () => {
     },
   ];
 
-  console.log("cards : ", paymentMethods.map(item => item.cardId))
+  // console.log("cards : ", paymentMethods.map(item => item.cardId))
   // console.log("Payment Card ID : ", paymentCardId)
 
   useEffect(() => {
@@ -140,7 +138,6 @@ const Payment = () => {
       });
     }
   }, [paymentMethods, selectedCardToModify, form]);
-
 
   return (
     <>
@@ -177,7 +174,9 @@ const Payment = () => {
           <div className="grid grid-cols-1 gap-5">
             {paymentMethods.map((item) => (
               <div
-                className={`flex h-full w-full border-2 border-cyan-200 rounded-md p-4 ${item.ChoosedAsDefault ? "bg-cyan-100" : ""}`}
+                className={`flex h-full w-full border-2 border-cyan-200 rounded-md p-4 ${
+                  item.ChoosedAsDefault ? "bg-cyan-100" : ""
+                }`}
                 key={item.cardId}
               >
                 <div className="w-10">
@@ -194,7 +193,9 @@ const Payment = () => {
                   <div className="flex justify-start items-center space-x-5">
                     <Button
                       className="text-base font-light"
-                      onClick={() => dispatch(choosedAsDefaultCardPayment(item.cardId))}
+                      onClick={() =>
+                        dispatch(choosedAsDefaultCardPayment(item.cardId))
+                      }
                     >
                       set as default
                     </Button>
@@ -213,7 +214,12 @@ const Payment = () => {
             ))}
 
             <div className="flex p-5">
-              <Button onClick={() => setAddNewCard(true)} className="font-bold">
+              <Button
+                onClick={() => {
+                  setAddNewCard(true), form.resetFields();
+                }}
+                className="font-bold"
+              >
                 <BiPlusCircle size={20} /> Add new card
               </Button>
             </div>
@@ -239,7 +245,7 @@ const Payment = () => {
           </Button>,
           <Button
             type="primary"
-            onClick={() =>{
+            onClick={() => {
               dispatch(
                 addNewPayment({
                   cardId: Math.floor(Math.random() * 20) + 1,
@@ -249,22 +255,48 @@ const Payment = () => {
                   cvv: form.getFieldValue("cardVerification"),
                   cardImg: selectCardType,
                 })
-              )
-              setAddNewCard(false)
-            }
-            }
+              );
+              setAddNewCard(false);
+            }}
           >
             Add
           </Button>,
         ]}
       >
         <Form layout="vertical" form={form}>
-          <Form.Item name="cardName" label="Card Name">
-            <Input />
+          <Form.Item
+            name="cardName"
+            label="Card Name"
+            rules={[
+              {
+                required: true,
+                message: "Please enter your card name!",
+              },
+            ]}
+          >
+            <Input placeholder="Enter card name" />
           </Form.Item>
           <div className="flex w-full h-full space-x-2 justify-center items-center">
-            <Form.Item name="cardNumber" label="Card Number" className="w-full">
-              <Input />
+            <Form.Item
+              name="cardNumber"
+              label="Card Number"
+              className="w-full"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter your card number!",
+                },
+                {
+                  len: 16,
+                  message: "Card number must be exactly 16 digits!",
+                },
+                {
+                  pattern: /^[0-9]*$/,
+                  message: "Card number must be numeric!",
+                },
+              ]}
+            >
+              <Input maxLength={16} placeholder="Enter 16-digit card number" />
             </Form.Item>
             <Select
               onChange={(value) => setSelectCardType(value)}
@@ -280,13 +312,24 @@ const Payment = () => {
                 },
               ]}
               className="w-20 h-8 -bottom-0.5"
+              
             />
           </div>
           <div className="flex w-full h-full justify-between space-x-2 items-center ">
-            <Form.Item name="expDate" label="Expiration Date">
+            <Form.Item name="expDate" label="Expiration Date" rules={[
+              {
+                required: true,
+                message: "Please enter your expiration date!",
+              },
+            ]}>
               <DatePicker className="flex w-[30vh]" />
             </Form.Item>
-            <Form.Item name="cardVerification" label="CVC">
+            <Form.Item name="cardVerification" label="CVC" rules={[
+              {
+                required: true,
+                message: "Please enter your CVC!",
+              },
+            ]}>
               <Input type="number" className="flex w-56" />
             </Form.Item>
           </div>
@@ -303,28 +346,60 @@ const Payment = () => {
           <Button key="back" onClick={() => setEditPaymentMethod(false)}>
             Cancel
           </Button>,
-          <Button type="primary" onClick={() => {
-            dispatch(
-              editPaymentCard({
-                cardId: selectedCardToModify,
-                cardName: form.getFieldValue("cardName"),
-                expiryDate: form.getFieldValue("expDate"),
-                cardNumber: form.getFieldValue("cardNumber"),
-                cvv: form.getFieldValue("cardVerification"),
-                cardImg: selectCardType,
-              })
-            )
-            setEditPaymentMethod(false)
-          }}>Edit</Button>,
+          <Button
+            type="primary"
+            onClick={() => {
+              dispatch(
+                editPaymentCard({
+                  cardId: selectedCardToModify,
+                  cardName: form.getFieldValue("cardName"),
+                  expiryDate: form.getFieldValue("expDate"),
+                  cardNumber: form.getFieldValue("cardNumber"),
+                  cvv: form.getFieldValue("cardVerification"),
+                  cardImg: selectCardType,
+                })
+              );
+              setEditPaymentMethod(false);
+            }}
+          >
+            Edit
+          </Button>,
         ]}
       >
         <Form layout="vertical" form={form}>
-          <Form.Item name="cardName" label="Card Name">
-            <Input />
+          <Form.Item
+            name="cardName"
+            label="Card Name"
+            rules={[
+              {
+                required: true,
+                message: "Please enter your card name!",
+              },
+            ]}
+          >
+            <Input placeholder="Enter card name" />
           </Form.Item>
           <div className="flex w-full h-full space-x-2 justify-center items-center">
-            <Form.Item name="cardNumber" label="Card Number" className="w-full">
-              <Input />
+            <Form.Item
+              name="cardNumber"
+              label="Card Number"
+              className="w-full"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter your card number!",
+                },
+                {
+                  len: 16,
+                  message: "Card number must be exactly 16 digits!",
+                },
+                {
+                  pattern: /^[0-9]*$/,
+                  message: "Card number must be numeric!",
+                },
+              ]}
+            >
+              <Input maxLength={16} placeholder="Enter 16-digit card number" />
             </Form.Item>
             <Select
               onChange={(value) => setSelectCardType(value)}
@@ -340,13 +415,24 @@ const Payment = () => {
                 },
               ]}
               className="w-20 h-8 -bottom-0.5"
+              
             />
           </div>
           <div className="flex w-full h-full justify-between space-x-2 items-center ">
-            <Form.Item name="expDate" label="Expiration Date">
+            <Form.Item name="expDate" label="Expiration Date" rules={[
+              {
+                required: true,
+                message: "Please enter your expiration date!",
+              },
+            ]}>
               <DatePicker className="flex w-[30vh]" />
             </Form.Item>
-            <Form.Item name="cardVerification" label="CVC">
+            <Form.Item name="cardVerification" label="CVC" rules={[
+              {
+                required: true,
+                message: "Please enter your CVC!",
+              },
+            ]}>
               <Input type="number" className="flex w-56" />
             </Form.Item>
           </div>
