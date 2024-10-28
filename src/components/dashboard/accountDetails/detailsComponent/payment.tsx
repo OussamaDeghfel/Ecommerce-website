@@ -125,11 +125,14 @@ const Payment = () => {
 
   // console.log("cards : ", paymentMethods.map(item => item.cardId))
   // console.log("Payment Card ID : ", paymentCardId)
+  // console.log("Expire Date : ", dayjs(form.getFieldValue("expDate")).format('MM/YYYY'))
 
   useEffect(() => {
     const choosedCard = paymentMethods.find(
       (card) => card.cardId == selectedCardToModify
     );
+
+    console.log("from Edit :", choosedCard?.expiryDate);
 
     if (choosedCard) {
       form.setFieldsValue({
@@ -264,7 +267,7 @@ const Payment = () => {
                 addNewPayment({
                   cardId: Math.floor(Math.random() * 20) + 1,
                   cardName: form.getFieldValue("cardName"),
-                  expiryDate: form.getFieldValue("expDate"),
+                  expiryDate: form.getFieldValue("expDate").toString(),
                   cardNumber: form.getFieldValue("cardNumber"),
                   cvv: form.getFieldValue("cardVerification"),
                   cardImg: selectCardType,
@@ -349,9 +352,13 @@ const Payment = () => {
                   required: true,
                   message: "Please enter your CVC!",
                 },
+                {
+                  pattern: /^[0-9]*$/,
+                  message: "CVC must be numeric!",
+                },
               ]}
             >
-              <Input type="number" className="flex w-56" />
+              <Input className="flex w-56" maxLength={3} placeholder="Enter CVC" />
             </Form.Item>
           </div>
         </Form>
