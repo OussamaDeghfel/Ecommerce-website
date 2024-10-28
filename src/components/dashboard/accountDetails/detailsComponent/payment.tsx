@@ -18,7 +18,6 @@ import { useDispatch } from "react-redux";
 import {
   addNewPayment,
   choosedAsDefaultCardPayment,
-  choosedPaymentMethod,
   editPaymentCard,
 } from "../../../redux/paymentSlice";
 import dayjs from "dayjs";
@@ -27,8 +26,9 @@ const Payment = () => {
   const [addNewCard, setAddNewCard] = useState(false);
   const [editPaymentMethod, setEditPaymentMethod] = useState(false);
   const [selectCardType, setSelectCardType] = useState("");
+  const [selectedCardToModify, setSelectedCardToModify] = useState<number>()
 
-  const { paymentMethods, paymentCardId } = useSelector(
+  const { paymentMethods } = useSelector(
     (state: RootState) => state.payment
   );
   const dispatch = useDispatch();
@@ -123,9 +123,12 @@ const Payment = () => {
     },
   ];
 
+  console.log("cards : ", paymentMethods.map(item => item.cardId))
+  // console.log("Payment Card ID : ", paymentCardId)
+
   useEffect(() => {
     const choosedCard = paymentMethods.find(
-      (card) => card.cardId == paymentCardId
+      (card) => card.cardId == selectedCardToModify
     );
 
     if (choosedCard) {
@@ -136,7 +139,7 @@ const Payment = () => {
         cardVerification: choosedCard.cvv,
       });
     }
-  }, [paymentMethods, paymentCardId, form]);
+  }, [paymentMethods, selectedCardToModify, form]);
 
 
   return (
@@ -198,7 +201,8 @@ const Payment = () => {
                     <Button
                       onClick={() => {
                         setEditPaymentMethod(true);
-                        dispatch(choosedPaymentMethod(item.cardId));
+                        setSelectedCardToModify(item.cardId);
+                        // dispatch(choosedPaymentMethod(item.cardId));
                       }}
                     >
                       Edit
@@ -302,7 +306,7 @@ const Payment = () => {
           <Button type="primary" onClick={() => {
             dispatch(
               editPaymentCard({
-                cardId: paymentCardId,
+                cardId: selectedCardToModify,
                 cardName: form.getFieldValue("cardName"),
                 expiryDate: form.getFieldValue("expDate"),
                 cardNumber: form.getFieldValue("cardNumber"),

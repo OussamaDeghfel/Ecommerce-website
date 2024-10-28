@@ -12,12 +12,31 @@ interface PaymentCart {
 
 interface paymentState {
   paymentMethods: PaymentCart[];
-  paymentCardId: number;
+//   paymentCardId: number;
 }
 
 const initialState: paymentState = {
-  paymentMethods: [],
-  paymentCardId: 0,
+  paymentMethods: [
+    // {
+    //   cardId: 1,
+    //   cardName: "Visa",
+    //   cardNumber: "**** **** **** 1234",
+    //   expiryDate: "12/24",
+    //   cvv: "123",
+    //   cardImg: "/images/visa.png",
+    //   ChoosedAsDefault: false,
+    // },
+    // {
+    //   cardId: 2,
+    //   cardName: "MasterCard",
+    //   cardNumber: "**** **** **** 1234",
+    //   expiryDate: "12/24",
+    //   cvv: "123",
+    //   cardImg: "/images/masterCard.png",
+    //   ChoosedAsDefault: false,
+    // }
+  ],
+//   paymentCardId: 0,
 };
 
 const paymentSlice = createSlice({
@@ -26,9 +45,6 @@ const paymentSlice = createSlice({
   reducers: {
     addNewPayment: (state, action) => {
       state.paymentMethods.push(action.payload);
-    },
-    choosedPaymentMethod: (state, action) => {
-      state.paymentCardId = action.payload;
     },
     editPaymentCard: (state, action) => {
       const index = state.paymentMethods.findIndex(
@@ -43,12 +59,18 @@ const paymentSlice = createSlice({
         (item) => item.cardId === action.payload
       );
       if (findCard !== -1) {
-        state.paymentMethods[findCard].ChoosedAsDefault = true;
+        state.paymentMethods.every((item) => {
+          if(item.cardId !== findCard){
+            item.ChoosedAsDefault = false
+          } else {
+            state.paymentMethods[findCard].ChoosedAsDefault = true
+          }
+        })
       }
     },
   },
 });
 
 export default paymentSlice.reducer;
-export const { addNewPayment, choosedPaymentMethod, editPaymentCard, choosedAsDefaultCardPayment } =
+export const { addNewPayment, editPaymentCard, choosedAsDefaultCardPayment } =
   paymentSlice.actions;
