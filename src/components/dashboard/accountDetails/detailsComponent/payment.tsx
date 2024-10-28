@@ -20,6 +20,7 @@ import dayjs from "dayjs";
 
 const Payment = () => {
   const [addNewCard, setAddNewCard] = useState(false);
+  const [selectCardType, setSelectCardType] = useState("")
 
   const { paymentMethods } = useSelector((state: RootState) => state.payment);
   const dispatch = useDispatch();
@@ -163,7 +164,7 @@ const Payment = () => {
                 key={item.cardId}
               >
                 <div className="w-10">
-                  <img src={visaCard} alt="visa card image" />
+                  <img src={item.cardImg === "visacard" ? visaCard : masterCard} alt="visa card image" />
                 </div>
                 <div className="flex flex-col ml-5 space-y-1">
                   <h1 className="text-xl">{item.cardName}</h1>
@@ -213,7 +214,7 @@ const Payment = () => {
               expiryDate: dayjs(form.getFieldValue("expDate")).format("MM/YYYY"),
               cardNumber: form.getFieldValue("cardNumber"),
               cvv: form.getFieldValue("cardVerification"),
-              // cardImg: form.getFieldValue(""),
+              cardImg: selectCardType,
             })
           )}>
             Add
@@ -229,6 +230,7 @@ const Payment = () => {
               <Input />
             </Form.Item>
             <Select
+            onChange={(value) => setSelectCardType(value)}
               placeholder="Select Card Type"
               options={[
                 {
