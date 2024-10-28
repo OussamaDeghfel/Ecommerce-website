@@ -12,7 +12,7 @@ interface PaymentCart {
 
 interface paymentState {
   paymentMethods: PaymentCart[];
-//   paymentCardId: number;
+  //   paymentCardId: number;
 }
 
 const initialState: paymentState = {
@@ -36,7 +36,7 @@ const initialState: paymentState = {
     //   ChoosedAsDefault: false,
     // }
   ],
-//   paymentCardId: 0,
+  //   paymentCardId: 0,
 };
 
 const paymentSlice = createSlice({
@@ -59,13 +59,12 @@ const paymentSlice = createSlice({
         (item) => item.cardId === action.payload
       );
       if (findCard !== -1) {
-        state.paymentMethods.every((item) => {
-          if(item.cardId !== findCard){
-            item.ChoosedAsDefault = false
-          } else {
-            state.paymentMethods[findCard].ChoosedAsDefault = true
+        state.paymentMethods[findCard].ChoosedAsDefault = true;
+        state.paymentMethods.forEach((item) => {
+          if (item.cardId !== action.payload) {
+            item.ChoosedAsDefault = false;
           }
-        })
+        });
       }
     },
   },
