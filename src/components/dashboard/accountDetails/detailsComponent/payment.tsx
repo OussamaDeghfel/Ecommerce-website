@@ -7,6 +7,7 @@ import {
   Form,
   DatePicker,
   Select,
+  Radio,
 } from "antd";
 import visaCard from "../../../../assets/visaCard.png";
 import masterCard from "../../../../assets/masterCard.png";
@@ -21,6 +22,8 @@ import {
   editPaymentCard,
 } from "../../../redux/paymentSlice";
 import dayjs from "dayjs";
+import { PiCheckFatBold } from "react-icons/pi";
+import { FaCheckCircle } from "react-icons/fa";
 
 const Payment = () => {
   const [addNewCard, setAddNewCard] = useState(false);
@@ -179,26 +182,18 @@ const Payment = () => {
                 }`}
                 key={item.cardId}
               >
-                <div className="w-10">
+                <div className="w-10 ">
                   <img
                     src={item.cardImg === "visacard" ? visaCard : masterCard}
                     alt="visa card image"
                   />
                 </div>
-                <div className="flex flex-col ml-5 space-y-1">
+                <div className="flex w-full flex-col ml-5 space-y-1">
                   <h1 className="text-xl">{item.cardName}</h1>
                   <p className="text-sm text-gray-400">
                     Expire on {dayjs(item.expiryDate).format("MM/YYYY")}
                   </p>
                   <div className="flex justify-start items-center space-x-5">
-                    <Button
-                      className="text-base font-light"
-                      onClick={() =>
-                        dispatch(choosedAsDefaultCardPayment(item.cardId))
-                      }
-                    >
-                      set as default
-                    </Button>
                     <Button
                       onClick={() => {
                         setEditPaymentMethod(true);
@@ -208,7 +203,26 @@ const Payment = () => {
                     >
                       Edit
                     </Button>
+                    <Button
+                      size="small"
+                      variant="dashed"
+                      color="danger"
+                    >
+                      Remove
+                    </Button>
                   </div>
+                </div>
+                <div className="flex justify-end items-center">
+                  <FaCheckCircle
+                    size={25}
+                    className="cursor-pointer"
+                    style={{
+                      color: item.ChoosedAsDefault ? "blue" : "gray",
+                    }}
+                    onClick={() =>
+                      dispatch(choosedAsDefaultCardPayment(item.cardId))
+                    }
+                  />
                 </div>
               </div>
             ))}
@@ -312,24 +326,31 @@ const Payment = () => {
                 },
               ]}
               className="w-20 h-8 -bottom-0.5"
-              
             />
           </div>
           <div className="flex w-full h-full justify-between space-x-2 items-center ">
-            <Form.Item name="expDate" label="Expiration Date" rules={[
-              {
-                required: true,
-                message: "Please enter your expiration date!",
-              },
-            ]}>
+            <Form.Item
+              name="expDate"
+              label="Expiration Date"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter your expiration date!",
+                },
+              ]}
+            >
               <DatePicker className="flex w-[30vh]" />
             </Form.Item>
-            <Form.Item name="cardVerification" label="CVC" rules={[
-              {
-                required: true,
-                message: "Please enter your CVC!",
-              },
-            ]}>
+            <Form.Item
+              name="cardVerification"
+              label="CVC"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter your CVC!",
+                },
+              ]}
+            >
               <Input type="number" className="flex w-56" />
             </Form.Item>
           </div>
@@ -415,24 +436,31 @@ const Payment = () => {
                 },
               ]}
               className="w-20 h-8 -bottom-0.5"
-              
             />
           </div>
           <div className="flex w-full h-full justify-between space-x-2 items-center ">
-            <Form.Item name="expDate" label="Expiration Date" rules={[
-              {
-                required: true,
-                message: "Please enter your expiration date!",
-              },
-            ]}>
+            <Form.Item
+              name="expDate"
+              label="Expiration Date"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter your expiration date!",
+                },
+              ]}
+            >
               <DatePicker className="flex w-[30vh]" />
             </Form.Item>
-            <Form.Item name="cardVerification" label="CVC" rules={[
-              {
-                required: true,
-                message: "Please enter your CVC!",
-              },
-            ]}>
+            <Form.Item
+              name="cardVerification"
+              label="CVC"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter your CVC!",
+                },
+              ]}
+            >
               <Input type="number" className="flex w-56" />
             </Form.Item>
           </div>
