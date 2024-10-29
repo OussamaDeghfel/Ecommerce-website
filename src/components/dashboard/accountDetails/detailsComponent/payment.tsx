@@ -123,16 +123,10 @@ const Payment = () => {
     },
   ];
 
-  // console.log("cards : ", paymentMethods.map(item => item.cardId))
-  // console.log("Payment Card ID : ", paymentCardId)
-  // console.log("Expire Date : ", dayjs(form.getFieldValue("expDate")).format('MM/YYYY'))
-
   useEffect(() => {
     const choosedCard = paymentMethods.find(
       (card) => card.cardId == selectedCardToModify
     );
-
-    console.log("from Edit :", choosedCard?.expiryDate);
 
     if (choosedCard) {
       form.setFieldsValue({
