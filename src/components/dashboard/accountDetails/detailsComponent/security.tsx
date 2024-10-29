@@ -1,13 +1,20 @@
-import { Alert, Button, Select, Switch, Table, TableColumnType } from "antd";
-import React, { useState } from "react";
+import { Alert, Button, Switch, Table } from "antd";
+import { Key, useState } from "react";
 
 interface DataType {
   key: string;
   username: string;
   browser: string;
   location: string;
-  mostrecent: string;
-  fitlers: string;
+  mostrecent: string
+}
+
+interface ColumnType {
+  title: string;
+  dataIndex: string;
+  key: string;
+  filters?: { text: string; value: string }[];
+  onFilter?: (value: boolean | Key, record: DataType) => boolean;
 }
 
 const Security = () => {
@@ -90,7 +97,7 @@ const Security = () => {
 
   const [dataSource, setDataSource] = useState(initialSessionsData);
 
-  const columns: TableColumnType<DataType> = [
+  const columns: ColumnType[] = [
     {
       title: "User Name",
       dataIndex: "username",
@@ -103,18 +110,18 @@ const Security = () => {
       filters: [
         {
           text: "Chrome",
-          value: "Chrome"
+          value: "Chrome",
         },
         {
           text: "Firefox",
-          value: "Firefox"
+          value: "Firefox",
         },
         {
           text: "Safari",
-          value: "Safari"
-        }
+          value: "Safari",
+        },
       ],
-      onFilter: (value:string, record: string) => record.browser === value,
+      onFilter: (value, record) => record.browser === value
     },
     {
       title: "Location",
