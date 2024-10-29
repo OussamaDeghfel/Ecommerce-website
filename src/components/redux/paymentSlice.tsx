@@ -17,15 +17,15 @@ interface paymentState {
 
 const initialState: paymentState = {
   paymentMethods: [
-    // {
-    //   cardId: 12,
-    //   cardName: 'Credit bussiness 01',
-    //   expiryDate: 'Fri, 07 Mar 2025 23:00:00 GMT',
-    //   cardNumber: '2121515245121512',
-    //   cvv: '966',
-    //   cardImg: 'visacard',
-    //   ChoosedAsDefault: false
-    // },
+    {
+      cardId: 1,
+      cardName: 'Credit Card ',
+      expiryDate: 'Fri, 07 Mar 2025 23:00:00 GMT',
+      cardNumber: '2121515245121512',
+      cvv: '966',
+      cardImg: 'visacard',
+      ChoosedAsDefault: false
+    },
     // {
     //   cardId: 16,
     //   cardName: 'debit card 01',
@@ -67,7 +67,7 @@ const paymentSlice = createSlice({
         (item) => item.cardId === action.payload
       );
       if (findCard !== -1) {
-        state.paymentMethods[findCard].ChoosedAsDefault = true;
+        state.paymentMethods[findCard].ChoosedAsDefault = !state.paymentMethods[findCard].ChoosedAsDefault;
         state.paymentMethods.forEach((item) => {
           if (item.cardId !== action.payload) {
             item.ChoosedAsDefault = false;
