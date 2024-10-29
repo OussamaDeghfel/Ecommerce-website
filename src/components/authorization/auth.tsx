@@ -193,7 +193,7 @@ const Auth = () => {
         <Route path="signup" element={<SignUp />} />
       </Routes> */}
 
-      <div className="flex justify-center items-center w-full h-screen">
+      <div className="flex justify-center items-center w-full h-screen bg-gradient-to-r from-orange-100 from-20% via-orange-200 via-30% to-orange-200 to-90%">
         <div className="flex flex-col md:flex-row justify-center items-center">
           <div
             className="flex border-2 border-white rounded-md space-y-5 w-[90vh] h-[80vh] shadow-right bg-cover bg-center bg-no-repeat z-10"
