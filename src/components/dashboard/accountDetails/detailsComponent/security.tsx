@@ -1,5 +1,14 @@
-import { Alert, Button, Select, Switch, Table } from "antd";
-import { useState } from "react";
+import { Alert, Button, Select, Switch, Table, TableColumnType } from "antd";
+import React, { useState } from "react";
+
+interface DataType {
+  key: string;
+  username: string;
+  browser: string;
+  location: string;
+  mostrecent: string;
+  fitlers: string;
+}
 
 const Security = () => {
   const [twoVerificationChecked, setTwoVerificationChecked] = useState(false);
@@ -78,10 +87,10 @@ const Security = () => {
       mostrecent: "6 minutes ago",
     },
   ];
-  
+
   const [dataSource, setDataSource] = useState(initialSessionsData);
-  
-  const columns = [
+
+  const columns: TableColumnType<DataType> = [
     {
       title: "User Name",
       dataIndex: "username",
@@ -91,6 +100,21 @@ const Security = () => {
       title: "Browser",
       dataIndex: "browser",
       key: "browser",
+      filters: [
+        {
+          text: "Chrome",
+          value: "Chrome"
+        },
+        {
+          text: "Firefox",
+          value: "Firefox"
+        },
+        {
+          text: "Safari",
+          value: "Safari"
+        }
+      ],
+      onFilter: (value:string, record: string) => record.browser === value,
     },
     {
       title: "Location",
@@ -104,14 +128,22 @@ const Security = () => {
     },
   ];
 
-
   const handleLogoutAllSessions = () => {
     setDataSource([]);
     setDisbaledButton(true);
   };
 
-
-  
+  // const filterByBrowser = (value: string) => {
+  //   console.log("filtered Choice : ", value);
+  //   const filterdChoice = initialSessionsData.filter(
+  //     (session) => session.browser === value
+  //   );
+  //   if (filterdChoice) {
+  //     setDataSource(filterdChoice);
+  //   } else {
+  //     setDataSource(initialSessionsData);
+  //   }
+  // };
 
   return (
     <>
@@ -172,17 +204,18 @@ const Security = () => {
             </p>
           </div>
           <div className="space-y-2">
-            <div className="grid grid-cols-3 gap-2 w-fit">
-              <Select defaultValue="All People" style={{ width: 120 }}></Select>
+            {/* <div className="grid grid-cols-3 gap-2 w-fit">
               <Select
-                defaultValue="All browsers"
-                style={{ width: 120 }}
-              ></Select>
-              <Select
-                defaultValue="All Locations"
-                style={{ width: 120 }}
-              ></Select>
-            </div>
+                placeholder="Filter by browser"
+                options={[
+                  { value: "Chrome", label: "Chrome" },
+                  { value: "Firefox", label: "Firefox" },
+                  { value: "Safari", label: "Safari" },
+                ]}
+                // onChange={(value) => filterByBrowser(value)}
+                allowClear
+              />
+            </div> */}
             <Table dataSource={dataSource} columns={columns} />
           </div>
         </div>
