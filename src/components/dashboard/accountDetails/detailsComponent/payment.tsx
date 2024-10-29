@@ -6,7 +6,8 @@ import {
   Table,
   Form,
   DatePicker,
-  Select
+  Select,
+  Tag
 } from "antd";
 import visaCard from "../../../../assets/visaCard.png";
 import masterCard from "../../../../assets/masterCard.png";
@@ -54,6 +55,13 @@ const Payment = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      render: (status:string) => {
+        if(status === "Paid") {
+          return <Tag color="green">{status}</Tag>
+        } else {
+          return <Tag color="blue">{status}</Tag>
+        }
+      }
     },
   ];
 
@@ -62,7 +70,7 @@ const Payment = () => {
       key: "1",
       invoice: "Invoice 1",
       amount: "$100",
-      status: "Pending",
+      status: "Paid",
       date: "2024-10-10",
     },
     {
