@@ -138,7 +138,7 @@ const Payment = () => {
       form.setFieldsValue({
         cardName: choosedCard.cardName,
         cardNumber: choosedCard.cardNumber,
-        expDate: choosedCard.expiryDate,
+        expDate: dayjs(choosedCard.expiryDate),
         cardVerification: choosedCard.cvv,
       });
     }
@@ -381,7 +381,7 @@ const Payment = () => {
                 editPaymentCard({
                   cardId: selectedCardToModify,
                   cardName: form.getFieldValue("cardName"),
-                  expiryDate: form.getFieldValue("expDate"),
+                  expiryDate: form.getFieldValue("expDate").toString(),
                   cardNumber: form.getFieldValue("cardNumber"),
                   cvv: form.getFieldValue("cardVerification"),
                   cardImg: selectCardType,
