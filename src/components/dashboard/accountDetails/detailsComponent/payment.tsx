@@ -158,9 +158,9 @@ const Payment = () => {
           </div>
           <div className="flex flex-col space-y-5 ">
             <div className="flex flex-col">
-              <Checkbox className="">Send to my account email</Checkbox>
+              <Checkbox defaultChecked={true} >Send to my account email</Checkbox>
               <span className="text-sm text-gray-400 px-6">
-                oussama@gmail.com
+                {localStorage.getItem("email")}
               </span>
             </div>
             <div className="flex flex-col space-y-2">
