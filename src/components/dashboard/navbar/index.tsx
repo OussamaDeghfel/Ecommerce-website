@@ -17,6 +17,7 @@ const NavBar = () => {
 
   const [showProducts, setShowProducts] = useState(false);
   const [showFavorite, setShowFavorite] = useState(false);
+  const [activeBarSelect, setActiveBarSelect] = useState<string>("");
   const navigate = useNavigate();
 
   const favRef = useRef<HTMLDivElement>(null);
@@ -37,9 +38,6 @@ const NavBar = () => {
     };
   }, []);
 
-  // const toggleSearch = () => {
-  //   setShowSearch(!showSearch);
-  // };
   const handleLogOut = () => {
     localStorage.setItem("isLogin", "false");
     navigate("/");
@@ -78,14 +76,17 @@ const NavBar = () => {
         <img className="w-fit h-[30px] " src={logo} alt="store logo" />
         <div>
           <ul className="flex">
-            <li className="p-2 text-black font-medium mx-4 cursor-pointer">
+            <li className={`p-2 text-black font-medium mx-4 cursor-pointer 
+              ${activeBarSelect === "home" && "text-orange-500"}`} onClick={() => setActiveBarSelect("home")}>
               {" "}
               <Link to="/home">Home</Link>
             </li>
-            <li className="p-2 text-black font-medium mx-4 cursor-pointer">
+            <li className={`p-2 text-black font-medium mx-4 cursor-pointer 
+              ${activeBarSelect === "store" && "text-orange-500"}`} onClick={() => setActiveBarSelect("store")}>
               <Link to="/store">Store</Link>
             </li>
-            <li className="p-2 text-black font-medium mx-4 cursor-pointer">
+            <li className={`p-2 text-black font-medium mx-4 cursor-pointer 
+              ${activeBarSelect === "about" && "text-orange-500"}`} onClick={() => setActiveBarSelect("about")}>
               <Link to="/about">About</Link>
             </li>
           </ul>
