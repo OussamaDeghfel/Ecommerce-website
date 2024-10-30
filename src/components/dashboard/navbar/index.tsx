@@ -17,7 +17,7 @@ const NavBar = () => {
 
   const [showProducts, setShowProducts] = useState(false);
   const [showFavorite, setShowFavorite] = useState(false);
-  const [activeBarSelect, setActiveBarSelect] = useState<string>("");
+  const [activeBarSelect, setActiveBarSelect] = useState<string>("home");
   const [openNavBar, setOpenNavBar] = useState(false);
   const navigate = useNavigate();
 
@@ -144,7 +144,7 @@ const NavBar = () => {
               </li>
             </ul>
           </div>
-          <div className="flex justify-between items-center ">
+          <div className="flex justify-between items-center">
             <div className="relative mx-3 cursor-pointer">
               {favCart.length === 0 ? (
                 <Popover
