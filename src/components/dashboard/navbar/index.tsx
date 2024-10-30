@@ -78,6 +78,7 @@ const NavBar = () => {
         <div className="flex justify-between items-center w-full ">
           <div className="flex md:hidden justify-between items-center w-full px-2">
             <FaBars
+            color="orange"
               size={30}
               onClick={() => setOpenNavBar(!openNavBar)}
               className="z-10"
