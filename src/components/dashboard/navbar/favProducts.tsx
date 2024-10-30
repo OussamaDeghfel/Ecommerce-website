@@ -27,7 +27,7 @@ const FavProducts = () => {
               <img
                 className="w-60 h-56 rounded-t-md"
                 src={prod.image}
-                alt="just image"
+                alt="image of the product"
               />
               <div
                 className=" absolute top-0 right-0 cursor-pointer hover:scale-125 bg-gray-400 opacity-80 p-2 rounded-full"
@@ -44,7 +44,7 @@ const FavProducts = () => {
             </div>
             <div className="flex flex-col p-2 justify-between h-[30vh]">
               <div className="px-2">
-                <h1 className="font-bold text-md my-2">{prod.title}</h1>
+                <h1 className="font-bold text-md my-2">{prod.title.substring(0, 20)}</h1>
                 <h1 className="text-base my-2">{prod.category}</h1>
               </div>
 
