@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { appDispatch, RootState } from "../redux/store";
 import { favorite, fetchProducts } from "../redux/productSlice";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 // import { useMemo } from "react";
 import { FaRegHeart, FaShoppingBag, FaStarHalfAlt } from "react-icons/fa";
 import { addToCart, chooseFavorite, removeFavorite } from "../redux/cartSlice";
@@ -22,7 +22,7 @@ const StoreList = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const [selectedRate, setSelectedRate] = useState(null);
   const [filteredProduct, setFilteredProduct] = useState(product);
-  // const [favlist, setFavlist] = useState<string[]>([]);
+  const [favlist, setFavlist] = useState<string[]>([]);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -30,9 +30,11 @@ const StoreList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  useMemo(() => {
-    setFilteredProduct(product);
-  }, [product]);
+  
+
+  // useMemo(() => {
+  //   setFilteredProduct(product);
+  // }, [product]);
 
   //filter the category for only one name cause of duplicate
   const uniqueFilter = [
@@ -81,6 +83,18 @@ const StoreList = () => {
     setSelectedRate(null);
     setFilteredProduct(product);
   };
+
+  const handleFavoriteProduct = (id:string) => {
+    const verifyExistProduct = favlist.find((item) => item === id);
+    if(!verifyExistProduct){
+      const newList = [...favlist, id];
+      setFavlist(newList); 
+    } else {
+      const newList = favlist.filter((item) => item !== id);
+      setFavlist(newList);
+    }
+    console.log("favList : ",favlist)
+  }
 
   return (
     <div className="flex flex-col items-center justify-start h-full bg-gray-100 p-4">
@@ -173,12 +187,12 @@ const StoreList = () => {
                 />
                 <div
                   className={`absolute top-0 right-0 p-2 cursor-pointer hover:scale-125 m-2 rounded-full ${
-                    prod.isLiked
+                    favlist.includes(prod.id)
                       ? "bg-red-600 opacity-100"
                       : "bg-gray-400 opacity-80"
                   } `}
                   onClick={() => {
-                    if (prod.isLiked == false) {
+                    if (!favlist.includes(prod.id)) {
                       dispatch(
                         chooseFavorite({
                           id: prod.id,
@@ -190,10 +204,11 @@ const StoreList = () => {
                         })
                       ),
                         dispatch(favorite(prod.id));
-                    } else if (prod.isLiked) {
+                    } else if (favlist.includes(prod.id)) {
                       dispatch(removeFavorite({ productID: prod.id }));
                       dispatch(favorite(prod.id));
                     }
+                    handleFavoriteProduct(prod.id)
                   }}
                 >
                   <FaRegHeart color="white" size={25} />
