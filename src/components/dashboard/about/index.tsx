@@ -4,7 +4,13 @@ import customerImage from "../../../assets/profilePic.png";
 import customer2 from "../../../assets/customer2.jpg";
 import customer3 from "../../../assets/customer3.jpg";
 import womenImg from "../../../assets/womenImg.jpg";
-import { FaAngleLeft, FaAngleRight, FaArrowLeft } from "react-icons/fa";
+import {
+  FaAngleDown,
+  FaAngleLeft,
+  FaAngleRight,
+  FaAngleUp,
+  FaArrowLeft,
+} from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa6";
 import { useState } from "react";
 
@@ -85,7 +91,9 @@ const About = () => {
         </div>
       </div>
 
-      <div className="flex md:hidden justify-start items-center w-full h-[40vh] md:h-fit border-2 border-black rounded-md overflow-y-scroll bg-orange-100">
+      {/* Small size  */}
+
+      <div className="flex md:hidden justify-center items-center w-full h-[40vh] md:h-fit border-2 border-black rounded-md bg-orange-100">
         <Button disabled={activeCardSlide === 0} variant="link" color="default">
           <FaAngleLeft
             size={25}
@@ -99,14 +107,14 @@ const About = () => {
         </Button>
 
         <div
-          className="w-[50vh] h-fit flex flex-col p-2 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 hover:bg-orange-400 duration-300 cursor-pointer hover:text-white"
+          className="w-[50vh] h-fit flex flex-col p-2 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 hover:bg-orange-400 cursor-pointer shadow-md hover:text-white"
           // key={costumerReviewsdata[activeCardSlide]}
         >
           {timerSkeleton ? (
             <div className="w-full h-full justify-end place-items-end">
-            <Skeleton active />
-            <Skeleton.Avatar active size="large" shape="circle" />
-          </div>
+              <Skeleton active />
+              <Skeleton.Avatar active size="large" shape="circle" />
+            </div>
           ) : (
             <div>
               <div className="text-start">
@@ -158,7 +166,81 @@ const About = () => {
         </Button>
       </div>
 
-      <div className="hidden md:flex flex-col w-full h-[80vh] rounded-md space-y-3 overflow-y-scroll">
+      {/* medim & large size  */}
+      <div className="hidden md:flex justify-center items-center w-full md:h-[80vh] rounded-md bg-orange-100/45 space-y-3">
+        <Button disabled={activeCardSlide === 0} variant="link" color="default">
+          <FaAngleUp
+            size={25}
+            onClick={() => {
+              setActiveCardSlide(
+                (prevActiveCardSlide) => prevActiveCardSlide - 1
+              ),
+                handleTimer(true);
+            }}
+          />
+        </Button>
+
+        <div
+          className="w-[50vh] h-fit flex flex-col p-2 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 hover:bg-orange-400 cursor-pointer shadow-md hover:text-white"
+          // key={costumerReviewsdata[activeCardSlide]}
+        >
+          {timerSkeleton ? (
+            <div className="w-full h-full justify-end place-items-end">
+              <Skeleton active />
+              <Skeleton.Avatar active size="large" shape="circle" />
+            </div>
+          ) : (
+            <div>
+              <div className="text-start">
+                "{costumerReviewsdata[activeCardSlide].review}"
+              </div>
+              <div className="flex flex-col justify-between items-start md:space-x-4 space-y-3">
+                <Rate
+                  disabled
+                  value={costumerReviewsdata[activeCardSlide].rating}
+                />
+                <div className="flex space-x-4 justify-end w-full items-end">
+                  <div className="flex flex-col  ">
+                    <h1 className="text-gray-500">
+                      {costumerReviewsdata[activeCardSlide].name}
+                    </h1>
+                    <h2 className="text-gray-600">
+                      Total Spent :{" "}
+                      <span className="font-bold">
+                        {" "}
+                        {costumerReviewsdata[activeCardSlide].spent}{" "}
+                      </span>
+                    </h2>
+                  </div>
+                  <img
+                    src={costumerReviewsdata[activeCardSlide].image}
+                    alt="customer image"
+                    className="w-10 h-10"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <Button
+          disabled={activeCardSlide === costumerReviewsdata.length - 1}
+          variant="link"
+          color="default"
+        >
+          <FaAngleDown
+            size={25}
+            onClick={() => {
+              setActiveCardSlide(
+                (prevActiveCardSlide) => prevActiveCardSlide + 1
+              ),
+                handleTimer(true);
+            }}
+          />
+        </Button>
+      </div>
+
+      {/* <div className="hidden md:flex flex-col w-full h-[80vh] rounded-md space-y-3 overflow-y-scroll">
         {costumerReviewsdata.map((item, index) => (
           <div
             className="w-full h-fit flex flex-col p-5 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 hover:bg-orange-400 duration-200 cursor-pointer hover:text-white"
@@ -184,7 +266,7 @@ const About = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
