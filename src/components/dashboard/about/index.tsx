@@ -9,9 +9,7 @@ import {
   FaAngleLeft,
   FaAngleRight,
   FaAngleUp,
-  FaArrowLeft,
 } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa6";
 import { useState } from "react";
 
 const About = () => {
@@ -23,7 +21,7 @@ const About = () => {
 
     setTimeout(() => {
       setTimerSkeleton(!verify);
-    }, 1000);
+    }, 500);
   };
 
   const costumerReviewsdata = [
@@ -180,45 +178,156 @@ const About = () => {
           />
         </Button>
 
-        <div
-          className="w-full h-fit flex flex-col p-4 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 hover:bg-orange-400 cursor-pointer shadow-md hover:text-white"
-          // key={costumerReviewsdata[activeCardSlide]}
-        >
-          {timerSkeleton ? (
-            <div className="w-full h-full justify-end place-items-end">
-              <Skeleton active />
-              <Skeleton.Avatar active size="large" shape="circle" />
+        <div className="flex flex-col">
+          
+          {/* the First element */}
+          {activeCardSlide > 0 ? (
+            <div
+              className="w-full opacity-30 translate-y-4 -z-10 h-fit flex flex-col p-4 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100"
+              // key={costumerReviewsdata[activeCardSlide]}
+            >
+              {timerSkeleton ? (
+                <div className="w-full h-full justify-end place-items-end">
+                  <Skeleton active />
+                  <Skeleton.Avatar active size="large" shape="circle" />
+                </div>
+              ) : (
+                <div>
+                  <div className="text-start">
+                    "{costumerReviewsdata[activeCardSlide - 1].review}"
+                  </div>
+                  <div className="flex flex-col justify-between items-start md:space-x-4 space-y-3">
+                    <Rate
+                      disabled
+                      value={costumerReviewsdata[activeCardSlide - 1].rating}
+                    />
+                    <div className="flex space-x-4 justify-end w-full items-end">
+                      <div className="flex flex-col  ">
+                        <h1 className="text-gray-500">
+                          {costumerReviewsdata[activeCardSlide - 1].name}
+                        </h1>
+                        <h2 className="text-gray-600">
+                          Total Spent :{" "}
+                          <span className="font-bold">
+                            {" "}
+                            {
+                              costumerReviewsdata[activeCardSlide - 1].spent
+                            }{" "}
+                          </span>
+                        </h2>
+                      </div>
+                      <img
+                        src={costumerReviewsdata[activeCardSlide - 1].image}
+                        alt="customer image"
+                        className="w-10 h-10"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
-            <div>
-              <div className="text-start">
-                "{costumerReviewsdata[activeCardSlide].review}"
+            <div className="w-full h-full justify-end place-items-end">
+              <Skeleton />
+              <Skeleton.Avatar size="large" shape="circle" />
+            </div>
+          )}
+
+          {/* the medium  element*/}
+          <div
+            className="w-full h-fit flex flex-col p-4 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 hover:bg-orange-400 cursor-pointer shadow-md hover:text-white"
+            // key={costumerReviewsdata[activeCardSlide]}
+          >
+            {timerSkeleton ? (
+              <div className="w-full h-full justify-end place-items-end">
+                <Skeleton active />
+                <Skeleton.Avatar active size="large" shape="circle" />
               </div>
-              <div className="flex flex-col justify-between items-start md:space-x-4 space-y-3">
-                <Rate
-                  disabled
-                  value={costumerReviewsdata[activeCardSlide].rating}
-                />
-                <div className="flex space-x-4 justify-end w-full items-end">
-                  <div className="flex flex-col  ">
-                    <h1 className="text-gray-500">
-                      {costumerReviewsdata[activeCardSlide].name}
-                    </h1>
-                    <h2 className="text-gray-600">
-                      Total Spent :{" "}
-                      <span className="font-bold">
-                        {" "}
-                        {costumerReviewsdata[activeCardSlide].spent}{" "}
-                      </span>
-                    </h2>
-                  </div>
-                  <img
-                    src={costumerReviewsdata[activeCardSlide].image}
-                    alt="customer image"
-                    className="w-10 h-10"
+            ) : (
+              <div>
+                <div className="text-start">
+                  "{costumerReviewsdata[activeCardSlide].review}"
+                </div>
+                <div className="flex flex-col w-full justify-between items-start md:space-x-2 space-y-3">
+                  <Rate
+                    disabled
+                    value={costumerReviewsdata[activeCardSlide].rating}
+                    className="pt-8"
                   />
+                  <div className="flex space-x-4 justify-end w-full items-end">
+                    <div className="flex flex-col  ">
+                      <h1 className="text-gray-500">
+                        {costumerReviewsdata[activeCardSlide].name}
+                      </h1>
+                      <h2 className="text-gray-600">
+                        Total Spent :{" "}
+                        <span className="font-bold">
+                          {" "}
+                          {costumerReviewsdata[activeCardSlide].spent}{" "}
+                        </span>
+                      </h2>
+                    </div>
+                    <img
+                      src={costumerReviewsdata[activeCardSlide].image}
+                      alt="customer image"
+                      className="w-10 h-10"
+                    />
+                  </div>
                 </div>
               </div>
+            )}
+          </div>
+
+          {/* the last element */}
+          {!(activeCardSlide === costumerReviewsdata.length - 1) ? (
+            <div
+              className="w-full opacity-30  -translate-y-4 h-fit flex flex-col p-4 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 -z-10"
+              // key={costumerReviewsdata[activeCardSlide]}
+            >
+              {timerSkeleton ? (
+                <div className="w-full h-full justify-end place-items-end">
+                  <Skeleton active />
+                  <Skeleton.Avatar active size="large" shape="circle" />
+                </div>
+              ) : (
+                <div>
+                  <div className="text-start">
+                    "{costumerReviewsdata[activeCardSlide + 1].review}"
+                  </div>
+                  <div className="flex flex-col justify-between items-start md:space-x-4 space-y-3">
+                    <Rate
+                      disabled
+                      value={costumerReviewsdata[activeCardSlide + 1].rating}
+                    />
+                    <div className="flex space-x-4 justify-end w-full items-end">
+                      <div className="flex flex-col  ">
+                        <h1 className="text-gray-500">
+                          {costumerReviewsdata[activeCardSlide + 1].name}
+                        </h1>
+                        <h2 className="text-gray-600">
+                          Total Spent :{" "}
+                          <span className="font-bold">
+                            {" "}
+                            {
+                              costumerReviewsdata[activeCardSlide + 1].spent
+                            }{" "}
+                          </span>
+                        </h2>
+                      </div>
+                      <img
+                        src={costumerReviewsdata[activeCardSlide + 1].image}
+                        alt="customer image"
+                        className="w-10 h-10"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="w-full h-full justify-end place-items-end">
+              <Skeleton />
+              <Skeleton.Avatar size="large" shape="circle" />
             </div>
           )}
         </div>
