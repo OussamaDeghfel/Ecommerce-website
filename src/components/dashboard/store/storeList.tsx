@@ -106,12 +106,12 @@ const StoreList = () => {
           size={25}
           color="black"
         />
-        <span className="font-bold text-xl">Filter</span>
+        <span className="font-bold text-xl italic">FILTER</span>
         {!showFilter ? <FaAngleDown size={15} /> : 
         <FaAngleUp size={15} /> }
       </div>
       {showFilter && (
-        <div className="flex justify-center items-center mt-2">
+        <div className="flex justify-center items-center mt-2 md:hidden">
           <div className="p-2 grid grid-cols-1 gap-4 w-full rounded-md bg-gray-100 shadow-md ">
             <div className="flex flex-col h-fit">
               <Select
@@ -185,9 +185,12 @@ const StoreList = () => {
       )}
 
       <div className="hidden md:flex justify-center items-center">
-        <div className="p-5 m-5 grid grid-cols-5 gap-8 w-full">
-          <h1 className="uppercase font-medium text-black text-xl italic w-fit">
-            filter :
+        <div className="p-5 m-5 grid grid-cols-5 gap-6 w-full">
+          <h1 className="uppercase flex font-medium items-center text-black text-xl italic w-fit">
+          <FaFilter
+          size={25}
+          color="black"
+        /> filter :
           </h1>
           <div className="flex flex-col pr-5 h-fit">
             <Select
@@ -239,7 +242,7 @@ const StoreList = () => {
               allowClear
             />
           </div>
-          <div className="space-x-4">
+          <div className="grid grid-cols-2 gap-2">
             <Button
               className="w-fit justify-center items-end font-medium"
               danger
