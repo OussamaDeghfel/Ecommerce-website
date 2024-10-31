@@ -1,5 +1,9 @@
+import { Rate } from "antd";
 import customerRevImg from "../../../assets/CustomerRevImg.jpg";
 import customerImage from "../../../assets/profilePic.png"
+import customer2 from "../../../assets/customer2.jpg"
+import customer3 from "../../../assets/customer3.jpg"
+import womenImg from "../../../assets/womenImg.jpg"
 
 const About = () => {
 
@@ -7,40 +11,47 @@ const About = () => {
     {
       name: "John Doe",
       image: customerImage,
-      title: "Customer Title",
+      spent: "$200",
       review: "I am beyond impressed with the quality of the products and the speedy delivery! Everything was just as described, and the customer service team was extremely helpful with my inquiries. I’ll definitely be shopping here again!",
+      rating: 4
     },
     {
-      name: "John Doe",
-      image: customerImage,
-      title: "Customer Title",
+      name: "William Albert",
+      image: customer2,
+      spent: "$140",
       review: "This is my go-to store for finding exclusive deals. I’ve purchased several items, and every time, the process has been seamless. The products are fantastic, and the variety is great. Highly recommend!",
+      rating: 3
     },
     {
-      name: "John Doe",
-      image: customerImage,
-      title: "Customer Title",
+      name: "fernando hernandez",
+      image: customer3,
+      spent: "$340",
       review: "I am beyond impressed with the quality of the products and the speedy delivery! Everything was just as described, and the customer service team was extremely helpful with my inquiries. I’ll definitely be shopping here again!",
+      rating: 5
     },
     {
-      name: "John Doe",
-      image: customerImage,
-      title: "Customer Title",
+      name: "Anya johans",
+      image: womenImg,
+      spent: "$1210",
       review: "I am beyond impressed with the quality of the products and the speedy delivery! Everything was just as described, and the customer service team was extremely helpful with my inquiries. I’ll definitely be shopping here again!",
+      rating: 4.5
     },
     {
-      name: "John Doe",
+      name: "Alex Carter",
       image: customerImage,
-      title: "Customer Title",
+      spent: "$50",
       review: "I was hesitant to order online, but this store exceeded my expectations! The items I bought arrived quickly, and they are exactly what I wanted. I’m very satisfied with my purchase and will be recommending this shop to my friends.",
+      rating: 2
     },
     {
-      name: "John Doe",
-      image: customerImage,
-      title: "Customer Title",
+      name: "Jamie Brooks",
+      image: customer2,
+      spent: "$632",
       review: "I am beyond impressed with the quality of the products and the speedy delivery! Everything was just as described, and the customer service team was extremely helpful with my inquiries. I’ll definitely be shopping here again!",
+      rating: 5
     },
   ]
+  
   return (
     <div className="w-full h-full grid grid-cols-2 gap-4 mt-6">
       <div
@@ -60,12 +71,15 @@ const About = () => {
           <div className="text-start">
           "{item.review}"
           </div>
-          <div className="flex justify-end items-center space-x-4">
+          <div className="flex justify-between items-center space-x-4">
+          <Rate disabled value={item.rating} />
+            <div className="flex space-x-4">
             <div className="flex flex-col items-end">
-              <h1>{item.name}</h1>
-              <h2>{item.title}</h2>
+              <h1 className="text-gray-500">{item.name}</h1>
+              <h2 className="text-gray-600">Total Spent : <span className="font-bold"> {item.spent} </span></h2>
             </div>
             <img src={item.image} alt="customer image" className="w-10 h-10" />
+            </div>
           </div>
           </div>
         ))}
