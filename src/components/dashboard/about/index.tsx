@@ -107,7 +107,7 @@ const About = () => {
         </Button>
 
         <div
-          className="w-[50vh] h-fit flex flex-col p-2 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 hover:bg-orange-400 cursor-pointer shadow-md hover:text-white"
+          className="w-full h-fit flex flex-col p-2 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 hover:bg-orange-400 cursor-pointer shadow-md hover:text-white"
           // key={costumerReviewsdata[activeCardSlide]}
         >
           {timerSkeleton ? (
@@ -181,7 +181,7 @@ const About = () => {
         </Button>
 
         <div
-          className="w-[50vh] h-fit flex flex-col p-2 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 hover:bg-orange-400 cursor-pointer shadow-md hover:text-white"
+          className="w-full h-fit flex flex-col p-4 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 hover:bg-orange-400 cursor-pointer shadow-md hover:text-white"
           // key={costumerReviewsdata[activeCardSlide]}
         >
           {timerSkeleton ? (
