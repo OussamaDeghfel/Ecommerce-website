@@ -10,7 +10,7 @@ import {
   chooseFavorite,
   removeFavorite,
 } from "../../redux/cartSlice";
-import { FaFilter, FaStar, FaStarHalf } from "react-icons/fa6";
+import { FaAngleDown, FaAngleUp, FaFilter, FaStar, FaStarHalf } from "react-icons/fa6";
 import { Button, Input, Select } from "antd";
 // import { FcClearFilters } from "react-icons/fc";
 // import { BiHeart } from "react-icons/bi";
@@ -107,6 +107,8 @@ const StoreList = () => {
           color="black"
         />
         <span className="font-bold text-xl">Filter</span>
+        {!showFilter ? <FaAngleDown size={15} /> : 
+        <FaAngleUp size={15} /> }
       </div>
       {showFilter && (
         <div className="flex justify-center items-center mt-2">
