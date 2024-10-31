@@ -1,4 +1,4 @@
-import { Button, Rate } from "antd";
+import { Button, Rate, Skeleton } from "antd";
 import customerRevImg from "../../../assets/CustomerRevImg.jpg";
 import customerImage from "../../../assets/profilePic.png";
 import customer2 from "../../../assets/customer2.jpg";
@@ -10,6 +10,15 @@ import { useState } from "react";
 
 const About = () => {
   const [activeCardSlide, setActiveCardSlide] = useState(0);
+  const [timerSkeleton, setTimerSkeleton] = useState(true);
+
+  const handleTimer = (verify: boolean) => {
+    setTimerSkeleton(verify);
+
+    setTimeout(() => {
+      setTimerSkeleton(!verify);
+    }, 1000);
+  };
 
   const costumerReviewsdata = [
     {
@@ -76,60 +85,75 @@ const About = () => {
         </div>
       </div>
 
-      <div className="flex md:hidden justify-start items-center w-full h-fit rounded-md overflow-y-scroll bg-orange-300/20 py-4">
+      <div className="flex md:hidden justify-start items-center w-full h-[40vh] md:h-fit border-2 border-black rounded-md overflow-y-scroll bg-orange-100">
         <Button disabled={activeCardSlide === 0} variant="link" color="default">
           <FaAngleLeft
-            size={40}
+            size={25}
             onClick={() => {
               setActiveCardSlide(
                 (prevActiveCardSlide) => prevActiveCardSlide - 1
-              );
+              ),
+                handleTimer(true);
             }}
           />
         </Button>
 
         <div
-          className="w-full h-fit flex flex-col p-5 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 hover:bg-orange-400 duration-200 cursor-pointer hover:text-white"
+          className="w-[50vh] h-fit flex flex-col p-2 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 hover:bg-orange-400 duration-300 cursor-pointer hover:text-white"
           // key={costumerReviewsdata[activeCardSlide]}
         >
-          <div className="text-start">
-            "{costumerReviewsdata[activeCardSlide].review}"
+          {timerSkeleton ? (
+            <div className="w-full h-full justify-end place-items-end">
+            <Skeleton active />
+            <Skeleton.Avatar active size="large" shape="circle" />
           </div>
-          <div className="flex justify-between items-center space-x-4">
-            <Rate
-              disabled
-              value={costumerReviewsdata[activeCardSlide].rating}
-            />
-            <div className="flex space-x-4">
-              <div className="flex flex-col items-end">
-                <h1 className="text-gray-500">
-                  {costumerReviewsdata[activeCardSlide].name}
-                </h1>
-                <h2 className="text-gray-600">
-                  Total Spent :{" "}
-                  <span className="font-bold">
-                    {" "}
-                    {costumerReviewsdata[activeCardSlide].spent}{" "}
-                  </span>
-                </h2>
+          ) : (
+            <div>
+              <div className="text-start">
+                "{costumerReviewsdata[activeCardSlide].review}"
               </div>
-              <img
-                src={costumerReviewsdata[activeCardSlide].image}
-                alt="customer image"
-                className="w-10 h-10"
-              />
+              <div className="flex flex-col justify-between items-start md:space-x-4 space-y-3">
+                <Rate
+                  disabled
+                  value={costumerReviewsdata[activeCardSlide].rating}
+                />
+                <div className="flex space-x-4 justify-end w-full items-end">
+                  <div className="flex flex-col  ">
+                    <h1 className="text-gray-500">
+                      {costumerReviewsdata[activeCardSlide].name}
+                    </h1>
+                    <h2 className="text-gray-600">
+                      Total Spent :{" "}
+                      <span className="font-bold">
+                        {" "}
+                        {costumerReviewsdata[activeCardSlide].spent}{" "}
+                      </span>
+                    </h2>
+                  </div>
+                  <img
+                    src={costumerReviewsdata[activeCardSlide].image}
+                    alt="customer image"
+                    className="w-10 h-10"
+                  />
+                </div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
-        <Button  disabled={activeCardSlide === costumerReviewsdata.length - 1} variant="link" color="default">
+        <Button
+          disabled={activeCardSlide === costumerReviewsdata.length - 1}
+          variant="link"
+          color="default"
+        >
           <FaAngleRight
-            size={40}
-            onClick={() =>
+            size={25}
+            onClick={() => {
               setActiveCardSlide(
                 (prevActiveCardSlide) => prevActiveCardSlide + 1
-              )
-            }
+              ),
+                handleTimer(true);
+            }}
           />
         </Button>
       </div>
