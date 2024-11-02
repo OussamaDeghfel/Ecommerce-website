@@ -14,7 +14,7 @@ const AccountInfo = () => {
     city: "M'Sila",
     stateLocation: "Cite 1",
     postalCode: "5000",
-  })
+  });
 
   const [infoEdit, setInfoEdit] = useState(false);
   const [addressEdit, setAddressEdit] = useState(false);
@@ -36,15 +36,16 @@ const AccountInfo = () => {
     setUserAddress({
       ...userAddress,
       [e.target.name]: e.target.value,
-    })
+    });
   };
 
   return (
     <div className="flex flex-col w-full h-full space-y-2">
-      <div className="flex border-2 border-gray-300 rounded-md p-4 justify-start items-center">
+      {/* Profile Picture  */}
+      <div className="flex border-2 border-gray-300 rounded-md p-4 md:justify-start justify-center items-center">
         <img src={profilePic} alt="" className="w-20 h-20" />
         <div className="flex flex-col p-4">
-          <h1 className="text-3xl font-bold">
+          <h1 className="md:text-3xl text-xl font-bold">
             {userInformation.firstname} {userInformation.lastname}
           </h1>
           <p className="text-base font-mono text-gray-500">Seller && Buyer</p>
@@ -52,10 +53,13 @@ const AccountInfo = () => {
       </div>
 
       {/* Personal information  */}
-      <div className="flex flex-col border-2 border-gray-300 rounded-md p-4">
-        <h1 className="text-xl font-bold pb-8">Personal Inforamtion</h1>
-        <div className="flex justify-between px-10">
-          <Form layout="vertical" className="grid grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:place-items-between border-2 border-gray-300 rounded-md p-4 ">
+        <h1 className="text-2xl font-bold pb-8 grid place-self-center md:place-self-start">Personal Information</h1>
+        <div className="md:flex md:justify-between px-10 place-items-center md:place-items-start">
+          <Form
+            layout="vertical"
+            className="grid md:grid-cols-2 gap-5"
+          >
             <Form.Item label="First Name">
               {infoEdit ? (
                 <Input
@@ -94,32 +98,33 @@ const AccountInfo = () => {
               )}
             </Form.Item>
           </Form>
-
-          {infoEdit ? (
-            <Button
-              className="w-fit font-bold"
-              onClick={() => setInfoEdit(!infoEdit)}
-              size="large"
-            >
-              Save
-            </Button>
-          ) : (
-            <Button
-              className="w-fit font-bold"
-              onClick={() => setInfoEdit(!infoEdit)}
-              size="large"
-            >
-              Edit
-            </Button>
-          )}
+          
+            {infoEdit ? (
+              <Button
+                className="w-fit font-bold"
+                onClick={() => setInfoEdit(!infoEdit)}
+                size="large"
+              >
+                Save
+              </Button>
+            ) : (
+              <Button
+                className="w-fit font-bold"
+                onClick={() => setInfoEdit(!infoEdit)}
+                size="large"
+              >
+                Edit
+              </Button>
+            )}
+         
         </div>
       </div>
 
       {/* Address information  */}
-      <div className="flex flex-col border-2 border-gray-300 rounded-md p-4">
-      <h1 className="text-xl font-bold pb-8">Address</h1>
-      <div className="flex justify-between px-10">
-          <Form layout="vertical" className="grid grid-cols-2 gap-x-24">
+      <div className="grid grid-cols-1 md:place-items-between border-2 border-gray-300 rounded-md p-4">
+        <h1 className="text-2xl font-bold pb-8 grid place-self-center md:place-self-start">Address</h1>
+        <div className="md:flex md:justify-between px-10 place-items-center md:place-items-start">
+          <Form layout="vertical" className="grid grid-cols-1 md:grid-cols-2 gap-x-24">
             <Form.Item label="Country">
               {addressEdit ? (
                 <Input
@@ -128,9 +133,7 @@ const AccountInfo = () => {
                   onChange={handleChangeEditable}
                 />
               ) : (
-                <span className="text-gray-500">
-                  {userAddress.country}
-                </span>
+                <span className="text-gray-500">{userAddress.country}</span>
               )}
             </Form.Item>
             <Form.Item label="City">
@@ -141,9 +144,7 @@ const AccountInfo = () => {
                   onChange={handleChangeEditable}
                 />
               ) : (
-                <span className="text-gray-500">
-                  {userAddress.city}
-                </span>
+                <span className="text-gray-500">{userAddress.city}</span>
               )}
             </Form.Item>
             <Form.Item label="State">
@@ -154,7 +155,9 @@ const AccountInfo = () => {
                   onChange={handleChangeEditable}
                 />
               ) : (
-                <span className="text-gray-500">{userAddress.stateLocation}</span>
+                <span className="text-gray-500">
+                  {userAddress.stateLocation}
+                </span>
               )}
             </Form.Item>
             <Form.Item label="Postal Code">
