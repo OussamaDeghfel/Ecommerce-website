@@ -149,9 +149,12 @@ const Payment = () => {
   return (
     <>
       <div className="space-y-5">
-        <div className="grid grid-cols-2 w-full h-full border-2 border-gray-300 rounded-md p-6">
+
+        {/* Contact Email  */}
+        <div className="grid grid-cols-1 md:grid-cols-2 space-y-4 w-full h-full border-2 border-gray-300 rounded-md p-6">
+          {/* <div className=" border-2 border-black flex justify-between w-full h-full"> */}
           <div className="flex flex-col">
-            <h1 className="text-xl ">Contact Email</h1>
+            <h1 className="text-2xl">Contact Email</h1>
             <p className="text-sm text-gray-400">
               Where should invoices be sent?
             </p>
@@ -168,11 +171,13 @@ const Payment = () => {
               <Input placeholder="example@gmail.com" className="w-fit mx-6" />
             </div>
           </div>
+          {/* </div> */}
         </div>
 
-        <div className="grid grid-cols-2 w-full h-full border-2 border-gray-300 rounded-md p-6">
+        {/* Card details payment  */}
+        <div className="grid grid-cols-1 space-y-4 md:grid-cols-2 w-full h-full border-2 border-gray-300 rounded-md p-6">
           <div className="flex flex-col">
-            <h1 className="text-xl ">Card details</h1>
+            <h1 className="text-2xl ">Card details</h1>
             <p className="text-sm text-gray-400">
               Select default payment method
             </p>
@@ -232,7 +237,7 @@ const Payment = () => {
               </div>
             ))}
 
-            <div className="flex p-5">
+            <div className="grid grid-cols-1 md:flex p-5 ">
               <Button
                 onClick={() => {
                   setAddNewCard(true), form.resetFields();
@@ -245,9 +250,12 @@ const Payment = () => {
           </div>
         </div>
 
+        {/* Billing history  */}
+        <div className="grid grid-cols-1 space-y-4 w-full h-full border-2 border-gray-300 rounded-md p-6">
         <div className="flex flex-col space-y-5">
           <h1 className="text-xl ">Billing History</h1>
-          <Table columns={columns} dataSource={data} />
+          <Table columns={columns} dataSource={data} className="overflow-x-scroll w-full" />
+        </div>
         </div>
       </div>
 
