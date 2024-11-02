@@ -289,6 +289,7 @@ const Payment = () => {
             Add
           </Button>,
         ]}
+        className="overflow-hidden w-[100px] h-fit"
       >
         <Form layout="vertical" form={form}>
           <Form.Item
@@ -341,7 +342,7 @@ const Payment = () => {
               className="w-20 h-8 -bottom-0.5"
             />
           </div>
-          <div className="flex w-full h-full justify-between space-x-2 items-center ">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 w-full h-full items-center ">
             <Form.Item
               name="expDate"
               label="Expiration Date"
