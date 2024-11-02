@@ -154,7 +154,7 @@ const Security = () => {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center w-full h-full space-y-10">
+      <div className="flex flex-col justify-center items-center w-full h-full space-y-10 mt-4">
         <div>
           {twoVerificationChecked ? (
             <Alert
@@ -223,7 +223,7 @@ const Security = () => {
                 allowClear
               />
             </div> */}
-            <Table dataSource={dataSource} columns={columns} />
+            <Table dataSource={dataSource} columns={columns} className="overflow-x-scroll" />
           </div>
         </div>
       </div>
