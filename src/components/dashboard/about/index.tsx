@@ -14,7 +14,7 @@ import { useState } from "react";
 
 const About = () => {
   const [activeCardSlide, setActiveCardSlide] = useState(0);
-  const [timerSkeleton, setTimerSkeleton] = useState(true);
+  const [timerSkeleton, setTimerSkeleton] = useState(false);
 
   const handleTimer = (verify: boolean) => {
     setTimerSkeleton(verify);
@@ -91,7 +91,7 @@ const About = () => {
 
       {/* Small size  */}
 
-      <div className="flex md:hidden justify-center items-center w-full h-[40vh] md:h-fit border-2 border-black rounded-md bg-orange-100">
+      <div className="flex md:hidden justify-center items-center w-full h-[40vh] md:h-fit border-2 border-gray-300 rounded-md bg-orange-100">
         <Button disabled={activeCardSlide === 0} variant="link" color="default">
           <FaAngleLeft
             size={25}
@@ -164,6 +164,8 @@ const About = () => {
         </Button>
       </div>
 
+
+
       {/* medim & large size  */}
       <div className="hidden md:flex justify-center items-center w-full md:h-[80vh] rounded-md bg-orange-100/45 space-y-3">
         <Button disabled={activeCardSlide === 0} variant="link" color="default">
@@ -186,12 +188,7 @@ const About = () => {
               className="w-full opacity-30 translate-y-4 -z-10 h-fit flex flex-col p-4 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100"
               // key={costumerReviewsdata[activeCardSlide]}
             >
-              {timerSkeleton ? (
-                <div className="w-full h-full justify-end place-items-end">
-                  <Skeleton active />
-                  <Skeleton.Avatar active size="large" shape="circle" />
-                </div>
-              ) : (
+              
                 <div>
                   <div className="text-start">
                     "{costumerReviewsdata[activeCardSlide - 1].review}"
@@ -224,7 +221,6 @@ const About = () => {
                     </div>
                   </div>
                 </div>
-              )}
             </div>
           ) : (
             <div className="w-full h-full justify-end place-items-end">
@@ -284,12 +280,7 @@ const About = () => {
               className="w-full opacity-30  -translate-y-4 h-fit flex flex-col p-4 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 -z-10"
               // key={costumerReviewsdata[activeCardSlide]}
             >
-              {timerSkeleton ? (
-                <div className="w-full h-full justify-end place-items-end">
-                  <Skeleton active />
-                  <Skeleton.Avatar active size="large" shape="circle" />
-                </div>
-              ) : (
+          
                 <div>
                   <div className="text-start">
                     "{costumerReviewsdata[activeCardSlide + 1].review}"
@@ -322,7 +313,6 @@ const About = () => {
                     </div>
                   </div>
                 </div>
-              )}
             </div>
           ) : (
             <div className="w-full h-full justify-end place-items-end">
