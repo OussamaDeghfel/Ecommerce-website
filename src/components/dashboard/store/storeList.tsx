@@ -33,7 +33,7 @@ const StoreList = () => {
     dispatch(fetchProducts());
     setFilteredProduct(product);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [dispatch,product]);
 
   // useMemo(() => {
   //   setFilteredProduct(product);
