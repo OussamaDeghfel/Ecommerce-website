@@ -2,7 +2,7 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import QBLogoSite from "../../../assets/QB-LogoSite.png"
-import loginImage from "../../../assets/loginImage.jpg"
+// import loginImage from "../../../assets/loginImage.jpg"
 
 type user = {
   email: string;
@@ -23,11 +23,10 @@ const SignIn = () => {
       setCredentialWarn(true)
     }
   }
+
   return (
     <div className="flex w-[900px] m-auto h-screen justify-center items-center">
-      <div className="m-auto flex border-2 border-orange-100 rounded-md space-y-5 p-5 w-full h-[80vh] shadow-lg bg-cover bg-center bg-no-repeat bg-black/45" style={{backgroundImage: `url(${loginImage})`}}>
-        <h1>Your best place to buy everything</h1>
-      </div>
+      
       <div className="m-auto border-2 border-orange-100 rounded-md space-y-5 p-5 w-[600px] h-fit shadow-lg ">
         <div className="flex flex-col space-y-2 justify-center items-center">
           <img src={QBLogoSite} alt="Store logo" className="w-25 h-20 bg-black/70 rounded-lg p-2" />

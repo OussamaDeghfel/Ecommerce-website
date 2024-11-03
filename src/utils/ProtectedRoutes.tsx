@@ -7,7 +7,7 @@ interface ProtectedRoutesProps {
   children: ReactNode;
 }
 
-const ProtectedRoutes: React.FC<ProtectedRoutesProps> = ({ children }) => {
+const ProtectedRoutes: React.FC<ProtectedRoutesProps> = () => {
   const user = localStorage.getItem("isLogin");
   user ? console.log("user is correct") : console.log("user is not correct");
   return user ? (
