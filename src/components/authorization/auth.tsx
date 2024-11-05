@@ -14,7 +14,7 @@ type user = {
   password: string;
 };
 
-const SignIn = ({ togglePage }: {togglePage : () => void}) => {
+const SignIn = ({ togglePage }: { togglePage: () => void }) => {
   const [credentialWarn, setCredentialWarn] = useState(false);
   const navigate = useNavigate();
 
@@ -33,69 +33,70 @@ const SignIn = ({ togglePage }: {togglePage : () => void}) => {
 
   return (
     // <div className="flex w-full h-full justify-center items-center">
-      <div className="m-auto border-y-2 border-r-2 border-white rounded-md space-y-5 p-5 w-[400px] h-fit shadow-lg ">
-        <div className="flex flex-col space-y-2 justify-center items-center">
-          <img
-            src={QBLogoSite}
-            alt="Store logo"
-            className="w-25 h-20 bg-black/70 rounded-lg p-2"
-          />
-          <h1 className="text-2xl font-bold w-fit">Welcome to QuickBuy</h1>
+    <div className="m-auto border-y-2 border-r-2 border-white bg-white rounded-md space-y-5 p-5 w-[400px] h-fit shadow-lg ">
+      <div className="flex flex-col space-y-2 justify-center items-center">
+        <img
+          src={QBLogoSite}
+          alt="Store logo"
+          className="w-25 h-20 bg-black/70 rounded-lg p-2"
+        />
+        <h1 className="text-2xl font-bold w-fit">Welcome to QuickBuy</h1>
+      </div>
+      {credentialWarn && (
+        <div className="w-full h-fit p-4 bg-orange-200  text-center rounded-md mb-5">
+          <h1 className="font-bold text-red-600 ">Wrong Credentials</h1>
+          <p className="font-sm text-red-600">Invalid username or password</p>
         </div>
-        {credentialWarn && (
-          <div className="w-full h-fit p-4 bg-orange-200  text-center rounded-md mb-5">
-            <h1 className="font-bold text-red-600 ">Wrong Credentials</h1>
-            <p className="font-sm text-red-600">Invalid username or password</p>
-          </div>
-        )}
+      )}
 
-        <Form layout="vertical" onFinish={verfiyCredential}>
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[{ required: true, message: "Please input your email!" }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
-          >
-            <Input.Password />
-          </Form.Item>
+      <Form layout="vertical" onFinish={verfiyCredential}>
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[{ required: true, message: "Please input your email!" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[{ required: true, message: "Please input your password!" }]}
+        >
+          <Input.Password />
+        </Form.Item>
 
-          <Form.Item
-            name="remember"
-            valuePropName="checked"
-            className="justify-center items-center flex"
-          >
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
+        <Form.Item
+          name="remember"
+          valuePropName="checked"
+          className="justify-center items-center flex"
+        >
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
 
-          <Form.Item className="justify-center items-center flex">
-            <Button
-              type="primary"
-              size="large"
-              htmlType="submit"
-              className="w-full bg-orange-500"
-            >
-              Sign In
-            </Button>
-          </Form.Item>
-        </Form>
-        <div className="justify-center flex items-center">
-          <h1>
-            Don't have an account?{" "}
-            {/* <Link to="signup">
+        <Form.Item className="justify-center items-center flex">
+          <Button
+            type="primary"
+            size="large"
+            htmlType="submit"
+            className="w-full bg-orange-500"
+          >
+            Sign In
+          </Button>
+        </Form.Item>
+      </Form>
+      <div className="justify-center flex flex-col md:flex-row items-center w-full">
+        Don't have an account ?{" "}
+        {/* <Link to="signup">
               {" "}
               <span className="font-bold text-orange-500">Create Acccount</span>{" "}
             </Link> */}
-            <button onClick={togglePage} className="text-orange-500 font-medium pl-2" >
-              Create Account
-            </button>
-          </h1>
-        </div>
+        <button
+          onClick={togglePage}
+          className="text-orange-500 font-medium pl-2"
+        >
+          Create Account
+        </button>
+      </div>
       {/* </div> */}
     </div>
   );
@@ -108,72 +109,83 @@ export type userSignUP = {
   password: string;
 };
 
-const SignUp = ({ togglePage }: {togglePage : () => void}) => {
+const SignUp = ({ togglePage }: { togglePage: () => void }) => {
+  const navigate = useNavigate();
   const saveCredential = (values: userSignUP) => {
     localStorage.setItem("firstname", values.firstname);
     localStorage.setItem("lastname", values.lastname);
     localStorage.setItem("email", values.email);
     localStorage.setItem("password", values.password);
     localStorage.setItem("isLogin", "true");
+    navigate("/");
   };
   return (
     // <div className="flex w-full h-screen justify-center items-center">
-      
-      <div className="m-auto border-y-2 border-r-2 border-white rounded-md p-5 w-[400px] h-fit shadow-lg ">
-        <Form layout="vertical" onFinish={saveCredential}>
-          <Form.Item
-            label="FirstName"
-            name="firstname"
-            rules={[
-              { required: true, message: "Please input your firstname!" },
-            ]}
+
+    <div className="m-auto border-y-2 border-r-2 space-y-4 border-white bg-white rounded-md p-5 w-full h-fit shadow-lg ">
+      <div className="flex flex-col space-y-2 justify-center items-center">
+        <img
+          src={QBLogoSite}
+          alt="Store logo"
+          className="w-25 h-20 bg-black/70 rounded-lg p-2"
+        />
+        <h1 className="text-2xl font-bold w-fit">Create your account</h1>
+      </div>
+      <Form layout="vertical" onFinish={saveCredential}>
+        <Form.Item
+          label="FirstName"
+          name="firstname"
+          rules={[{ required: true, message: "Please input your firstname!" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="LastName"
+          name="lastname"
+          rules={[{ required: true, message: "Please input your lastname!" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[{ required: true, message: "Please input your email!" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[{ required: true, message: "Please input your password!" }]}
+        >
+          <Input.Password />
+        </Form.Item>
+        <Form.Item className="justify-center items-center flex">
+          <Button
+            type="primary"
+            size="large"
+            htmlType="submit"
+            className="w-full bg-orange-500"
           >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="LastName"
-            name="lastname"
-            rules={[{ required: true, message: "Please input your lastname!" }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[{ required: true, message: "Please input your email!" }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
-          >
-            <Input.Password />
-          </Form.Item>
-          <Form.Item className="justify-center items-center flex">
-            <Button
-              type="primary"
-              size="large"
-              htmlType="submit"
-              className="w-full bg-orange-500"
-            >
-              Sign Up
-            </Button>
-          </Form.Item>
-        </Form>
-        <div className="justify-center flex items-center">
-          <h1>
+            Sign Up
+          </Button>
+        </Form.Item>
+      </Form>
+      <div className="justify-center flex items-center">
+        <h1>
           Already have an account?{" "}
-            {/* <Link to="signup">
+          {/* <Link to="signup">
               {" "}
               <span className="font-bold text-orange-500">Create Acccount</span>{" "}
             </Link> */}
-            <button onClick={togglePage} className="text-orange-500 font-medium pl-2" >
+          <button
+            onClick={togglePage}
+            className="text-orange-500 font-medium pl-2"
+          >
             SignIn
-            </button>
-          </h1>
-        </div>
+          </button>
+        </h1>
+      </div>
       {/* </div> */}
     </div>
   );
@@ -187,34 +199,70 @@ const Auth = () => {
   };
   return (
     <>
-      {/* routing between sign in and sign up
-      <Routes>
-        <Route path="/" element={<SignIn />} />
-        <Route path="signup" element={<SignUp />} />
-      </Routes> */}
-
-      <div className="flex justify-center items-center w-full h-screen bg-gradient-to-r from-orange-100 from-20% via-orange-200 via-30% to-orange-200 to-90%">
-        <div className="flex flex-col md:flex-row justify-center items-center">
+      {/* <div className="flex justify-center items-center w-full h-screen bg-gradient-to-r from-orange-100 from-20% via-orange-200 via-30% to-orange-200 to-90%">
+        <div className="flex md:flex-row justify-center items-center">
           <div
-            className="flex border-2 border-white rounded-md space-y-5 w-[90vh] h-[80vh] shadow-right bg-cover bg-center bg-no-repeat z-10"
+            className="flex border-2 border-white rounded-md space-y-5 h-fit w-fit m-4 md:w-[90vh] md:h-[80vh] shadow-right bg-cover bg-center bg-no-repeat z-10"
             style={{ backgroundImage: `url(${loginImage})` }}
           >
-            <div className="w-full h-full flex flex-col p-5 bg-black/60 justify-end items-start space-y-3 pb-14">
-              <h1 className="text-white text-5xl font-bold font-mono">
-                Get <br /> Everything <br /> You Want
-              </h1>
-              <p className="text-gray-300">
-                "Find everything you're looking for in our store items you won't even find on Amazon."
-              </p>
+            <div className="w-full h-full flex flex-col md:p-5 justify-center items-center bg-black/60 md:justify-end md:items-start space-y-3 pb-14">
+              <div className="w-full h-full flex flex-col md:text-start justify-center items-center md:justify-end md:items-start text-center p-8 md:p-5">
+                <h1 className="text-white hidden md:flex text-5xl font-bold font-mono">
+                  Get <br /> Everything <br /> You Want
+                </h1>
+                <h1 className="text-white md:hidden flex text-3xl font-bold font-mono">
+                  Get Everything You Want
+                </h1>
+                <p className="text-gray-300">
+                  "Find everything you're looking for in our store items you
+                  won't even find on Amazon."
+                </p>
+              </div>
+
+              <div className="flex md:hidden w-fit md:h-full justify-center items-center border-2 bg-white border-white rounded-md">
+                {isSignIn ? (
+                  <SignIn togglePage={togglePage} />
+                ) : (
+                  <SignUp togglePage={togglePage} />
+                )}
+              </div>
             </div>
           </div>
 
-          <div className="flex w-fit h-full justify-center items-center border-2 bg-white border-white rounded-md">
+          <div className="hidden md:flex w-fit h-full justify-center items-center border-2 bg-white border-white rounded-md">
             {isSignIn ? (
               <SignIn togglePage={togglePage} />
             ) : (
               <SignUp togglePage={togglePage} />
             )}
+          </div>
+        </div>
+      </div> */}
+
+      <div className="flex w-full h-screen bg-gradient-to-r from-orange-100 from-20% via-orange-200 via-30% to-orange-200 to-90%">
+        <div className=" w-full h-full flex md:flex-row justify-center items-center">
+          <div
+            className=" w-full md:w-[70%] h-full border-2 md:border-white rounded-md flex justify-center items-center bg-cover bg-center bg-no-repeat z-10"
+            style={{ backgroundImage: `url(${loginImage})` }}
+          >
+            <div className="w-full h-full md:space-x-10 space-y-6 bg-black/60 flex flex-col md:flex-row p-8 justify-center items-center mx-auto">
+              <div className="md:w-[50vh] h-fit flex flex-col justify-center md:space-y-4 md:items-start items-center md:text-start text-center">
+                <h1 className="text-white flex text-2xl md:text-5xl font-bold font-mono">
+                  Get Everything You Want
+                </h1>
+                <p className="text-gray-300 text-sm md:text-md">
+                  "Find everything you're looking for in our store items you
+                  won't even find on Amazon."
+                </p>
+              </div>
+              <div className="flex w-[40vh] md:w-[50vh] md:h-fit">
+                {isSignIn ? (
+                  <SignIn togglePage={togglePage} />
+                ) : (
+                  <SignUp togglePage={togglePage} />
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
