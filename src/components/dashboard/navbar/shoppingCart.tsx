@@ -17,47 +17,59 @@ const ShoppingCart = () => {
 
   return (
     <>
-      <div className="overflow-scroll w-[80vh] h-[350px] border-2 overflow-x-hidden border-gray-200 rounded-md bg-white shadow-lg">
+      <div className="overflow-scroll w-fit h-screen p-2 mx-4 translate-x-2 md:w-[80vh] md:h-[350px] border-2 overflow-x-hidden border-gray-200 rounded-md bg-orange-100 shadow-lg">
         <div className=" flex p-2 justify-between items-center mx-2 border-b-2 border-gray-200 pb-4 w-full">
           <h1 className="font-bold text-2xl">Shopping Cart</h1>
-          <h1 className="font-bold text-2xl">{cart.length} items</h1>
+          <h1 className="font-bold text-2xl p-2 border-2 border-gray-200 rounded-lg shadow-md">
+            {cart.length} Items
+          </h1>
         </div>
 
         <div className="grid grid-cols-1 gap-4 mt-4 ">
           <div className="w-full h-full">
             {cart.map((pic, idx) => (
-              <div key={idx} className="flex m-4 shadow-md rounded-md ">
+              <div
+                key={idx}
+                className="flex m-4 shadow-md rounded-md bg-orange-50 p-2 justify-center items-center "
+              >
                 <img
                   src={pic.product.image}
                   alt="cart image"
                   className="w-[200px] h-[200px] rounded-md mb-5 shadow-right"
                 />
 
-                <div className="m-2 w-full">
+                <div className="m-2 w-full justify-items-center md:justify-items-start space-y-4">
                   <h1 className="font-medium px-3 text-xl">
                     {pic.product.title.substring(0, 45)}
                   </h1>
-                  <div className="flex px-2 my-5 justify-start items-center text-gray-600">
-                    <FaMinus
-                      size={12}
-                      className="cursor-pointer border-2 p-1 w-fit h-fit border-gray-200 rounded-md hover:bg-slate-200"
-                      onClick={() =>
-                        dispatch(decrementQuantity(pic.product.id))
-                      }
-                    />
-                    <span className="text-2xl font-bold mx-2">
-                      {pic.quantity}
-                    </span>
-                    <FaPlus
-                      size={12}
-                      className="cursor-pointer border-2 p-1 w-fit h-fit border-gray-200 rounded-md hover:bg-slate-200"
-                      onClick={() => {
-                        dispatch(incrementQuantity(pic.product.id));
-                      }}
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 place-items-center md:justify-between w-full   p-2">
+                    <div className="flex px-2 my-5 justify-start items-center text-gray-600">
+                      <FaMinus
+                        size={12}
+                        className="cursor-pointer border-2 p-1 w-fit h-fit border-gray-200 rounded-md hover:bg-slate-200"
+                        onClick={() =>
+                          dispatch(decrementQuantity(pic.product.id))
+                        }
+                      />
+                      <span className="text-2xl font-bold mx-2">
+                        {pic.quantity}
+                      </span>
+                      <FaPlus
+                        size={12}
+                        className="cursor-pointer border-2 p-1 w-fit h-fit border-gray-200 rounded-md hover:bg-slate-200"
+                        onClick={() => {
+                          dispatch(incrementQuantity(pic.product.id));
+                        }}
+                      />
+                    </div>
+                    <div className="flex w-fit h-fit">
+                      <h1 className="font-bold text-2xl p-2 rounded-lg shadow-md bg-orange-300">
+                        {Number(pic.product.price.toFixed(2))} $
+                      </h1>
+                    </div>
                   </div>
                   <div
-                    className="flex justify-starts items-center cursor-pointer text-red-600"
+                    className="flex justify-start items-center cursor-pointer text-red-600"
                     onClick={() => {
                       dispatch(
                         removeFromCart({
@@ -70,16 +82,11 @@ const ShoppingCart = () => {
                     <FaTrash size={15} className="mx-2 cursor-pointer " />
                     Delete
                   </div>
-                  <div className="flex justify-end items-center">
-                    <h1 className="font-bold text-2xl">
-                      {Number(pic.product.price.toFixed(2))} $
-                    </h1>
-                  </div>
                 </div>
               </div>
             ))}
           </div>
-          <div className="text-2xl font-bold bg-green-200 p-4 text-center">
+          <div className="text-2xl font-bold bg-orange-500 p-4 text-center rounded-lg text-white">
             Total Price : {totalQuantityPrice.toFixed(2)} $
           </div>
         </div>
