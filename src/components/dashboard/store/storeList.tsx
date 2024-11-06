@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { appDispatch, RootState } from "../../redux/store";
 import { favorite, fetchProducts } from "../../redux/productSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 // import { useMemo } from "react";
 import { FaRegHeart, FaShoppingBag, FaStarHalfAlt } from "react-icons/fa";
 import {
@@ -18,7 +18,7 @@ import { Button, Input, Select } from "antd";
 const StoreList = () => {
   // const [productList , setProductList] = useState([]);
   const dispatch = useDispatch<appDispatch>();
-  const { product } = useSelector((state: RootState) => state.product);
+  const  product  = useSelector((state: RootState) => state.product.product);
 
   // const [prodFavorite, setProdFavorite] = useState<boolean | undefined>(Boolean);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -29,11 +29,19 @@ const StoreList = () => {
   const [favlist, setFavlist] = useState<string[]>([]);
   const [showFilter, setShowFiter] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(fetchProducts());
     setFilteredProduct(product);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch,product]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[dispatch])
+
+  console.log("seeing the product : ", filteredProduct);
+
+  // useEffect(() => {
+  //   dispatch(fetchProducts());
+  //   setFilteredProduct(product);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [dispatch]);
 
   // useMemo(() => {
   //   setFilteredProduct(product);
