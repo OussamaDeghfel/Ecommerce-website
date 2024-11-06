@@ -49,9 +49,9 @@ const productSlice = createSlice({
       state.product = action.payload;
       state.isLoading = false;
       state.error = "";
-      state.product.map((item) => {
-        item.isLiked = false
-      })
+      // state.product.map((item) => {
+      //   item.isLiked = false
+      // })
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
       state.product = [];
