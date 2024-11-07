@@ -75,7 +75,6 @@ const About = () => {
     },
   ];
 
-  // console.log("Choosed Card Review : ", costumerReviewsdata[2])
 
   return (
     <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
@@ -167,7 +166,7 @@ const About = () => {
 
 
       {/* medim & large size  */}
-      <div className="hidden md:flex justify-center items-center w-full md:h-[80vh] rounded-md bg-orange-100/45 space-y-3">
+      <div className="hidden md:flex justify-center items-center w-full shadow-inner md:h-[80vh] rounded-md bg-orange-100/45 space-y-3 overflow-hidden">
         <Button disabled={activeCardSlide === 0} variant="link" color="default">
           <FaAngleUp
             size={25}
@@ -339,33 +338,7 @@ const About = () => {
         </Button>
       </div>
 
-      {/* <div className="hidden md:flex flex-col w-full h-[80vh] rounded-md space-y-3 overflow-y-scroll">
-        {costumerReviewsdata.map((item, index) => (
-          <div
-            className="w-full h-fit flex flex-col p-5 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 hover:bg-orange-400 duration-200 cursor-pointer hover:text-white"
-            key={index}
-          >
-            <div className="text-start">"{item.review}"</div>
-            <div className="flex justify-between items-center space-x-4">
-              <Rate disabled value={item.rating} />
-              <div className="flex space-x-4">
-                <div className="flex flex-col items-end">
-                  <h1 className="text-gray-500">{item.name}</h1>
-                  <h2 className="text-gray-600">
-                    Total Spent :{" "}
-                    <span className="font-bold"> {item.spent} </span>
-                  </h2>
-                </div>
-                <img
-                  src={item.image}
-                  alt="customer image"
-                  className="w-10 h-10"
-                />
-              </div>
-            </div>
-          </div>
-        ))}
-      </div> */}
+
     </div>
   );
 };
