@@ -104,6 +104,7 @@ const StoreList = () => {
 
   return (
     <div className="flex flex-col items-center justify-start h-full bg-gray-100 p-4">
+      {/* small Size filter dropDown */}
       <div
         className="flex md:hidden space-x-2 justify-center items-center"
         onClick={() => setShowFiter(!showFilter)}
@@ -364,6 +365,7 @@ const StoreList = () => {
           ))}
 
         {filterActive &&
+          filteredProduct.length > 0 &&
           filteredProduct.map((prod) => (
             <div
               key={prod.id}
@@ -463,6 +465,13 @@ const StoreList = () => {
             </div>
           ))}
       </div>
+      {filterActive && filteredProduct.length === 0 && (
+        <div>
+          <h1 className="w-full h-full text-4xl font-bold pb-8 text-center">
+            No Product Match The Search
+          </h1>
+        </div>
+      )}
     </div>
   );
 };
