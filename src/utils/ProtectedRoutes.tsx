@@ -9,7 +9,6 @@ interface ProtectedRoutesProps {
 
 const ProtectedRoutes: React.FC<ProtectedRoutesProps> = () => {
   const user = localStorage.getItem("isLogin");
-  user ? console.log("user is correct") : console.log("user is not correct");
   return user ? (
     <>
     <div className="px-6">
