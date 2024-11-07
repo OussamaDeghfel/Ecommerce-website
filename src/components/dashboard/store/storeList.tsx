@@ -46,22 +46,24 @@ const StoreList = () => {
     setFilterActive(true);
     let filteredProduct = [...product];
 
-    if (filterActive) {
       if (selectedCategory) {
         filteredProduct = filteredProduct.filter(
           (item) => item.category === selectedCategory
         );
+        
       }
 
       if (minPrice) {
         filteredProduct = filteredProduct.filter(
           (item) => item.price >= Number(minPrice)
         );
+       
       }
       if (maxPrice) {
         filteredProduct = filteredProduct.filter(
           (item) => item.price <= Number(maxPrice)
         );
+        
       }
 
       if (selectedRate) {
@@ -74,11 +76,9 @@ const StoreList = () => {
             (product) => product.rating.rate > 4.5
           );
         }
+        
       }
-
       setFilteredProduct(filteredProduct);
-      console.log("Filtered Product :", filteredProduct);
-    }
   };
 
   const handleClear = () => {
