@@ -20,7 +20,7 @@ const ShoppingCart = () => {
       <div className="overflow-scroll w-fit h-screen p-2 mx-4 translate-x-2 md:w-[80vh] md:h-[350px] border-2 overflow-x-hidden border-gray-200 rounded-md bg-orange-100 shadow-lg">
         <div className=" flex p-2 justify-between items-center mx-2 border-b-2 border-gray-200 pb-4 w-full">
           <h1 className="font-bold text-2xl">Shopping Cart</h1>
-          <h1 className="font-bold text-2xl p-2 border-2 border-gray-200 rounded-lg shadow-md">
+          <h1 className="font-bold text-2xl p-2 border-2 border-gray-200 bg-white rounded-lg shadow-md">
             {cart.length} Items
           </h1>
         </div>
@@ -86,7 +86,7 @@ const ShoppingCart = () => {
               </div>
             ))}
           </div>
-          <div className="text-2xl font-bold bg-orange-500 p-4 text-center rounded-lg text-white">
+          <div className="text-2xl md:text-3xl font-bold bg-orange-500 p-4 text-center rounded-lg text-white">
             Total Price : {totalQuantityPrice.toFixed(2)} $
           </div>
         </div>
