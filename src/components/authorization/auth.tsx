@@ -1,8 +1,3 @@
-// import { Route, Routes } from "react-router-dom";
-// import SignIn from "./signin/signIn";
-// import SignUp from "./signup/signUp";
-// import loginImage from "../../assets/loginImage.jpg";
-
 import { Button, Checkbox, Form, Input } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -110,17 +105,17 @@ export type userSignUP = {
 };
 
 const SignUp = ({ togglePage }: { togglePage: () => void }) => {
-  const navigate = useNavigate();
+
   const saveCredential = (values: userSignUP) => {
     localStorage.setItem("firstname", values.firstname);
     localStorage.setItem("lastname", values.lastname);
     localStorage.setItem("email", values.email);
     localStorage.setItem("password", values.password);
     localStorage.setItem("isLogin", "true");
-    navigate("/");
+    togglePage();
   };
+
   return (
-    // <div className="flex w-full h-screen justify-center items-center">
 
     <div className="m-auto border-y-2 border-r-2 space-y-4 border-white bg-white rounded-md p-5 w-full h-fit shadow-lg ">
       <div className="flex flex-col space-y-2 justify-center items-center">
