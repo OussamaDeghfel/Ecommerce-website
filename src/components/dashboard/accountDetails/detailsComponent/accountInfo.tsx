@@ -1,13 +1,12 @@
 import { Button, Form, Input } from "antd";
 import profilePic from "../../../../assets/profilePic.png";
 import { useState } from "react";
-import { userSignUP } from "../../../authorization/signup/signUp";
 const AccountInfo = () => {
-  const [userInformation, setUserInformation] = useState<userSignUP>({
+  const [userInformation, setUserInformation] = useState({
     firstname: localStorage.getItem("firstname") as string,
     lastname: localStorage.getItem("lastname") as string,
     email: localStorage.getItem("email") as string,
-  } as userSignUP);
+  } );
 
   const [userAddress, setUserAddress] = useState({
     country: "Algeria",
