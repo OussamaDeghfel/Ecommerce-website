@@ -194,45 +194,6 @@ const Auth = () => {
   };
   return (
     <>
-      {/* <div className="flex justify-center items-center w-full h-screen bg-gradient-to-r from-orange-100 from-20% via-orange-200 via-30% to-orange-200 to-90%">
-        <div className="flex md:flex-row justify-center items-center">
-          <div
-            className="flex border-2 border-white rounded-md space-y-5 h-fit w-fit m-4 md:w-[90vh] md:h-[80vh] shadow-right bg-cover bg-center bg-no-repeat z-10"
-            style={{ backgroundImage: `url(${loginImage})` }}
-          >
-            <div className="w-full h-full flex flex-col md:p-5 justify-center items-center bg-black/60 md:justify-end md:items-start space-y-3 pb-14">
-              <div className="w-full h-full flex flex-col md:text-start justify-center items-center md:justify-end md:items-start text-center p-8 md:p-5">
-                <h1 className="text-white hidden md:flex text-5xl font-bold font-mono">
-                  Get <br /> Everything <br /> You Want
-                </h1>
-                <h1 className="text-white md:hidden flex text-3xl font-bold font-mono">
-                  Get Everything You Want
-                </h1>
-                <p className="text-gray-300">
-                  "Find everything you're looking for in our store items you
-                  won't even find on Amazon."
-                </p>
-              </div>
-
-              <div className="flex md:hidden w-fit md:h-full justify-center items-center border-2 bg-white border-white rounded-md">
-                {isSignIn ? (
-                  <SignIn togglePage={togglePage} />
-                ) : (
-                  <SignUp togglePage={togglePage} />
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div className="hidden md:flex w-fit h-full justify-center items-center border-2 bg-white border-white rounded-md">
-            {isSignIn ? (
-              <SignIn togglePage={togglePage} />
-            ) : (
-              <SignUp togglePage={togglePage} />
-            )}
-          </div>
-        </div>
-      </div> */}
 
       <div className="flex w-full h-screen bg-gradient-to-r from-orange-100 from-20% via-orange-200 via-30% to-orange-200 to-90%">
         <div className=" w-full h-full flex md:flex-row justify-center items-center">
