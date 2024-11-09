@@ -105,7 +105,6 @@ export type userSignUP = {
 };
 
 const SignUp = ({ togglePage }: { togglePage: () => void }) => {
-
   const saveCredential = (values: userSignUP) => {
     localStorage.setItem("firstname", values.firstname);
     localStorage.setItem("lastname", values.lastname);
@@ -116,7 +115,6 @@ const SignUp = ({ togglePage }: { togglePage: () => void }) => {
   };
 
   return (
-
     <div className="m-auto border-y-2 border-r-2 space-y-4 border-white bg-white rounded-md p-5 w-full h-fit shadow-lg ">
       <div className="flex flex-col space-y-2 justify-center items-center">
         <img
@@ -194,31 +192,26 @@ const Auth = () => {
   };
   return (
     <>
-
-      <div className="flex w-full h-screen md:bg-gradient-to-r from-orange-100 from-20% via-orange-200 via-30% md:to-orange-200 to-90%">
-        <div className=" w-full h-full flex md:flex-row justify-center items-center">
-          <div
-            className=" w-full md:w-[70%] h-full border-2 md:border-white rounded-md flex justify-center items-center bg-cover bg-center bg-no-repeat z-10"
-            style={{ backgroundImage: `url(${loginImage})` }}
-          >
-            <div className="w-full h-full md:space-x-10 space-y-6 bg-black/60 flex flex-col md:flex-row p-8 justify-center items-center mx-auto">
-              <div className="md:w-[50vh] h-fit flex flex-col justify-center md:space-y-4 md:items-start items-center md:text-start text-center">
-                <h1 className="text-white flex text-2xl md:text-5xl font-bold font-mono">
-                  Get Everything You Want
-                </h1>
-                <p className="text-gray-300 text-sm md:text-md">
-                  "Find everything you're looking for in our store items you
-                  won't even find on Amazon."
-                </p>
-              </div>
-              <div className="flex w-[40vh] md:w-[50vh] md:h-fit">
-                {isSignIn ? (
-                  <SignIn togglePage={togglePage} />
-                ) : (
-                  <SignUp togglePage={togglePage} />
-                )}
-              </div>
-            </div>
+      <div
+        className=" w-full h-screen flex md:flex-row justify-center items-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${loginImage})` }}
+      >
+        <div className="w-full h-full md:space-x-10 space-y-6 bg-black/60  flex flex-col md:flex-row p-8 justify-center items-center mx-auto">
+          <div className="md:w-[50vh] h-fit flex flex-col justify-center md:space-y-4 md:items-start items-center md:text-start text-center">
+            <h1 className="text-white flex text-2xl md:text-5xl font-bold font-mono">
+              Get Everything You Want
+            </h1>
+            <p className="text-gray-300 text-sm md:text-md">
+              "Find everything you're looking for in our store items you won't
+              even find on Amazon."
+            </p>
+          </div>
+          <div className="flex w-[40vh] md:w-[50vh] md:h-fit">
+            {isSignIn ? (
+              <SignIn togglePage={togglePage} />
+            ) : (
+              <SignUp togglePage={togglePage} />
+            )}
           </div>
         </div>
       </div>
