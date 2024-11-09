@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ReactNode } from "react";
 import { Outlet, Navigate } from "react-router-dom";
-import NavBar from "../components/dashboard/navbar";
+import NavBar from "../components/dashboard/navbar/navBar";
 
 interface ProtectedRoutesProps {
   children: ReactNode;
