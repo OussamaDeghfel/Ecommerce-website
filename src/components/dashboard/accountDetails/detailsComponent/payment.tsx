@@ -9,8 +9,8 @@ import {
   Select,
   Tag
 } from "antd";
-import visaCard from "../../../../assets/visaCard.png";
-import masterCard from "../../../../assets/masterCard.png";
+import visaCard from "../../../../assets/visaCard.webp";
+import masterCard from "../../../../assets/masterCard.webp";
 import { BiPlusCircle } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";

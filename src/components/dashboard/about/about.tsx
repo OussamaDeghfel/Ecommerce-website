@@ -1,9 +1,9 @@
 import { Button, Rate, Skeleton } from "antd";
 import customerRevImg from "../../../assets/CustomerRevImg.jpg";
 import customerImage from "../../../assets/profilePic.png";
-import customer2 from "../../../assets/customer2.jpg";
-import customer3 from "../../../assets/customer3.jpg";
-import womenImg from "../../../assets/womenImg.jpg";
+import customer2 from "../../../assets/customer2.webp";
+import customer3 from "../../../assets/customer3.webp";
+import womenImg from "../../../assets/womenImg.webp";
 import {
   FaAngleDown,
   FaAngleLeft,
