@@ -2,7 +2,7 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import QBLogoSite from "../../assets/QB-LogoSite.png";
-import loginImage from "../../assets/loginImage.jpg";
+import loginImage from "../../assets/loginImage.webp";
 
 type user = {
   email: string;
@@ -195,7 +195,7 @@ const Auth = () => {
   return (
     <>
 
-      <div className="flex w-full h-screen bg-gradient-to-r from-orange-100 from-20% via-orange-200 via-30% to-orange-200 to-90%">
+      <div className="flex w-full h-screen md:bg-gradient-to-r from-orange-100 from-20% via-orange-200 via-30% md:to-orange-200 to-90%">
         <div className=" w-full h-full flex md:flex-row justify-center items-center">
           <div
             className=" w-full md:w-[70%] h-full border-2 md:border-white rounded-md flex justify-center items-center bg-cover bg-center bg-no-repeat z-10"
