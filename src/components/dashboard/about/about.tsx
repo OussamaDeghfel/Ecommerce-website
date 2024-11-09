@@ -1,5 +1,5 @@
 import { Button, Rate, Skeleton } from "antd";
-import customerRevImg from "../../../assets/CustomerRevImg.jpg";
+import customerRevImg from "../../../assets/CustomerRevImg.webp";
 import customerImage from "../../../assets/profilePic.png";
 import customer2 from "../../../assets/customer2.webp";
 import customer3 from "../../../assets/customer3.webp";
