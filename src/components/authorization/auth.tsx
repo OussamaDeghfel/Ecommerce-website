@@ -118,7 +118,7 @@ const SignUp = ({ togglePage }: { togglePage: () => void }) => {
           alt="Store logo"
           className="w-25 h-20 bg-black/70 rounded-lg p-2"
         />
-        <h1 className="text-2xl font-bold w-fit">Create your account</h1>
+        <h1 className="text-xl md:text-2xl text-center font-bold w-fit">Create your account</h1>
       </div>
       <Form layout="vertical" onFinish={saveCredential}>
         <Form.Item
@@ -160,20 +160,16 @@ const SignUp = ({ togglePage }: { togglePage: () => void }) => {
           </Button>
         </Form.Item>
       </Form>
-      <div className="justify-center flex items-center">
-        <h1>
+      <div className="justify-center flex flex-col md:flex-row items-center">
+        
           Already have an account?{" "}
-          {/* <Link to="signup">
-              {" "}
-              <span className="font-bold text-orange-500">Create Acccount</span>{" "}
-            </Link> */}
           <button
             onClick={togglePage}
             className="text-orange-500 font-medium pl-2"
           >
             SignIn
           </button>
-        </h1>
+        
       </div>
       {/* </div> */}
     </div>
@@ -189,10 +185,10 @@ const Auth = () => {
   return (
     <>
       <div
-        className=" w-full h-screen flex md:flex-row justify-center items-center bg-cover bg-center bg-no-repeat"
+        className=" w-full min-h-screen flex md:flex-row justify-center items-center bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${loginImage})` }}
       >
-        <div className="w-full h-full md:space-x-10 space-y-6 bg-black/60  flex flex-col md:flex-row p-8 justify-center items-center mx-auto">
+        <div className="w-full min-h-screen md:space-x-10 space-y-6 bg-black/60  flex flex-col md:flex-row p-8 justify-center items-center mx-auto">
           <div className="md:w-[50vh] h-fit flex flex-col justify-center md:space-y-4 md:items-start items-center md:text-start text-center">
             <h1 className="text-white text-2xl md:text-5xl font-medium">
               Get Everything You Want
@@ -202,7 +198,7 @@ const Auth = () => {
               even find on Amazon."
             </p>
           </div>
-          <div className="flex w-[40vh] md:w-[50vh] md:h-fit">
+          <div className="flex w-[40vh] h-[20vh] md:w-[50vh] md:h-full">
             {isSignIn ? (
               <SignIn togglePage={togglePage} />
             ) : (
