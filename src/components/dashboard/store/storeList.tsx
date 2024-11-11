@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { appDispatch, RootState } from "../../redux/store";
-import { favorite, fetchProducts } from "../../redux/productSlice";
+import { addFavoriteProductToList, fetchProducts, removeFavoriteProductFromList } from "../../redux/productSlice";
 import { useEffect, useState } from "react";
 import { FaRegHeart, FaShoppingBag, FaStarHalfAlt } from "react-icons/fa";
 import {
@@ -22,12 +22,13 @@ import { Button, Input, Select } from "antd";
 const StoreList = () => {
   const dispatch = useDispatch<appDispatch>();
   const product = useSelector((state: RootState) => state.product.product);
+  const favoriteList = useSelector((state: RootState) => state.product.favoriteList);
 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [selectedRate, setSelectedRate] = useState(null);
-  const [favlist, setFavlist] = useState<string[]>([]);
+  // const [favlist, setFavlist] = useState<string[]>(favoriteList);
   const [showFilter, setShowFiter] = useState(false);
   const [filterActive, setFilterActive] = useState(false);
   const [filteredProduct, setFilteredProduct] = useState(product);
@@ -90,17 +91,17 @@ const StoreList = () => {
     setFilterActive(false);
   };
 
-  const handleFavoriteProduct = (id: string) => {
-    const verifyExistProduct = favlist.find((item) => item === id);
-    if (!verifyExistProduct) {
-      const newList = [...favlist, id];
-      setFavlist(newList);
-    } else {
-      const newList = favlist.filter((item) => item !== id);
-      setFavlist(newList);
-    }
-    console.log("favList : ", favlist);
-  };
+  // const handleFavoriteProduct = (id: string) => {
+  //   const verifyExistProduct = favlist.find((item) => item === id);
+  //   if (!verifyExistProduct) {
+  //     const newList = [...favlist, id];
+  //     setFavlist(newList);
+  //   } else {
+  //     const newList = favlist.filter((item) => item !== id);
+  //     setFavlist(newList);
+  //   }
+  //   console.log("favList : ", favlist);
+  // };
 
   return (
     <div className="flex flex-col items-center justify-start h-full bg-gray-100 p-4">
@@ -278,12 +279,12 @@ const StoreList = () => {
                 />
                 <div
                   className={`absolute top-0 right-0 p-2 cursor-pointer hover:scale-125 m-2 rounded-full ${
-                    favlist.includes(prod.id)
+                    favoriteList.includes(prod.id)
                       ? "bg-red-600 opacity-100"
                       : "bg-gray-400 opacity-80"
                   } `}
                   onClick={() => {
-                    if (!favlist.includes(prod.id)) {
+                    if (!favoriteList.includes(prod.id)) {
                       dispatch(
                         chooseFavorite({
                           id: prod.id,
@@ -294,12 +295,15 @@ const StoreList = () => {
                           rating: prod.rating,
                         })
                       ),
-                        dispatch(favorite(prod.id));
-                    } else if (favlist.includes(prod.id)) {
+                        // dispatch(favorite(prod.id));
+                        dispatch(addFavoriteProductToList(prod.id));
+                    } else if (favoriteList.includes(prod.id)) {
                       dispatch(removeFavorite({ productID: prod.id }));
-                      dispatch(favorite(prod.id));
+                      dispatch(removeFavoriteProductFromList(prod.id));
+
+                      // dispatch(favorite(prod.id));
                     }
-                    handleFavoriteProduct(prod.id);
+                    // handleFavoriteProduct(prod.id);
                   }}
                 >
                   <FaRegHeart color="white" size={25} />
@@ -379,12 +383,12 @@ const StoreList = () => {
                 />
                 <div
                   className={`absolute top-0 right-0 p-2 cursor-pointer hover:scale-125 m-2 rounded-full ${
-                    favlist.includes(prod.id)
+                    favoriteList.includes(prod.id)
                       ? "bg-red-600 opacity-100"
                       : "bg-gray-400 opacity-80"
                   } `}
                   onClick={() => {
-                    if (!favlist.includes(prod.id)) {
+                    if (!favoriteList.includes(prod.id)) {
                       dispatch(
                         chooseFavorite({
                           id: prod.id,
@@ -395,12 +399,14 @@ const StoreList = () => {
                           rating: prod.rating,
                         })
                       ),
-                        dispatch(favorite(prod.id));
-                    } else if (favlist.includes(prod.id)) {
+                        // dispatch(favorite(prod.id));
+                        dispatch(addFavoriteProductToList(prod.id));
+                    } else if (favoriteList.includes(prod.id)) {
                       dispatch(removeFavorite({ productID: prod.id }));
-                      dispatch(favorite(prod.id));
+                      // dispatch(favorite(prod.id));
+                      dispatch(removeFavoriteProductFromList(prod.id));
                     }
-                    handleFavoriteProduct(prod.id);
+                    // handleFavoriteProduct(prod.id);
                   }}
                 >
                   <FaRegHeart color="white" size={25} />

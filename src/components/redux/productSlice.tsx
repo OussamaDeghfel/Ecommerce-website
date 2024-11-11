@@ -7,6 +7,7 @@ import { RootState } from "./store";
     product: ProductData[];
     isLoading: boolean;
     error: string | null;
+    favoriteList : string[]
   }
 
 // Initial state
@@ -14,6 +15,7 @@ const initialState:ProductState = {
   product: [],
   isLoading: false,
   error: "",
+  favoriteList: []
 };
 
 // Async thunk for fetching products
@@ -39,6 +41,13 @@ const productSlice = createSlice({
       if(productIndex !== -1){
         state.product[productIndex].isLiked = !state.product[productIndex].isLiked;
       }
+    },
+    addFavoriteProductToList : (state, action) => {
+      state.favoriteList.push(action.payload)
+    },
+    removeFavoriteProductFromList : (state, action) => {
+      const findTheIndex = state.favoriteList.findIndex((item) => item.id === action.payload)
+      state.favoriteList.splice(findTheIndex, 1)
     }
   },
   extraReducers(builder) {
@@ -63,7 +72,7 @@ const productSlice = createSlice({
 
 export default productSlice.reducer;
 export const {
-  favorite
+  favorite, addFavoriteProductToList, removeFavoriteProductFromList
 } = productSlice.actions;
 
 export const selectProduct = (state:RootState) => state.product.product;
