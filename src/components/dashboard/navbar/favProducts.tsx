@@ -15,7 +15,7 @@ const FavProducts = () => {
   return (
     <>
       {favoriteProduct && favoriteProduct.length > 0 && (
-        <div className="w-[100%] h-[80vh]  md:w-full md:h-[80vh] justify-center overflow-y-scroll items-center border-2 border-gray-200 bg-orange-100 p-10 rounded-lg shadow-lg">
+        <div className="w-[100%] h-[80vh]  md:w-full md:h-[80vh] justify-center overflow-y-scroll items-center border-2 border-gray-200 bg-gray-200 p-10 rounded-lg shadow-lg">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {favoriteProduct.map((prod) => (
               <div
