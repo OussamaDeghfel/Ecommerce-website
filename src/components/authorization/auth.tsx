@@ -198,7 +198,7 @@ const Auth = () => {
               even find on Amazon."
             </p>
           </div>
-          <div className="flex w-[40vh] h-[20vh] md:w-[50vh] md:h-full">
+          <div className="flex w-[40vh] md:w-[50vh] md:h-full">
             {isSignIn ? (
               <SignIn togglePage={togglePage} />
             ) : (
