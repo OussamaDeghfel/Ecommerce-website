@@ -286,14 +286,15 @@ const StoreList = () => {
                   onClick={() => {
                     if (!favoriteList.includes(prod.id)) {
                       dispatch(
-                        chooseFavorite({
-                          id: prod.id,
-                          title: prod.title,
-                          category: prod.category,
-                          image: prod.image,
-                          price: prod.price,
-                          rating: prod.rating,
-                        })
+                        // chooseFavorite({
+                        //   id: prod.id,
+                        //   title: prod.title,
+                        //   category: prod.category,
+                        //   image: prod.image,
+                        //   price: prod.price,
+                        //   rating: prod.rating,
+                        // })
+                        chooseFavorite(prod)
                       ),
                         // dispatch(favorite(prod.id));
                         dispatch(addFavoriteProductToList(prod.id));
@@ -390,14 +391,15 @@ const StoreList = () => {
                   onClick={() => {
                     if (!favoriteList.includes(prod.id)) {
                       dispatch(
-                        chooseFavorite({
-                          id: prod.id,
-                          title: prod.title,
-                          category: prod.category,
-                          image: prod.image,
-                          price: prod.price,
-                          rating: prod.rating,
-                        })
+                        // chooseFavorite({
+                        //   id: prod.id,
+                        //   title: prod.title,
+                        //   category: prod.category,
+                        //   image: prod.image,
+                        //   price: prod.price,
+                        //   rating: prod.rating,
+                        // })
+                        chooseFavorite(prod)
                       ),
                         // dispatch(favorite(prod.id));
                         dispatch(addFavoriteProductToList(prod.id));
