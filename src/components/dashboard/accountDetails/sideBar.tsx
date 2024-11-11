@@ -11,8 +11,8 @@ const SideBar = () => {
         <ul className="flex flex-col h-fit w-[35vh] space-y-5">
           <Link to="accountInfo">
             <li
-              className={`text-xl p-4 shadow-sm flex space-x-2 rounded-md cursor-pointer hover:scale-105 duration-300 ${
-                choosedDetail === 0 ? "bg-orange-100" : ""
+              className={`text-sm p-4 shadow-sm flex justify-start items-center space-x-2 rounded-md cursor-pointer hover:scale-105 duration-300 ${
+                choosedDetail === 0 ? "bg-gray-200" : ""
               }`}
               onClick={() => setChoosedDetail(0)}
             >
@@ -21,8 +21,8 @@ const SideBar = () => {
           </Link>
           <Link to="security">
             <li
-              className={`text-xl p-4 shadow-sm rounded-md flex space-x-2 cursor-pointer hover:scale-105 duration-300 ${
-                choosedDetail === 1 ? "bg-orange-100" : ""
+              className={`text-sm p-4 shadow-sm rounded-md flex justify-start items-center space-x-2 cursor-pointer hover:scale-105 duration-300 ${
+                choosedDetail === 1 ? "bg-gray-200" : ""
               }`}
               onClick={() => setChoosedDetail(1)}
             >
@@ -32,8 +32,8 @@ const SideBar = () => {
           </Link>
           <Link to="payment">
             <li
-              className={`text-xl p-4 flex justify-start space-x-2 items-center shadow-sm rounded-md cursor-pointer hover:scale-105 duration-300 ${
-                choosedDetail === 2 ? "bg-orange-100" : ""
+              className={`text-sm p-4 flex justify-start space-x-2 items-center shadow-sm rounded-md cursor-pointer hover:scale-105 duration-300 ${
+                choosedDetail === 2 ? "bg-gray-200" : ""
               }`}
               onClick={() => setChoosedDetail(2)}
             >

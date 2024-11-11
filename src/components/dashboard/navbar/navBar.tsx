@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import logo from "../../../assets/quickbuy_logo.png";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaBars, FaUser } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { BiHeart } from "react-icons/bi";
@@ -17,12 +17,16 @@ const NavBar = () => {
 
   const [showProducts, setShowProducts] = useState(false);
   const [showFavorite, setShowFavorite] = useState(false);
-  const [activeBarSelect, setActiveBarSelect] = useState<string>("home");
+  // const [activeBarSelect, setActiveBarSelect] = useState<string>("home");
   const [openNavBar, setOpenNavBar] = useState(false);
   const navigate = useNavigate();
 
   const favRef = useRef<HTMLDivElement>(null);
   const cartRef = useRef<HTMLDivElement>(null);
+
+  const location = useLocation();
+  const navRoutes = ["/home", "/store", "/about"];
+  const isNavRoute = navRoutes.includes(location.pathname);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -74,74 +78,120 @@ const NavBar = () => {
   return (
     <>
       <div className="flex flex-col md:flex-row justify-center items-center w-full h-fit m-auto pt-8">
-        <img className="w-fit h-[30px] " src={logo} alt="store logo" />
+        <Link to="/home">
+          <img className="w-fit h-[30px] " src={logo} alt="store logo"  />
+        </Link>
         <div className="flex justify-between items-center w-full ">
           <div className="flex md:hidden justify-between items-center w-full px-2">
             <FaBars
-            color="orange"
+              color="orange"
               size={30}
               onClick={() => setOpenNavBar(!openNavBar)}
               className="z-10"
             />
             {openNavBar && (
               <>
-                <ul className="flex flex-col bg-white shadow-lg w-fit h-fit space-y-5 py-6 px-4 rounded-md fixed transform translate-x-1/4 translate-y-24 text-2xl z-10 duration-700">
+                <ul className={`flex flex-col bg-white shadow-lg w-fit h-fit space-y-5 py-6 px-4 rounded-md fixed transform translate-x-1/4 translate-y-24 text-2xl z-10 duration-700}`}>
                   <li
-                    className={`p-2 text-black font-medium mx-4 cursor-pointer 
-            ${activeBarSelect === "home" && "text-orange-500"}`}
-                    onClick={() => {
-                      setActiveBarSelect("home"), setOpenNavBar(false);
-                    }}
+                    className="p-2 text-black font-medium mx-4 cursor-pointer "
+                    onClick={() => setOpenNavBar(!openNavBar)}
                   >
                     {" "}
-                    <Link to="/home">Home</Link>
+                    <NavLink
+                  to="/home"
+                  className={({ isActive }) =>
+                    `px-4 py-2 ${
+                      isActive && isNavRoute
+                        ? "text-orange-500"
+                        : "text-gray-800"
+                    } hover:text-orange-500`
+                  }
+                >
+                  Home
+                </NavLink>
                   </li>
                   <li
-                    className={`p-2 text-black font-medium mx-4 cursor-pointer 
-            ${activeBarSelect === "store" && "text-orange-500"}`}
-                    onClick={() => {
-                      setActiveBarSelect("store"), setOpenNavBar(false);
-                    }}
+                    className="p-2 text-black font-medium mx-4 cursor-pointer"
+                    onClick={() => setOpenNavBar(!openNavBar)}
                   >
-                    <Link to="/store">Store</Link>
+                    <NavLink
+                  to="/store"
+                  className={({ isActive }) =>
+                    `px-4 py-2 ${
+                      isActive && isNavRoute
+                        ? "text-orange-500"
+                        : "text-gray-800"
+                    } hover:text-orange-500`
+                  }
+                >
+                  Store
+                </NavLink>
                   </li>
                   <li
-                    className={`p-2 text-black font-medium mx-4 cursor-pointer 
-            ${activeBarSelect === "about" && "text-orange-500"}`}
-                    onClick={() => {
-                      setActiveBarSelect("about"), setOpenNavBar(false);
-                    }}
+                    className="p-2 text-black font-medium mx-4 cursor-pointer"
+                    onClick={() => setOpenNavBar(!openNavBar)}
                   >
-                    <Link to="/about">About</Link>
+                    <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    `px-4 py-2 ${
+                      isActive && isNavRoute
+                        ? "text-orange-500"
+                        : "text-gray-800"
+                    } hover:text-orange-500`
+                  }
+                >
+                  About
+                </NavLink>
                   </li>
                 </ul>
               </>
             )}
-            
           </div>
           <div className=" hidden md:flex justify-center m-auto items-center">
             <ul className="flex">
-              <li
-                className={`p-2 text-black font-medium mx-4 cursor-pointer 
-              ${activeBarSelect === "home" && "text-orange-500"}`}
-                onClick={() => setActiveBarSelect("home")}
-              >
+              <li className="p-2 text-black font-medium mx-4 cursor-pointer">
                 {" "}
-                <Link to="/home">Home</Link>
+                <NavLink
+                  to="/home"
+                  className={({ isActive }) =>
+                    `px-4 py-2 ${
+                      isActive && isNavRoute
+                        ? "text-orange-500"
+                        : "text-gray-800"
+                    } hover:text-orange-500`
+                  }
+                >
+                  Home
+                </NavLink>
               </li>
-              <li
-                className={`p-2 text-black font-medium mx-4 cursor-pointer 
-              ${activeBarSelect === "store" && "text-orange-500"}`}
-                onClick={() => setActiveBarSelect("store")}
-              >
-                <Link to="/store">Store</Link>
+              <li className="p-2 text-black font-medium mx-4 cursor-pointer ">
+                <NavLink
+                  to="/store"
+                  className={({ isActive }) =>
+                    `px-4 py-2 ${
+                      isActive && isNavRoute
+                        ? "text-orange-500"
+                        : "text-gray-800"
+                    } hover:text-orange-500`
+                  }
+                >
+                  Store
+                </NavLink>
               </li>
-              <li
-                className={`p-2 text-black font-medium mx-4 cursor-pointer 
-              ${activeBarSelect === "about" && "text-orange-500"}`}
-                onClick={() => setActiveBarSelect("about")}
-              >
-                <Link to="/about">About</Link>
+              <li className="p-2 text-black font-medium mx-4 cursor-pointer ">
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    `px-4 py-2 ${
+                      isActive && isNavRoute
+                        ? "text-orange-500"
+                        : "text-gray-800"
+                    } hover:text-orange-500`
+                  }
+                >
+                  About
+                </NavLink>
               </li>
             </ul>
           </div>
