@@ -35,7 +35,7 @@ const SignIn = ({ togglePage }: { togglePage: () => void }) => {
           alt="Store logo"
           className="w-25 h-20 bg-black/70 rounded-lg p-2"
         />
-        <h1 className="text-2xl font-bold w-fit">Welcome to QuickBuy</h1>
+        <h1 className="text-xl md:text-2xl text-center font-bold w-fit">Welcome to QuickBuy</h1>
       </div>
       {credentialWarn && (
         <div className="w-full h-fit p-4 bg-orange-200  text-center rounded-md mb-5">
@@ -79,7 +79,7 @@ const SignIn = ({ togglePage }: { togglePage: () => void }) => {
           </Button>
         </Form.Item>
       </Form>
-      <div className="justify-center flex flex-col md:flex-row items-center w-full">
+      <div className="justify-center flex flex-col md:flex-row items-center w-full text-sm">
         Don't have an account ?{" "}
         <button
           onClick={togglePage}
@@ -189,7 +189,7 @@ const Auth = () => {
   return (
     <>
       <div
-        className=" w-full h-full flex md:flex-row justify-center items-center bg-cover bg-center bg-no-repeat"
+        className=" w-full h-screen flex md:flex-row justify-center items-center bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${loginImage})` }}
       >
         <div className="w-full h-full md:space-x-10 space-y-6 bg-black/60  flex flex-col md:flex-row p-8 justify-center items-center mx-auto">
@@ -202,7 +202,7 @@ const Auth = () => {
               even find on Amazon."
             </p>
           </div>
-          <div className="flex w-[40vh] md:w-[50vh] md:h-full">
+          <div className="flex w-[40vh] md:w-[50vh] md:h-fit">
             {isSignIn ? (
               <SignIn togglePage={togglePage} />
             ) : (
