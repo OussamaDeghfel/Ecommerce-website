@@ -46,7 +46,7 @@ const productSlice = createSlice({
       state.favoriteList.push(action.payload)
     },
     removeFavoriteProductFromList : (state, action) => {
-      const findTheIndex = state.favoriteList.findIndex((item) => item.id === action.payload)
+      const findTheIndex = state.favoriteList.findIndex(item => item === action.payload)
       state.favoriteList.splice(findTheIndex, 1)
     }
   },
