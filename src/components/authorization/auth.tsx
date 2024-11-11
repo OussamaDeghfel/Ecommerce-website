@@ -28,7 +28,7 @@ const SignIn = ({ togglePage }: { togglePage: () => void }) => {
 
   return (
     // <div className="flex w-full h-full justify-center items-center">
-    <div className="m-auto border-y-2 border-r-2 border-white bg-white rounded-md space-y-5 p-5 w-[400px] h-fit shadow-lg ">
+    <div className="m-auto border-y-2 border-r-2 border-white bg-white rounded-md space-y-5 p-5 w-[400px] h-full shadow-lg ">
       <div className="flex flex-col space-y-2 justify-center items-center">
         <img
           src={QBLogoSite}
@@ -81,10 +81,6 @@ const SignIn = ({ togglePage }: { togglePage: () => void }) => {
       </Form>
       <div className="justify-center flex flex-col md:flex-row items-center w-full">
         Don't have an account ?{" "}
-        {/* <Link to="signup">
-              {" "}
-              <span className="font-bold text-orange-500">Create Acccount</span>{" "}
-            </Link> */}
         <button
           onClick={togglePage}
           className="text-orange-500 font-medium pl-2"
@@ -193,7 +189,7 @@ const Auth = () => {
   return (
     <>
       <div
-        className=" w-full h-screen flex md:flex-row justify-center items-center bg-cover bg-center bg-no-repeat"
+        className=" w-full h-full flex md:flex-row justify-center items-center bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${loginImage})` }}
       >
         <div className="w-full h-full md:space-x-10 space-y-6 bg-black/60  flex flex-col md:flex-row p-8 justify-center items-center mx-auto">
@@ -206,7 +202,7 @@ const Auth = () => {
               even find on Amazon."
             </p>
           </div>
-          <div className="flex w-[40vh] md:w-[50vh] md:h-fit">
+          <div className="flex w-[40vh] md:w-[50vh] md:h-full">
             {isSignIn ? (
               <SignIn togglePage={togglePage} />
             ) : (
