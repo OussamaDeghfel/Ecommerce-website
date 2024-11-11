@@ -20,11 +20,11 @@ const FavProducts = () => {
             {favoriteProduct.map((prod) => (
               <div
                 key={prod.id}
-                className=" w-48 h-fit md:w-60 md:h-fit bg-orange-50 p-2 rounded-md shadow-md "
+                className=" w-48 h-full md:w-60 md:h-fit bg-orange-50 p-2 rounded-md shadow-md "
               >
-                <div className="relative">
+                <div className="relative border-b-2 border-gray-200">
                   <img
-                    className="w-60 h-56 rounded-t-md"
+                    className="w-60 h-56 rounded-t-md p-4"
                     src={prod.image}
                     alt="image of the product"
                   />
@@ -39,7 +39,7 @@ const FavProducts = () => {
                     <BsTrash2 color="white" size={25} />
                   </div>
                 </div>
-                <div className="flex flex-col p-2 justify-between md:h-[25vh]">
+                <div className="flex flex-col p-2 justify-between md:h-fit">
                   <div className="px-2 w-full justify-items-center md:justify-items-start">
                     <h1 className="font-bold text-md my-2">
                       {prod.title.substring(0, 20)}
@@ -75,10 +75,10 @@ const FavProducts = () => {
                     </span>
                   </div>
 
-                  <div className="flex flex-col md:flex-row md:justify-between  md:items-start items-center ">
-                    <h1 className="font-bold my-2 text-xl">{prod.price} $</h1>
+                  <div className="flex flex-col md:flex-row md:justify-between items-center">
+                    <h1 className="font-bold my-2 text-md ">{prod.price} $</h1>
                     <button
-                      className="flex items-center text-orange-600 font-bold p-2 border-2 border-orange-600 rounded-md  px-2 my-1 hover:bg-orange-500 hover:text-white duration-200"
+                      className="w-32 text-sm flex items-center text-orange-600 font-bold p-2 border-2 border-orange-600 rounded-md  px-2 my-1 hover:bg-orange-500 hover:text-white duration-200"
                       onClick={() => {
                         dispatch(
                           addToCart({

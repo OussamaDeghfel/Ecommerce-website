@@ -30,20 +30,20 @@ const ShoppingCart = () => {
             {cart.map((pic, idx) => (
               <div
                 key={idx}
-                className="flex m-4 shadow-md rounded-md bg-orange-50 p-2 justify-center items-center "
+                className="flex m-4 shadow-md rounded-md bg-orange-50 p-2 justify-center items-center border-2 border-orange-300"
               >
                 <img
                   src={pic.product.image}
-                  alt="cart image"
-                  className="w-[200px] h-[200px] rounded-md mb-5 shadow-right"
+                  alt="product image"
+                  className="w-40 h-full p-2 rounded-md mb-5 shadow-right"
                 />
 
                 <div className="m-2 w-full justify-items-center md:justify-items-start space-y-4">
                   <h1 className="font-medium px-3 text-xl">
                     {pic.product.title.substring(0, 45)}
                   </h1>
-                  <div className="grid grid-cols-1 md:grid-cols-2 place-items-center md:justify-between w-full   p-2">
-                    <div className="flex px-2 my-5 justify-start items-center text-gray-600">
+                  <div className="grid grid-cols-1 md:grid-cols-2 place-items-center md:justify-between w-full border-2 border-red-500 px-2">
+                    <div className="flex px-2 my-5 justify-start items-center text-gray-600 ">
                       <FaMinus
                         size={12}
                         className="cursor-pointer border-2 p-1 w-fit h-fit border-gray-200 rounded-md hover:bg-slate-200"
@@ -63,7 +63,7 @@ const ShoppingCart = () => {
                       />
                     </div>
                     <div className="flex w-fit h-fit">
-                      <h1 className="font-bold text-2xl p-2 rounded-lg shadow-md bg-orange-300">
+                      <h1 className="font-bold text-xl p-2 rounded-lg shadow-md bg-orange-300">
                         {Number(pic.product.price.toFixed(2))} $
                       </h1>
                     </div>
