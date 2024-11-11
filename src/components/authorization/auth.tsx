@@ -198,7 +198,7 @@ const Auth = () => {
       >
         <div className="w-full h-full md:space-x-10 space-y-6 bg-black/60  flex flex-col md:flex-row p-8 justify-center items-center mx-auto">
           <div className="md:w-[50vh] h-fit flex flex-col justify-center md:space-y-4 md:items-start items-center md:text-start text-center">
-            <h1 className="text-white flex text-2xl md:text-5xl font-bold font-mono">
+            <h1 className="text-white text-2xl md:text-5xl font-medium">
               Get Everything You Want
             </h1>
             <p className="text-gray-300 text-sm md:text-md">
