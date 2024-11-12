@@ -7,7 +7,7 @@ import {
   Form,
   DatePicker,
   Select,
-  Tag
+  Tag,
 } from "antd";
 import visaCard from "../../../../assets/visaCard.webp";
 import masterCard from "../../../../assets/masterCard.webp";
@@ -55,13 +55,13 @@ const Payment = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: (status:string) => {
-        if(status === "Paid") {
-          return <Tag color="green">{status}</Tag>
+      render: (status: string) => {
+        if (status === "Paid") {
+          return <Tag color="green">{status}</Tag>;
         } else {
-          return <Tag color="blue">{status}</Tag>
+          return <Tag color="blue">{status}</Tag>;
         }
-      }
+      },
     },
   ];
 
@@ -143,13 +143,14 @@ const Payment = () => {
         expDate: dayjs(choosedCard.expiryDate),
         cardVerification: choosedCard.cvv,
       });
+      setSelectCardType(choosedCard.cardImg);
+      console.log("selected card type :", selectCardType)
     }
   }, [paymentMethods, selectedCardToModify, form]);
 
   return (
     <>
       <div className="space-y-5">
-
         {/* Contact Email  */}
         <div className="grid grid-cols-1 md:grid-cols-2 space-y-4 w-full h-full border-2 border-gray-300 rounded-md p-6">
           {/* <div className=" border-2 border-black flex justify-between w-full h-full"> */}
@@ -161,7 +162,9 @@ const Payment = () => {
           </div>
           <div className="flex flex-col space-y-5 ">
             <div className="flex flex-col">
-              <Checkbox defaultChecked={true} >Send to my account email</Checkbox>
+              <Checkbox defaultChecked={true}>
+                Send to my account email
+              </Checkbox>
               <span className="text-sm text-gray-400 px-6">
                 {localStorage.getItem("email")}
               </span>
@@ -252,10 +255,14 @@ const Payment = () => {
 
         {/* Billing history  */}
         <div className="grid grid-cols-1 space-y-4 w-full h-full border-2 border-gray-300 rounded-md p-6">
-        <div className="flex flex-col space-y-5">
-          <h1 className="text-xl ">Billing History</h1>
-          <Table columns={columns} dataSource={data} className="overflow-x-scroll w-full" />
-        </div>
+          <div className="flex flex-col space-y-5">
+            <h1 className="text-xl ">Billing History</h1>
+            <Table
+              columns={columns}
+              dataSource={data}
+              className="overflow-x-scroll w-full"
+            />
+          </div>
         </div>
       </div>
 
@@ -342,7 +349,7 @@ const Payment = () => {
               className="w-20 h-8 -bottom-0.5"
             />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 w-full h-full items-center ">
+          <div className="flex  md:flex-row w-full h-full justify-start items-start md:justify-between space-x-5 md:items-center ">
             <Form.Item
               name="expDate"
               label="Expiration Date"
@@ -353,7 +360,7 @@ const Payment = () => {
                 },
               ]}
             >
-              <DatePicker className="flex w-[30vh]" />
+              <DatePicker className="flex md:w-[30vh] w-full " />
             </Form.Item>
             <Form.Item
               name="cardVerification"
@@ -364,12 +371,17 @@ const Payment = () => {
                   message: "Please enter your CVC!",
                 },
                 {
-                  pattern: /^[0-9]*$/,
-                  message: "CVC must be numeric!",
+                  len: 2,
+                  message: "CVC cannot exceed 4 digits.",
                 },
               ]}
             >
-              <Input className="flex w-56" maxLength={3} placeholder="Enter CVC" />
+              <Input
+                type="number"
+                maxLength={4}
+                className="flex md:w-56 w-full"
+                placeholder="Enter CVC"
+              />
             </Form.Item>
           </div>
         </Form>
@@ -443,6 +455,7 @@ const Payment = () => {
             <Select
               onChange={(value) => setSelectCardType(value)}
               placeholder="Select Card Type"
+              value={selectCardType === "visacard" ? "visacard" : "mastercard"}
               options={[
                 {
                   value: "mastercard",
@@ -456,7 +469,7 @@ const Payment = () => {
               className="w-20 h-8 -bottom-0.5"
             />
           </div>
-          <div className="flex w-full h-full justify-between space-x-2 items-center ">
+          <div className="flex  md:flex-row w-full h-full justify-start items-start md:justify-between space-x-5 md:items-center ">
             <Form.Item
               name="expDate"
               label="Expiration Date"
@@ -467,7 +480,7 @@ const Payment = () => {
                 },
               ]}
             >
-              <DatePicker className="flex w-[30vh]" />
+              <DatePicker className="flex md:w-[30vh] w-full " />
             </Form.Item>
             <Form.Item
               name="cardVerification"
@@ -477,9 +490,18 @@ const Payment = () => {
                   required: true,
                   message: "Please enter your CVC!",
                 },
+                {
+                  len: 2,
+                  message: "CVC cannot exceed 4 digits.",
+                },
               ]}
             >
-              <Input type="number" className="flex w-56" />
+              <Input
+                type="number"
+                maxLength={4}
+                className="flex md:w-56 w-full"
+                placeholder="Enter CVC"
+              />
             </Form.Item>
           </div>
         </Form>
