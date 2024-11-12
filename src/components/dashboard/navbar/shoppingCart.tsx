@@ -42,7 +42,7 @@ const ShoppingCart = () => {
                   <h1 className="font-medium px-3 text-xl">
                     {pic.product.title.substring(0, 45)}
                   </h1>
-                  <div className="grid grid-cols-1 md:grid-cols-2 place-items-center md:justify-between w-full border-2 border-red-500 px-2">
+                  <div className="grid grid-cols-1 md:grid-cols-2 place-items-center md:justify-between w-full px-2">
                     <div className="flex px-2 my-5 justify-start items-center text-gray-600 ">
                       <FaMinus
                         size={12}
