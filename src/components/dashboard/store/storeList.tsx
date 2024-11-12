@@ -1,7 +1,11 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { appDispatch, RootState } from "../../redux/store";
-import { addFavoriteProductToList, fetchProducts, removeFavoriteProductFromList } from "../../redux/productSlice";
+import {
+  addFavoriteProductToList,
+  fetchProducts,
+  removeFavoriteProductFromList,
+} from "../../redux/productSlice";
 import { useEffect, useState } from "react";
 import { FaRegHeart, FaShoppingBag, FaStarHalfAlt } from "react-icons/fa";
 import {
@@ -22,7 +26,9 @@ import { Button, Input, Select } from "antd";
 const StoreList = () => {
   const dispatch = useDispatch<appDispatch>();
   const product = useSelector((state: RootState) => state.product.product);
-  const favoriteList = useSelector((state: RootState) => state.product.favoriteList);
+  const favoriteList = useSelector(
+    (state: RootState) => state.product.favoriteList
+  );
 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [minPrice, setMinPrice] = useState("");
@@ -47,39 +53,35 @@ const StoreList = () => {
     setFilterActive(true);
     let filteredProduct = [...product];
 
-      if (selectedCategory) {
-        filteredProduct = filteredProduct.filter(
-          (item) => item.category === selectedCategory
-        );
-        
-      }
+    if (selectedCategory) {
+      filteredProduct = filteredProduct.filter(
+        (item) => item.category === selectedCategory
+      );
+    }
 
-      if (minPrice) {
-        filteredProduct = filteredProduct.filter(
-          (item) => item.price >= Number(minPrice)
-        );
-       
-      }
-      if (maxPrice) {
-        filteredProduct = filteredProduct.filter(
-          (item) => item.price <= Number(maxPrice)
-        );
-        
-      }
+    if (minPrice) {
+      filteredProduct = filteredProduct.filter(
+        (item) => item.price >= Number(minPrice)
+      );
+    }
+    if (maxPrice) {
+      filteredProduct = filteredProduct.filter(
+        (item) => item.price <= Number(maxPrice)
+      );
+    }
 
-      if (selectedRate) {
-        if (selectedRate === "2") {
-          filteredProduct = filteredProduct.filter(
-            (product) => product.rating.rate > 4.0
-          );
-        } else if (selectedRate === "3") {
-          filteredProduct = filteredProduct.filter(
-            (product) => product.rating.rate > 4.5
-          );
-        }
-        
+    if (selectedRate) {
+      if (selectedRate === "2") {
+        filteredProduct = filteredProduct.filter(
+          (product) => product.rating.rate > 4.0
+        );
+      } else if (selectedRate === "3") {
+        filteredProduct = filteredProduct.filter(
+          (product) => product.rating.rate > 4.5
+        );
       }
-      setFilteredProduct(filteredProduct);
+    }
+    setFilteredProduct(filteredProduct);
   };
 
   const handleClear = () => {
@@ -269,11 +271,12 @@ const StoreList = () => {
           product.map((prod) => (
             <div
               key={prod.id}
-              className="w-full h-full bg-white pb-2 rounded-md shadow-md"
+              className="w-full h-full bg-white pb-2 rounded-md shadow-md flex flex-col overflow-hidden"
             >
-              <div className="relative shadow-md">
+              {/* Image */}
+              <div className="w-full h-72 relative p-8 border-b-2 border-gray-200">
                 <img
-                  className="w-full h-72 rounded-t-md"
+                  className="h-full w-full justify-center items-center rounded-t-md "
                   src={prod.image}
                   alt="product image"
                 />
@@ -282,89 +285,72 @@ const StoreList = () => {
                     favoriteList.includes(prod.id)
                       ? "bg-red-600 opacity-100"
                       : "bg-gray-400 opacity-80"
-                  } `}
+                  }`}
                   onClick={() => {
                     if (!favoriteList.includes(prod.id)) {
-                      dispatch(
-                        // chooseFavorite({
-                        //   id: prod.id,
-                        //   title: prod.title,
-                        //   category: prod.category,
-                        //   image: prod.image,
-                        //   price: prod.price,
-                        //   rating: prod.rating,
-                        // })
-                        chooseFavorite(prod)
-                      ),
-                        // dispatch(favorite(prod.id));
-                        dispatch(addFavoriteProductToList(prod.id));
-                    } else if (favoriteList.includes(prod.id)) {
+                      dispatch(chooseFavorite(prod));
+                      dispatch(addFavoriteProductToList(prod.id));
+                    } else {
                       dispatch(removeFavorite({ productID: prod.id }));
                       dispatch(removeFavoriteProductFromList(prod.id));
-
-                      // dispatch(favorite(prod.id));
                     }
-                    // handleFavoriteProduct(prod.id);
                   }}
                 >
                   <FaRegHeart color="white" size={25} />
                 </div>
               </div>
 
-              <div className="flex flex-col p-2 justify-between h-[30vh]">
-                <div className="px-2">
-                  <h1 className="font-bold text-md my-2">{prod.title}</h1>
-                  <h1 className="text-base my-2">{prod.category}</h1>
-                </div>
+              {/* Title and Category */}
+              <div className="px-2 py-4 text-sm ">
+                <h1 className="font-bold text-md">{prod.title}</h1>
+                <h2 className="text-base">{prod.category}</h2>
+              </div>
 
-                <div className="flex font-bold">
-                  {prod.rating.rate >= 4 && (
-                    <div className="flex justify-center items-center space-x-4">
-                      <FaStar size={20} className="mr-2" color="orange" />
-                      {prod.rating.rate}
-                    </div>
-                  )}
-                  {prod.rating.rate >= 3 && prod.rating.rate < 4 && (
-                    <>
-                      <FaStarHalfAlt
-                        size={20}
-                        className="mr-2"
-                        color="orange"
-                      />
-                      {prod.rating.rate}
-                    </>
-                  )}
-                  {prod.rating.rate < 3 && (
-                    <>
-                      <FaStarHalf size={20} className="mr-1" color="orange" />
-                      {prod.rating.rate}
-                    </>
-                  )}
-                  <span className="font-thin ml-2">({prod.rating.count})</span>
-                </div>
+              {/* Rating */}
+              <div className="flex justify-center md:justify-start items-center px-2 text-sm font-bold space-x-2">
+                {prod.rating.rate >= 4 && (
+                  <div className="flex items-center">
+                    <FaStar size={20} color="orange" className="mr-1" />
+                    {prod.rating.rate}
+                  </div>
+                )}
+                {prod.rating.rate >= 3 && prod.rating.rate < 4 && (
+                  <>
+                    <FaStarHalfAlt size={20} color="orange" className="mr-1" />
+                    {prod.rating.rate}
+                  </>
+                )}
+                {prod.rating.rate < 3 && (
+                  <>
+                    <FaStarHalf size={20} color="orange" className="mr-1" />
+                    {prod.rating.rate}
+                  </>
+                )}
+                <span className="font-thin ml-2">({prod.rating.count})</span>
+              </div>
 
-                <div className="flex justify-between items-end ">
-                  <h1 className="font-bold my-2 text-xl">{prod.price} $</h1>
-                  <button
-                    className="flex items-center text-orange-600 font-bold p-2 border-2 border-orange-600 rounded-md  px-2 my-1 hover:bg-orange-500 hover:text-white duration-200"
-                    onClick={() => {
-                      dispatch(
-                        addToCart({
-                          product: {
-                            id: prod.id,
-                            title: prod.title,
-                            image: prod.image,
-                            price: prod.price,
-                          },
-                          quantity: 1,
-                          quantityPrice: prod.price,
-                        })
-                      );
-                    }}
-                  >
-                    <FaShoppingBag className="mr-2" /> Add To Cart
-                  </button>
-                </div>
+              {/* Price and Add to Cart Button */}
+              <div className="flex flex-col md:flex-row space-y-4 md:justify-between items-center px-2 mt-auto pt-4">
+                <h1 className="font-bold text-xl border-2 border-gray-300 shadow-md rounded-lg px-2">{prod.price} $</h1>
+                <button
+                  className="flex items-center text-orange-600 font-bold text-sm  p-2 border-2 border-orange-600 rounded-md hover:bg-orange-500 hover:text-white duration-200"
+                  onClick={() => {
+                    dispatch(
+                      addToCart({
+                        product: {
+                          id: prod.id,
+                          title: prod.title,
+                          image: prod.image,
+                          price: prod.price,
+                        },
+                        quantity: 1,
+                        quantityPrice: prod.price,
+                      })
+                    );
+                  }}
+                >
+                  <FaShoppingBag className="mr-2" /> Add To Cart
+                </button>
               </div>
             </div>
           ))}
@@ -374,11 +360,12 @@ const StoreList = () => {
           filteredProduct.map((prod) => (
             <div
               key={prod.id}
-              className="w-full h-full bg-white pb-2 rounded-md shadow-md"
+              className="w-full h-full bg-white pb-2 rounded-md shadow-md flex flex-col overflow-hidden"
             >
-              <div className="relative shadow-md">
+              {/* Image */}
+              <div className="w-full h-72 relative p-8 border-b-2 border-gray-200">
                 <img
-                  className="w-full h-72 rounded-t-md"
+                  className="h-full w-full justify-center items-center rounded-t-md "
                   src={prod.image}
                   alt="product image"
                 />
@@ -387,88 +374,72 @@ const StoreList = () => {
                     favoriteList.includes(prod.id)
                       ? "bg-red-600 opacity-100"
                       : "bg-gray-400 opacity-80"
-                  } `}
+                  }`}
                   onClick={() => {
                     if (!favoriteList.includes(prod.id)) {
-                      dispatch(
-                        // chooseFavorite({
-                        //   id: prod.id,
-                        //   title: prod.title,
-                        //   category: prod.category,
-                        //   image: prod.image,
-                        //   price: prod.price,
-                        //   rating: prod.rating,
-                        // })
-                        chooseFavorite(prod)
-                      ),
-                        // dispatch(favorite(prod.id));
-                        dispatch(addFavoriteProductToList(prod.id));
-                    } else if (favoriteList.includes(prod.id)) {
+                      dispatch(chooseFavorite(prod));
+                      dispatch(addFavoriteProductToList(prod.id));
+                    } else {
                       dispatch(removeFavorite({ productID: prod.id }));
-                      // dispatch(favorite(prod.id));
                       dispatch(removeFavoriteProductFromList(prod.id));
                     }
-                    // handleFavoriteProduct(prod.id);
                   }}
                 >
                   <FaRegHeart color="white" size={25} />
                 </div>
               </div>
 
-              <div className="flex flex-col p-2 justify-between h-[30vh]">
-                <div className="px-2">
-                  <h1 className="font-bold text-md my-2">{prod.title}</h1>
-                  <h1 className="text-base my-2">{prod.category}</h1>
-                </div>
+              {/* Title and Category */}
+              <div className="px-2 py-4 text-sm ">
+                <h1 className="font-bold text-md">{prod.title}</h1>
+                <h2 className="text-base">{prod.category}</h2>
+              </div>
 
-                <div className="flex font-bold">
-                  {prod.rating.rate >= 4 && (
-                    <div className="flex justify-center items-center space-x-4">
-                      <FaStar size={20} className="mr-2" color="orange" />
-                      {prod.rating.rate}
-                    </div>
-                  )}
-                  {prod.rating.rate >= 3 && prod.rating.rate < 4 && (
-                    <>
-                      <FaStarHalfAlt
-                        size={20}
-                        className="mr-2"
-                        color="orange"
-                      />
-                      {prod.rating.rate}
-                    </>
-                  )}
-                  {prod.rating.rate < 3 && (
-                    <>
-                      <FaStarHalf size={20} className="mr-1" color="orange" />
-                      {prod.rating.rate}
-                    </>
-                  )}
-                  <span className="font-thin ml-2">({prod.rating.count})</span>
-                </div>
+              {/* Rating */}
+              <div className="flex justify-center md:justify-start items-center px-2 text-sm font-bold space-x-2">
+                {prod.rating.rate >= 4 && (
+                  <div className="flex items-center">
+                    <FaStar size={20} color="orange" className="mr-1" />
+                    {prod.rating.rate}
+                  </div>
+                )}
+                {prod.rating.rate >= 3 && prod.rating.rate < 4 && (
+                  <>
+                    <FaStarHalfAlt size={20} color="orange" className="mr-1" />
+                    {prod.rating.rate}
+                  </>
+                )}
+                {prod.rating.rate < 3 && (
+                  <>
+                    <FaStarHalf size={20} color="orange" className="mr-1" />
+                    {prod.rating.rate}
+                  </>
+                )}
+                <span className="font-thin ml-2">({prod.rating.count})</span>
+              </div>
 
-                <div className="flex justify-between items-end ">
-                  <h1 className="font-bold my-2 text-xl">{prod.price} $</h1>
-                  <button
-                    className="flex items-center text-orange-600 font-bold p-2 border-2 border-orange-600 rounded-md  px-2 my-1 hover:bg-orange-500 hover:text-white duration-200"
-                    onClick={() => {
-                      dispatch(
-                        addToCart({
-                          product: {
-                            id: prod.id,
-                            title: prod.title,
-                            image: prod.image,
-                            price: prod.price,
-                          },
-                          quantity: 1,
-                          quantityPrice: prod.price,
-                        })
-                      );
-                    }}
-                  >
-                    <FaShoppingBag className="mr-2" /> Add To Cart
-                  </button>
-                </div>
+              {/* Price and Add to Cart Button */}
+              <div className="flex flex-col md:flex-row space-y-4 md:justify-between items-center px-2 mt-auto pt-4">
+                <h1 className="font-bold text-xl border-2 border-gray-300 shadow-md rounded-lg px-2">{prod.price} $</h1>
+                <button
+                  className="flex items-center text-orange-600 font-bold text-sm  p-2 border-2 border-orange-600 rounded-md hover:bg-orange-500 hover:text-white duration-200"
+                  onClick={() => {
+                    dispatch(
+                      addToCart({
+                        product: {
+                          id: prod.id,
+                          title: prod.title,
+                          image: prod.image,
+                          price: prod.price,
+                        },
+                        quantity: 1,
+                        quantityPrice: prod.price,
+                      })
+                    );
+                  }}
+                >
+                  <FaShoppingBag className="mr-2" /> Add To Cart
+                </button>
               </div>
             </div>
           ))}
