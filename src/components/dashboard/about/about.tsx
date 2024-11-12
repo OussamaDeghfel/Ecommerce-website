@@ -75,16 +75,17 @@ const About = () => {
     },
   ];
 
-
   return (
     <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
       <div
         className="w-full h-[40vh] md:h-full flex flex-col bg-cover bg-center justify-center items-center text-center rounded-md"
         style={{ backgroundImage: `url(${customerRevImg})` }}
       >
-        <div className="flex flex-col bg-white space-y-2 w-fit text-2xl uppercase p-4 rounded-md opacity-80">
-          <h1 className="font-semibold text-3xl"> Customers review </h1>
-          <span className="font-bold text-5xl">4.6k+</span>
+        <div className="w-full h-full flex justify-center items-center bg-black/40">
+          <div className="flex flex-col bg-white/90 space-y-2 w-fit text-2xl uppercase p-4 rounded-md opacity-80">
+            <h1 className="font-semibold text-3xl"> Customers review </h1>
+            <span className="font-bold text-5xl">4.6k+</span>
+          </div>
         </div>
       </div>
 
@@ -117,17 +118,19 @@ const About = () => {
               <div className="text-start">
                 "{costumerReviewsdata[activeCardSlide].review}"
               </div>
-              <div className="flex flex-col justify-between items-start md:space-x-4 space-y-3">
-                <Rate
-                  disabled
-                  value={costumerReviewsdata[activeCardSlide].rating}
-                />
-                <div className="flex space-x-4 justify-end w-full items-end">
+              <div className="flex justify-between items-center mt-4">
+                <div className="w-fit h-fit">
+                  <Rate
+                    disabled
+                    value={costumerReviewsdata[activeCardSlide].rating}
+                  />
+                </div>
+                <div className="flex space-x-4 justify-end w-fit items-end ">
                   <div className="flex flex-col  ">
-                    <h1 className="text-gray-500">
+                    <h1 className="text-gray-500 font-bold">
                       {costumerReviewsdata[activeCardSlide].name}
                     </h1>
-                    <h2 className="text-gray-600">
+                    <h2 className="text-gray-600 text-sm">
                       Total Spent :{" "}
                       <span className="font-bold">
                         {" "}
@@ -163,8 +166,6 @@ const About = () => {
         </Button>
       </div>
 
-
-
       {/* medim & large size  */}
       <div className="hidden md:flex justify-center items-center w-full shadow-inner md:h-[80vh] rounded-md bg-orange-100/45 space-y-3 overflow-hidden">
         <Button disabled={activeCardSlide === 0} variant="link" color="default">
@@ -180,46 +181,44 @@ const About = () => {
         </Button>
 
         <div className="flex flex-col">
-          
           {/* the First element */}
           {activeCardSlide > 0 ? (
             <div
               className="w-full opacity-30 translate-y-4 -z-10 h-fit flex flex-col p-4 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100"
               // key={costumerReviewsdata[activeCardSlide]}
             >
-              
-                <div>
-                  <div className="text-start">
-                    "{costumerReviewsdata[activeCardSlide - 1].review}"
-                  </div>
-                  <div className="flex flex-col justify-between items-start md:space-x-4 space-y-3">
+              <div>
+                <div className="text-start">
+                  "{costumerReviewsdata[activeCardSlide-1].review}"
+                </div>
+                <div className=" flex w-full h-full justify-between items-center mt-4">
+                  <div className="w-fit h-full">
                     <Rate
                       disabled
-                      value={costumerReviewsdata[activeCardSlide - 1].rating}
+                      value={costumerReviewsdata[activeCardSlide-1].rating}
                     />
-                    <div className="flex space-x-4 justify-end w-full items-end">
-                      <div className="flex flex-col  ">
-                        <h1 className="text-gray-500">
-                          {costumerReviewsdata[activeCardSlide - 1].name}
-                        </h1>
-                        <h2 className="text-gray-600">
-                          Total Spent :{" "}
-                          <span className="font-bold">
-                            {" "}
-                            {
-                              costumerReviewsdata[activeCardSlide - 1].spent
-                            }{" "}
-                          </span>
-                        </h2>
-                      </div>
-                      <img
-                        src={costumerReviewsdata[activeCardSlide - 1].image}
-                        alt="customer image"
-                        className="w-10 h-10"
-                      />
+                  </div>
+                  <div className="flex space-x-4 justify-end w-fit items-end">
+                    <div className="flex flex-col  ">
+                      <h1 className="text-gray-500 font-bold">
+                        {costumerReviewsdata[activeCardSlide-1].name}
+                      </h1>
+                      <h2 className="text-gray-600 text-sm">
+                        Total Spent :{" "}
+                        <span className="font-bold">
+                          {" "}
+                          {costumerReviewsdata[activeCardSlide-1].spent}{" "}
+                        </span>
+                      </h2>
                     </div>
+                    <img
+                      src={costumerReviewsdata[activeCardSlide-1].image}
+                      alt="customer image"
+                      className="w-10 h-10"
+                    />
                   </div>
                 </div>
+              </div>
             </div>
           ) : (
             <div className="w-full h-full justify-end place-items-end">
@@ -243,18 +242,19 @@ const About = () => {
                 <div className="text-start">
                   "{costumerReviewsdata[activeCardSlide].review}"
                 </div>
-                <div className="flex flex-col w-full justify-between items-start md:space-x-2 space-y-3">
-                  <Rate
-                    disabled
-                    value={costumerReviewsdata[activeCardSlide].rating}
-                    className="pt-8"
-                  />
-                  <div className="flex space-x-4 justify-end w-full items-end">
+                <div className=" flex w-full h-full justify-between items-center mt-4">
+                  <div className="w-fit h-full">
+                    <Rate
+                      disabled
+                      value={costumerReviewsdata[activeCardSlide].rating}
+                    />
+                  </div>
+                  <div className="flex space-x-4 justify-end w-fit items-end">
                     <div className="flex flex-col  ">
-                      <h1 className="text-gray-500">
+                      <h1 className="text-gray-500 font-bold">
                         {costumerReviewsdata[activeCardSlide].name}
                       </h1>
-                      <h2 className="text-gray-600">
+                      <h2 className="text-gray-600 text-sm">
                         Total Spent :{" "}
                         <span className="font-bold">
                           {" "}
@@ -279,39 +279,38 @@ const About = () => {
               className="w-full opacity-30  -translate-y-4 h-fit flex flex-col p-4 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 -z-10"
               // key={costumerReviewsdata[activeCardSlide]}
             >
-          
-                <div>
-                  <div className="text-start">
-                    "{costumerReviewsdata[activeCardSlide + 1].review}"
-                  </div>
-                  <div className="flex flex-col justify-between items-start md:space-x-4 space-y-3">
+              <div>
+                <div className="text-start">
+                  "{costumerReviewsdata[activeCardSlide+1].review}"
+                </div>
+                <div className=" flex w-full h-full justify-between items-center mt-4">
+                  <div className="w-fit h-full">
                     <Rate
                       disabled
-                      value={costumerReviewsdata[activeCardSlide + 1].rating}
+                      value={costumerReviewsdata[activeCardSlide+1].rating}
                     />
-                    <div className="flex space-x-4 justify-end w-full items-end">
-                      <div className="flex flex-col  ">
-                        <h1 className="text-gray-500">
-                          {costumerReviewsdata[activeCardSlide + 1].name}
-                        </h1>
-                        <h2 className="text-gray-600">
-                          Total Spent :{" "}
-                          <span className="font-bold">
-                            {" "}
-                            {
-                              costumerReviewsdata[activeCardSlide + 1].spent
-                            }{" "}
-                          </span>
-                        </h2>
-                      </div>
-                      <img
-                        src={costumerReviewsdata[activeCardSlide + 1].image}
-                        alt="customer image"
-                        className="w-10 h-10"
-                      />
+                  </div>
+                  <div className="flex space-x-4 justify-end w-fit items-end">
+                    <div className="flex flex-col  ">
+                      <h1 className="text-gray-500 font-bold">
+                        {costumerReviewsdata[activeCardSlide+1].name}
+                      </h1>
+                      <h2 className="text-gray-600 text-sm">
+                        Total Spent :{" "}
+                        <span className="font-bold">
+                          {" "}
+                          {costumerReviewsdata[activeCardSlide+1].spent}{" "}
+                        </span>
+                      </h2>
                     </div>
+                    <img
+                      src={costumerReviewsdata[activeCardSlide+1].image}
+                      alt="customer image"
+                      className="w-10 h-10"
+                    />
                   </div>
                 </div>
+              </div>
             </div>
           ) : (
             <div className="w-full h-full justify-end place-items-end">
@@ -337,8 +336,6 @@ const About = () => {
           />
         </Button>
       </div>
-
-
     </div>
   );
 };
