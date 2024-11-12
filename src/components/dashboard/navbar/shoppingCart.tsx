@@ -35,7 +35,7 @@ const ShoppingCart = () => {
                 <img
                   src={pic.product.image}
                   alt="product image"
-                  className="w-40 h-full p-2 rounded-md mb-5 shadow-right"
+                  className=" w-24 h-48 md:w-40 md:h-full p-2 rounded-md mb-5 shadow-right object-contain"
                 />
 
                 <div className="m-2 w-full justify-items-center md:justify-items-start space-y-4">
