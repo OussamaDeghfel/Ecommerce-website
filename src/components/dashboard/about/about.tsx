@@ -77,8 +77,7 @@ const About = () => {
 
   return (
     <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-      <div
-        className="w-full h-[40vh] md:h-full flex flex-col bg-cover bg-center justify-center items-center text-center rounded-md"
+      <div className="w-full h-[20em] md:h-full flex flex-col bg-cover bg-center justify-center items-center text-center rounded-md"
         style={{ backgroundImage: `url(${customerRevImg})` }}
       >
         <div className="w-full h-full flex justify-center items-center bg-black/40">
@@ -91,7 +90,7 @@ const About = () => {
 
       {/* Small size  */}
 
-      <div className="flex md:hidden justify-center items-center w-full h-[40vh] md:h-fit border-2 border-gray-300 rounded-md bg-orange-100">
+      <div className="flex md:hidden justify-center items-center w-full h-[35em] md:h-fit border-2 border-gray-300 rounded-md bg-orange-100 p-4">
         <Button disabled={activeCardSlide === 0} variant="link" color="default">
           <FaAngleLeft
             size={25}
@@ -104,8 +103,7 @@ const About = () => {
           />
         </Button>
 
-        <div
-          className="w-full h-fit flex flex-col p-2 px-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 hover:bg-orange-400 cursor-pointer shadow-md hover:text-white"
+        <div className="w-full h-fit justify-center items-center flex flex-col p-4 rounded-lg space-y-4 bg-gray-100 border-2 border-gray-100 hover:bg-orange-400 cursor-pointer shadow-md hover:text-white"
           // key={costumerReviewsdata[activeCardSlide]}
         >
           {timerSkeleton ? (
@@ -118,7 +116,7 @@ const About = () => {
               <div className="text-start">
                 "{costumerReviewsdata[activeCardSlide].review}"
               </div>
-              <div className="flex justify-between items-center mt-4">
+              <div className="flex flex-col md:flex-row justify-between items-center mt-4 space-y-4">
                 <div className="w-fit h-fit">
                   <Rate
                     disabled
